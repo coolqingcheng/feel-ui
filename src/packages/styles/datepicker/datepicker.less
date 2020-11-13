@@ -43,9 +43,14 @@
             padding: 0;
         }
 
-        .item-select {
+        .f-today {
             color: @theme;
             transition: all 0.3s ease;
+        }
+
+        .f-selectday {
+            background: @theme;
+            color: @white  !important;
         }
 
         .f-date-picker-content-header {
@@ -83,7 +88,7 @@
                     transition: all 0.3s ease;
 
                     &:hover {
-                        .item-select;
+                        .f-today;
                     }
                 }
             }

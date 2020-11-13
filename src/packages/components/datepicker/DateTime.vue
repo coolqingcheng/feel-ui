@@ -20,6 +20,8 @@
           :begin="begin"
           :end="end"
           :value="modelValue"
+          @close="close"
+          @clear="clear"
         ></f-date-picker>
       </div>
     </f-drop-anim>
@@ -27,11 +29,17 @@
 </template>
 
 <script lang="ts">
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, reactive, ref, watch } from "vue";
 import d from "./date";
 import cdk from "../../utils/cdk";
 import date from "./date";
 import moment from "moment";
+
+interface Data {
+  open: boolean;
+  time: string;
+  date: Date;
+}
 export default {
   name: "f-datetime",
   props: {
@@ -59,16 +67,17 @@ export default {
     return {};
   },
   setup(props) {
-    const data = reactive({
+    const data = reactive<Data>({
       open: false,
       time: "",
+      date: new Date(),
     });
     const selectPanel = ref<HTMLElement>();
     const datepicker = ref<HTMLElement>();
 
     const selectTime = (e) => {
       data.time = moment(e).format(props.format);
-      close();
+      // close();
     };
     const close = () => {
       data.open = false;
@@ -78,6 +87,7 @@ export default {
         selectPanel.value.style.top = datepicker.value?.offsetHeight + "px";
       }
       console.log(datepicker.value);
+      updateTime();
     });
     cdk.outClick(datepicker, () => {
       close();
@@ -86,6 +96,16 @@ export default {
       if (props.disabled) return;
       data.open = !data.open;
     };
+    const updateTime = () => {
+      data.date = moment(props.modelValue).toDate();
+      data.time = moment(props.modelValue).format(props.format).toString();
+    };
+    watch(() => props.modelValue, updateTime);
+
+    const clear = () => {
+      data.time = "";
+      close();
+    };
     return {
       data,
       selectPanel,
@@ -93,6 +113,7 @@ export default {
       inputClick,
       datepicker,
       selectTime,
+      clear,
     };
   },
 };

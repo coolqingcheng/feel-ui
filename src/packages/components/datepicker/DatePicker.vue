@@ -1,5 +1,6 @@
 <template>
   <div class="f-date-picker-select f-shadow">
+    <!-- <span>{{ data.selectDate }}</span> -->
     <div class="f-date-picker-select-header">
       <div class="f-date-picker-select-header-tool">
         <span class="f-icon icon-left"></span>
@@ -32,7 +33,8 @@
             @click="timeItemClick(item)"
             :class="[
               item.type != 'curr' ? 'f-date-picker-nextpre' : '',
-              checkEq(item.date, data.checkDate) ? 'item-select' : '',
+              checkEq(item.date, data.toDay) ? 'f-today' : '',
+              checkEq(item.date, data.selectDate) ? 'f-selectday' : '',
               rangeValidator(item.date) == false ? 'f-date-disabled' : '',
             ]"
           >
@@ -47,7 +49,9 @@
         <span>{{ time }}</span>
       </div>
       <div class="f-date-picker-footer-tool">
+        <button class="f-button" @click="clear">清空</button>
         <button class="f-button" @click="currClick">现在</button>
+        <button class="f-button" @click="close">确定</button>
       </div>
     </div>
     <f-year-picker v-if="data.showYear" @select="selectYear"></f-year-picker>
@@ -63,7 +67,7 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, onMounted, reactive } from "vue";
+import { computed, onMounted, reactive, watch } from "vue";
 import d from "./date";
 
 import moment from "moment";
@@ -72,7 +76,8 @@ interface Data {
   headers: string[];
   dayList: { type: string; day: number; date: Date }[];
   currDate: Date;
-  checkDate: Date;
+  selectDate: Date;
+  toDay: Date;
   year: number;
   month: number;
   showYear: boolean;
@@ -91,8 +96,9 @@ export default {
     const data = reactive<Data>({
       headers: ["日", "一", "二", "三", "四", "五", "六"],
       dayList: [],
-      currDate: new Date(),
-      checkDate: new Date(),
+      currDate: moment().toDate(),
+      toDay: moment().toDate(),
+      selectDate: moment().toDate(),
       year: 0,
       month: 0,
       showYear: false,
@@ -104,6 +110,7 @@ export default {
       updateDay();
       data.year = data.currDate.getFullYear();
       data.month = data.currDate.getMonth() + 1;
+
       if (!props.value) {
         let curr = moment();
         data.selectTimeDate = {
@@ -111,6 +118,8 @@ export default {
           m: curr.minute(),
           s: curr.second(),
         };
+      } else {
+        moment(props.value);
       }
     });
 
@@ -125,9 +134,7 @@ export default {
 
     const checkEq = (date1, date2) => {
       if (
-        date1.getFullYear() == date2.getFullYear() &&
-        date1.getMonth() == date2.getMonth() &&
-        date1.getDate() == date2.getDate()
+        moment(date1).format("YYYY-MM-DD") == moment(date2).format("YYYY-MM-DD")
       ) {
         return true;
       }
@@ -222,21 +229,19 @@ export default {
           date.setMonth(date.getMonth() + 1);
         }
       }
-      data.currDate = date;
       data.year = data.currDate.getFullYear();
       data.month = data.currDate.getMonth() + 1;
-      console.log(data.currDate.toLocaleString());
       updateDay();
     };
 
     const timeItemClick = (item) => {
-      console.log(item);
       let date = item.date;
       if (rangeValidator(date) == false) return;
       date.setHours(data.selectTimeDate.h);
       date.setMinutes(data.selectTimeDate.m);
       date.setSeconds(data.selectTimeDate.s);
-      data.currDate = date;
+      // data.currDate = date;
+      data.selectDate = date;
       context.emit("select-time", item.date);
     };
 
@@ -248,6 +253,11 @@ export default {
         data.selectTimeDate.h = e.time.h;
         data.selectTimeDate.m = e.time.m;
         data.selectTimeDate.s = e.time.s;
+        let date = data.currDate;
+        date.setHours(data.selectTimeDate.h);
+        date.setMinutes(data.selectTimeDate.m);
+        date.setSeconds(data.selectTimeDate.s);
+        context.emit("select-time", data.currDate);
       }
       if (e.type == "cancel") {
         data.showTime = false;
@@ -286,6 +296,16 @@ export default {
       context.emit("select-time", moment());
     };
 
+    const close = () => {
+      context.emit("close");
+    };
+    const clear = () => {
+      data.selectDate = moment("0000-00-00").toDate();
+      console.log(data.selectDate);
+
+      context.emit("clear");
+    };
+
     return {
       data,
       checkEq,
@@ -302,6 +322,8 @@ export default {
       rangeValidator,
       time,
       currClick,
+      close,
+      clear,
     };
   },
 };
