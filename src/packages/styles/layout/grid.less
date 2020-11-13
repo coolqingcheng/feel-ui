@@ -1,0 +1,79 @@
+@import "../commom.less";
+
+.row {
+    margin: @p;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+.f-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 8px;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    max-width: 100%;
+}
+
+.f-col {
+    padding: @p;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.col(@i, @max) {
+
+
+    .f-col-@{i} {
+        width: (@i/@max)*100%;
+    }
+
+    @media screen and (max-width:@sm) {
+        .f-col-sm-@{i} {
+            width: (@i/@max)*100%;
+        }
+    }
+
+    @media screen and (max-width:@md) {
+        .f-col-md-@{i} {
+            width: (@i/@max)*100%;
+        }
+    }
+
+    @media screen and (max-width:@lg) {
+        .f-col-lg-@{i} {
+            width: (@i/@max)*100%;
+        }
+    }
+
+    @media screen and (max-width:@xl) {
+        .f-col-xl-@{i} {
+            width: (@i/@max)*100%;
+        }
+    }
+
+    @media screen and (min-width:@xl) {
+        .f-col-xl-@{i} {
+            width: (@i/@max)*100%;
+        }
+    }
+
+}
+
+.col(1, 12);
+.col(2, 12);
+.col(3, 12);
+.col(4, 12);
+.col(5, 12);
+.col(6, 12);
+.col(7, 12);
+.col(8, 12);
+.col(9, 12);
+.col(10, 12);
+.col(11, 12);
+.col(12, 12);

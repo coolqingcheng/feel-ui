@@ -1,0 +1,49 @@
+@import "../../styles/config.less";
+@import "./datepicker.less";
+@import "./timepicker.less";
+
+.f-date-picker {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+
+    .f-date-icon {
+        position: absolute;
+        left: 5px;
+        font-size: 20px;
+        top: 50%;
+        margin-top: -13px;
+
+    }
+
+    .f-input {
+        box-sizing: border-box;
+        padding-left: 30px;
+    }
+
+    .c-date-picker-nextpre {
+        color: #ccc;
+    }
+
+    .f-date-yyyyMM {
+        span {
+            cursor: pointer;
+        }
+    }
+
+    .f-date-picker-body {
+        position: absolute;
+        left: 0;
+        z-index: 999;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .f-datetime-range {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    }
+}

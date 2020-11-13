@@ -1,0 +1,91 @@
+.f-pager {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+
+
+    .f-pager-list {
+        display: inline-flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        // margin: 0;
+        padding: 0;
+
+        .f-pager-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
+            line-height: 30px;
+            box-sizing: border-box;
+
+            &:hover {
+                cursor: pointer;
+                color: @theme;
+            }
+        }
+
+        .f-pager-item-selected {
+            background-color: @theme;
+            color: @white;
+
+            &:hover {
+                cursor: pointer;
+                color: @white;
+            }
+        }
+
+        .f-pager-item-ellipsis {
+
+            color: @bordercolor;
+
+            &:hover {
+                cursor: not-allowed !important;
+                color: @bordercolor;
+            }
+
+        }
+
+    }
+
+    .f-pager-sum {
+        .m-l-1;
+
+    }
+
+    .f-pager-changesize {
+        width: 45px;
+        height: 30px;
+        outline: none;
+        border: .5px solid @bordercolor;
+
+        &:focus {
+            border-color: @theme
+        }
+    }
+
+    .f-pager-jump {
+        .m-l-2;
+
+        input {
+            outline: none;
+            width: 30px;
+            height: 25px;
+            text-align: center;
+        }
+    }
+
+    .f-pager-btn {
+        height: 30px;
+        border: .5px solid @bordercolor;
+        background-color: @white;
+        color: @font-color;
+
+        &:hover {}
+    }
+}

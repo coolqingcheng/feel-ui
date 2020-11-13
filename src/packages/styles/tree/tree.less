@@ -1,0 +1,87 @@
+@import "../config.less";
+
+.f-tree-node {
+    // padding-left: 2rem;
+
+
+
+    .f-tree-node-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        &:hover {
+            background: #e8e8e8;
+        }
+
+        @iconSize: 10px;
+
+        .iconfont {
+            height: @iconSize;
+            width: @iconSize;
+            line-height: @iconSize;
+            cursor: pointer;
+            font-size: @iconSize;
+        }
+
+        .text {
+            margin-left: 0.1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            cursor: pointer;
+        }
+
+        .f-tree-icon-text {
+            line-height: 25px;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .nodes {}
+
+    .node-hide {
+        display: none;
+    }
+}
+
+
+.f-tree-checkbox {
+    display: flex;
+    flex-direction: row;
+
+    .f-tree-checkbox-item {
+        display: flex;
+        flex-direction: row;
+        margin-right: 0.5rem;
+        cursor: pointer;
+
+        &:hover {
+            .select-hover;
+        }
+
+        // .iconfont {
+        //     .iconfont;
+        // }
+
+        .txt {
+            text-align: center;
+            height: 1.5625rem;
+            line-height: 1.5625rem;
+        }
+
+
+    }
+
+    .checkbox-select {
+        .commom-select;
+    }
+}

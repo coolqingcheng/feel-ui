@@ -1,0 +1,62 @@
+.f-notify {
+    width: 350px;
+    display: block;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    background: @white;
+    transition: all .5s ease;
+
+    transform: translateX(360px);
+
+    .f-notify-item {
+        display: flex;
+        flex-direction: row;
+        .f-shadow;
+        border-radius: @border-radius;
+        box-sizing: border-box;
+        padding: 15px;
+        position: relative;
+        // pointer-events: none;
+
+        .f-notify-close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        .f-notify-title {
+            margin-bottom: 14px;
+        }
+    }
+}
+
+.f-notify-right {
+    right: 10px;
+}
+
+
+
+.notify-enter-active,
+.notify-leave-active {
+    transition: all 1s ease;
+}
+
+
+.notify-enter-from,
+.notify-leave-to {
+    opacity: 0;
+    transform: translateX(360px);
+
+}
+
+.list-enter-active,
+.list-leave-active {
+    transition: all 1s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}

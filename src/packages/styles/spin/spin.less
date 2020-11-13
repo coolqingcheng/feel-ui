@@ -1,0 +1,45 @@
+@keyframes floading {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.f-spin {
+    position: relative;
+    box-sizing: border-box;
+
+    .f-spin-mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: fade(#fff, 50%);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        .f-spin-mask-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: @theme  !important;
+
+            .f-loading {
+                animation: floading 1s linear infinite;
+            }
+
+            label {
+                font-size: 12px;
+            }
+        }
+
+    }
+}

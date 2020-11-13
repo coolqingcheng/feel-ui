@@ -1,0 +1,61 @@
+.f-select {
+    position: relative;
+
+    .f-select-input {
+        cursor: pointer;
+        outline: none;
+        height: 40px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .f-select-icon {
+        position: absolute;
+        right: 5px;
+        top: 7.5px;
+        transform-origin: center;
+        transform: rotate(90deg);
+        transition: all 0.3s linear;
+    }
+
+    .f-select-icon-active {
+        transform: rotate(-90deg);
+        transition: all 0.3s linear;
+    }
+
+    .f-select-options {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        box-sizing: border-box;
+        width: 100%;
+        border: 1px solid @bordercolor;
+        display: flex;
+        flex-direction: column;
+        z-index: 999;
+        overflow-y: auto;
+        background: @white;
+
+        .option {
+            color: @black;
+            padding: 0.4rem;
+            height: 35px;
+            cursor: pointer;
+            box-sizing: border-box;
+            background: @white;
+            display: flex;
+            justify-content: flex-start;
+
+
+            &:hover {
+                background: @theme-hover;
+            }
+
+            border-bottom: 0.5px solid @bordercolor;
+        }
+
+        .option-tip {
+            color: @font-color-1;
+        }
+    }
+}
