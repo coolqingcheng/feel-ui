@@ -1,0 +1,30 @@
+.f-collapse-panel {
+    display: flex;
+    flex-direction: column;
+
+    .f-collapse-panel-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background: #ccc;
+        cursor: pointer;
+        height: 40px;
+        box-sizing: border-box;
+        padding: @p;
+        border-bottom: 1px solid @bordercolor;
+    }
+
+    .f-collapse-panel-body {
+        background: #eeeeee;
+        overflow: hidden;
+
+        .body {
+            padding: @p;
+            box-sizing: border-box;
+        }
+    }
+}
+
+.f-collapse {
+    width: 100%;
+}

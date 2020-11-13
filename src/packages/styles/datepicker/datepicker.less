@@ -1,0 +1,185 @@
+@import "../config.less";
+
+@h: 35px;
+
+.f-date-picker-select {
+    width: 245px;
+    background: @white;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .f-icon {
+        &:hover {
+            color: @theme;
+        }
+    }
+
+    .f-date-picker-select-header {
+        height: 35px;
+        width: 100%;
+        border-bottom: .5px solid @bordercolor;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 0.5rem;
+        box-sizing: border-box;
+
+        .f-date-picker-select-header-tool {
+            display: flex;
+            flex-direction: row;
+            cursor: pointer;
+        }
+    }
+
+    .f-date-picker-select-content {
+        flex: 1;
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .item-select {
+            color: @theme;
+            transition: all 0.3s ease;
+        }
+
+        .f-date-picker-content-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            border-bottom: .5px solid @bordercolor;
+
+            box-sizing: border-box;
+            height: @h;
+            line-height: @h;
+
+            .f-date-picker-content-header-item {
+                cursor: pointer;
+                text-align: center;
+                width: @h;
+            }
+        }
+
+        .f-date-picker-content-time {
+            ul {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                li {
+                    width: @h;
+                    height: @h;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        .item-select;
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    .f-date-picker-footer {
+        height: 35px;
+        width: 100%;
+        // background: desaturate(@theme, 50%);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: .5px solid @bordercolor;
+
+        .f-date-picker-footer-tool {
+            padding-right: .3rem;
+            cursor: pointer;
+
+            span {
+                margin-right: 0.2rem;
+                // color: white;
+                padding: 2px;
+
+                font-size: 16px;
+            }
+        }
+    }
+
+
+    .f-date-year-item {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+
+        li {
+            width: (1/3)*100%;
+            height: 56px;
+            line-height: 56px;
+            box-sizing: border-box;
+            text-align: center;
+
+            &:hover {
+                cursor: pointer;
+                .f-hover-bg
+            }
+        }
+    }
+
+    .f-date-month-item {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+
+        li {
+            width: (1/3)*100%;
+            height: 70px;
+            line-height: 70px;
+            box-sizing: border-box;
+            text-align: center;
+
+            &:hover {
+                cursor: pointer;
+                .f-hover-bg
+            }
+        }
+    }
+
+    .f-date-picker-nextpre {
+        color: #ccc;
+    }
+
+    .f-date-disabled {
+        color: #ccc;
+        cursor: not-allowed !important;
+
+        &:hover {
+            background: transparent !important;
+            color: #ccc !important;
+        }
+    }
+
+    .f-picker-time {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
+
+}
+
+.fixed-top-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+}

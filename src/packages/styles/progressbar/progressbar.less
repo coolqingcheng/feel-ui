@@ -1,0 +1,66 @@
+@import "../config.less";
+
+@radius: 5px;
+
+.f-progress-bar-small {
+    height: .3rem;
+}
+
+.f-progress-bar-large {
+    height: 1.2rem;
+
+    .f-progress-bg {
+        border-radius: @radius*3  !important;
+
+        .f-progress-color {
+            border-radius: @radius*3  !important;
+        }
+    }
+}
+
+.f-progress-bar-medium {
+    height: .7rem;
+
+    .f-progress-bg {
+        border-radius: @radius*2  !important;
+
+        .f-progress-color {
+            border-radius: @radius*2  !important;
+        }
+    }
+}
+
+.f-progress-bar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    .f-progress-bg {
+        width: 100%;
+        background: @defaultbgcolor;
+        min-height: 100%;
+        margin-right: 0.5rem;
+        border-radius: @radius;
+
+        .f-progress-color {
+            width: 0;
+            height: 100%;
+            background: @theme;
+            transition: all 0.3s ease;
+            border-radius: @radius;
+        }
+    }
+
+    .f-progress-txt {
+        width: 3rem;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+
+        .txt {
+            display: flex;
+            align-items: center;
+            line-height: 1.5rem;
+        }
+    }
+}

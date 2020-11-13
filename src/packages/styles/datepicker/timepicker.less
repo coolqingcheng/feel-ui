@@ -1,0 +1,119 @@
+.f-time-picker {
+    width: 150px !important;
+    user-select: none;
+
+    .f-time-picker-body {
+
+        .f-time-picker-updown {
+            display: block;
+            text-align: center;
+            cursor: pointer;
+
+            .f-icon {
+                &:hover {
+                    color: @theme;
+                }
+            }
+        }
+
+
+        ul {
+            display: flex;
+            flex-direction: row;
+
+            li {
+                flex: 1;
+
+                .f-time-header-text {
+                    display: block;
+                    height: 30px;
+                    line-height: 30px;
+                    border-bottom: 1px solid @bordercolor;
+                    text-align: center;
+                }
+
+                .f-time-picker-timelist {
+                    height: 75px;
+                    position: relative;
+
+                    &:before {
+                        position: absolute;
+                        top: 25px;
+                        left: 0;
+                        right: 0;
+                        content: '';
+                        border-bottom: 1px solid @bordercolor;
+                    }
+
+                    &:after {
+                        position: absolute;
+                        top: 50px;
+                        left: 0;
+                        right: 0;
+                        content: '';
+                        border-bottom: 1px solid @bordercolor;
+                    }
+                }
+
+                ul {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    max-height: 75px;
+                    overflow-y: hidden;
+
+                    li {
+                        box-sizing: border-box;
+                        text-align: center;
+                        display: block;
+
+                        .f-time-txt {
+                            display: block;
+                            height: 25px;
+                            line-height: 25px;
+                        }
+
+                    }
+
+                    .f-time-picker-select {
+                        color: @theme;
+                        font-weight: bold;
+                    }
+
+                    .f-time-picker-pre {
+                        color: @font-color-1;
+                    }
+
+                    .f-time-picker-next {
+                        color: @font-color-1;
+                    }
+                }
+            }
+        }
+    }
+
+    .f-date-picker-footer {
+        border-top: 1px solid @bordercolor;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .f-date-picker-footer-tool {
+
+
+            span {
+                font-size: 12px;
+                padding: 2px;
+                border: 1px solid @bordercolor;
+                margin-right: 5px;
+                border-radius: 3px;
+
+                &:hover {
+                    border-color: @theme;
+                    transition: border .3s linear;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

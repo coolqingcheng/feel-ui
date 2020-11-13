@@ -1,0 +1,128 @@
+{
+  "id": "2008662",
+  "name": "Feel-UI",
+  "font_family": "f-icon",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "12346028",
+      "name": "keyboard_arrow_down_24px_rounded",
+      "font_class": "down",
+      "unicode": "ed82",
+      "unicode_decimal": 60802
+    },
+    {
+      "icon_id": "12346031",
+      "name": "keyboard_arrow_up_24px_rounded",
+      "font_class": "up",
+      "unicode": "ed83",
+      "unicode_decimal": 60803
+    },
+    {
+      "icon_id": "12345067",
+      "name": "access_time_24px_rounded",
+      "font_class": "time",
+      "unicode": "ed64",
+      "unicode_decimal": 60772
+    },
+    {
+      "icon_id": "12343116",
+      "name": "calendar_today_24px_rounded",
+      "font_class": "calendar",
+      "unicode": "ed3c",
+      "unicode_decimal": 60732
+    },
+    {
+      "icon_id": "11747910",
+      "name": "loading",
+      "font_class": "loading",
+      "unicode": "e700",
+      "unicode_decimal": 59136
+    },
+    {
+      "icon_id": "12346022",
+      "name": "keyboard_arrow_right_24px_rounded",
+      "font_class": "right",
+      "unicode": "ed80",
+      "unicode_decimal": 60800
+    },
+    {
+      "icon_id": "12346023",
+      "name": "keyboard_arrow_left_24px_rounded",
+      "font_class": "left",
+      "unicode": "ed81",
+      "unicode_decimal": 60801
+    },
+    {
+      "icon_id": "12347956",
+      "name": "close_24px_rounded",
+      "font_class": "close",
+      "unicode": "ed9f",
+      "unicode_decimal": 60831
+    },
+    {
+      "icon_id": "12348193",
+      "name": "radio_button_checked_24px_rounded",
+      "font_class": "radio",
+      "unicode": "edb2",
+      "unicode_decimal": 60850
+    },
+    {
+      "icon_id": "12348194",
+      "name": "radio_button_unchecked_24px_rounded",
+      "font_class": "unradio",
+      "unicode": "edb3",
+      "unicode_decimal": 60851
+    },
+    {
+      "icon_id": "12348183",
+      "name": "check_box_outline_blank_24px_rounded",
+      "font_class": "uncheck",
+      "unicode": "edaf",
+      "unicode_decimal": 60847
+    },
+    {
+      "icon_id": "12348184",
+      "name": "check_box_24px_rounded",
+      "font_class": "checked",
+      "unicode": "edb0",
+      "unicode_decimal": 60848
+    },
+    {
+      "icon_id": "12348185",
+      "name": "indeterminate_check_box_24px_rounded",
+      "font_class": "indeterminate",
+      "unicode": "edb1",
+      "unicode_decimal": 60849
+    },
+    {
+      "icon_id": "11474242",
+      "name": "code",
+      "font_class": "code",
+      "unicode": "e6f4",
+      "unicode_decimal": 59124
+    },
+    {
+      "icon_id": "7090060",
+      "name": "双箭头 右",
+      "font_class": "right2",
+      "unicode": "e713",
+      "unicode_decimal": 59155
+    },
+    {
+      "icon_id": "7090066",
+      "name": "双箭头 左",
+      "font_class": "left2",
+      "unicode": "e714",
+      "unicode_decimal": 59156
+    },
+    {
+      "icon_id": "16543274",
+      "name": "通用_添加",
+      "font_class": "add",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    }
+  ]
+}

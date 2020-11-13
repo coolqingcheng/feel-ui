@@ -1,0 +1,212 @@
+.s-1 {
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+}
+
+//外边距
+
+input {
+    border: 1px solid @bordercolor;
+
+    outline: none;
+
+    &:focus {
+        border-color: @theme;
+    }
+}
+
+.mp(@v, @i) {
+    .m-@{i} {
+        margin: @v*@i;
+    }
+
+    .m-l-@{i} {
+        margin-left: @v*@i ;
+    }
+
+    .m-r-@{i} {
+        margin-right: @v*@i ;
+    }
+
+    .m-t-@{i} {
+        margin-top: @v*@i ;
+    }
+
+    .m-b-@{i} {
+        margin-bottom: @v*@i ;
+    }
+
+    .p-@{i} {
+        padding: @v*@i;
+    }
+
+    .p-l-@{i} {
+        padding-left: @v*@i;
+    }
+
+    .p-r-@{i} {
+        padding-right: @v*@i;
+    }
+
+    .p-t-@{i} {
+        padding-top: @v*@i;
+    }
+
+    .p-b-@{i} {
+        padding-bottom: @v*@i;
+    }
+}
+
+.mp(.5rem, 1);
+.mp(.5rem, 2);
+.mp(.5rem, 3);
+.mp(.5rem, 4);
+.mp(.5rem, 5);
+.mp(.5rem, 6);
+.mp(.5rem, 7);
+
+
+//内边距
+
+
+//选中颜色
+@import "./config.less";
+
+.commom-select {
+    color: @theme;
+    transition: all 0.5s ease;
+
+    .iconfont {
+        color: @theme;
+        transition: all 0.5s ease;
+    }
+
+    .txt {
+        color: @theme;
+        transition: all 0.5s ease;
+    }
+}
+
+.f-this {
+    background: @theme  !important;
+    color: white !important;
+}
+
+.f-hover-bg {
+    background: #e6e6e6;
+}
+
+.f-icon {
+    font-size: 25px;
+}
+
+.select-hover {
+    color: @theme;
+    transition: all .5s ease;
+}
+
+.right {
+    transform: rotate(0);
+    transition: all 0.3s linear;
+}
+
+.bottom {
+    transform: rotate(90deg) !important;
+    transition: all 0.3s linear;
+}
+
+.f-left {
+    justify-content: flex-start !important;
+}
+
+.f-center {
+    justify-content: center !important;
+}
+
+.f-right {
+    justify-content: flex-end !important;
+}
+
+.f-disable {
+    cursor: not-allowed !important;
+    color: @disable-color  !important;
+
+    &:hover {
+        cursor: not-allowed !important;
+        color: @disable-color  !important;
+    }
+}
+
+.f-circle {
+    border-radius: 100%;
+}
+
+.f-button {
+    border: .5px solid @bordercolor;
+    color: @black-50;
+    font-size: 12px;
+
+    &:hover {
+        border-color: @theme;
+        // color: @theme;
+        transition: all .3s linear;
+
+    }
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body,
+html,
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+    padding: 0;
+    margin: 0;
+}
+
+ul,
+ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.baseline {
+    align-self: baseline;
+}
+
+.f-content {
+    box-sizing: border-box;
+    padding: 15px;
+
+    .f-content-title {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .f-content-h3 {
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+}
+
+input::-webkit-outer-spin-button,
+
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.drag-target {
+    cursor: move;
+    user-select: none;
+}

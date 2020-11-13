@@ -1,0 +1,50 @@
+@import "../../styles/config.less";
+
+.f-tab {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    width: 100%;
+
+    .f-tab-header {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid @bordercolor;
+        height: 40px;
+
+        ul {
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+
+            li {
+                height: 40px;
+                font-size: 14px;
+                line-height: 40px;
+                padding-left: @p;
+                padding-right: @p;
+                border-right: 1px solid @bordercolor;
+                cursor: pointer;
+                box-sizing: border-box;
+            }
+        }
+
+        .active {
+            height: 41px;
+            background: #fff;
+        }
+    }
+
+    .f-tab-content {
+        min-height: 150px;
+    }
+}
+
+.f-tab-item {
+    padding: @p;
+    box-sizing: border-box;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+}

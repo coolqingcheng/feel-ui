@@ -1,0 +1,59 @@
+.f-code {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+
+    .f-code-text {
+        margin-left: 60px;
+        opacity: 0;
+        transition: all .3s linear;
+    }
+
+    &:hover {
+        .f-code-text {
+            margin-left: 5px;
+            opacity: 1;
+            transition: all .3s linear;
+        }
+    }
+
+    .f-code-header {
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        box-sizing: border-box;
+        justify-content: center;
+        border: .5px solid @bordercolor;
+        font-size: 14px;
+        align-items: center;
+
+        &:hover {
+            color: @theme;
+            transition: color .3s linear;
+        }
+
+
+    }
+
+    .f-code-content {
+        box-sizing: border-box;
+        border: .5px solid @bordercolor;
+        border-top: none;
+
+
+        pre {
+            width: 100%;
+            margin: 0;
+            overflow-x: auto;
+            padding: 10px;
+            box-sizing: border-box;
+            display: block;
+
+            code {
+                padding-left: 25px;
+                font-size: 13px;
+                line-height: 22px;
+            }
+        }
+    }
+}

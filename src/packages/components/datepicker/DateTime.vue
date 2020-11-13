@@ -1,0 +1,102 @@
+<template>
+  <div class="f-date-picker" ref="datepicker">
+    <span class="f-icon icon-calendar f-date-icon"></span>
+    <input
+      class="f-input"
+      hint="选择日期"
+      :class="[data.open ? 'f-input-focus' : '']"
+      v-model="data.time"
+      @click="inputClick"
+      readonly
+    />
+    <f-drop-anim>
+      <div
+        class="f-date-picker-body f-shadow"
+        v-show="data.open"
+        ref="selectPanel"
+      >
+        <f-date-picker
+          @select-time="selectTime($event)"
+          :begin="begin"
+          :end="end"
+          :value="modelValue"
+        ></f-date-picker>
+      </div>
+    </f-drop-anim>
+  </div>
+</template>
+
+<script lang="ts">
+import { onMounted, reactive, ref } from "vue";
+import d from "./date";
+import cdk from "../../utils/cdk";
+import date from "./date";
+import moment from "moment";
+export default {
+  name: "f-datetime",
+  props: {
+    modelValue: String,
+    format: {
+      type: String,
+      default: "YYYY-MM-DD",
+    },
+    /**
+     * 范围
+     */
+    begin: String,
+    end: String,
+    //  year选择年  month 选择月  day 选择年月日 day-time 选择年月日时分秒 time 选择时分秒
+    model: {
+      type: String,
+      default: "yyyyMMdd",
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {};
+  },
+  setup(props) {
+    const data = reactive({
+      open: false,
+      time: "",
+    });
+    const selectPanel = ref<HTMLElement>();
+    const datepicker = ref<HTMLElement>();
+
+    const selectTime = (e) => {
+      data.time = moment(e).format(props.format);
+      close();
+    };
+    const close = () => {
+      data.open = false;
+    };
+    onMounted(() => {
+      if (selectPanel.value) {
+        selectPanel.value.style.top = datepicker.value?.offsetHeight + "px";
+      }
+      console.log(datepicker.value);
+    });
+    cdk.outClick(datepicker, () => {
+      close();
+    });
+    const inputClick = () => {
+      if (props.disabled) return;
+      data.open = !data.open;
+    };
+    return {
+      data,
+      selectPanel,
+      close,
+      inputClick,
+      datepicker,
+      selectTime,
+    };
+  },
+};
+</script>
+
+<style>
+</style>

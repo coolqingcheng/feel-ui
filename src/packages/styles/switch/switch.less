@@ -1,0 +1,43 @@
+@import "../config.less";
+
+.c-switch {
+    display: inline-flex;
+    border: 1px solid @theme;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    border-radius: 20px;
+    width: 45px;
+    height: 25px;
+    box-sizing: border-box;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s linear;
+
+    .c-switch-icon {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+    }
+
+    .c-switch-icon-close {
+        background: @theme;
+        border-radius: 20px;
+        left: 1px;
+        transition: all 0.3s linear;
+    }
+
+    .c-switch-icon-open {
+        background: @white;
+        border-radius: 20px;
+        margin-left: 20px;
+        left: 2px;
+        transition: all 0.3s linear;
+    }
+}
+
+.c-switch-open-bg {
+    background: @theme;
+    border: 1px solid @bordercolor;
+    transition: all 0.3s linear;
+}

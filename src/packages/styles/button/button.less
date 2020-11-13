@@ -1,0 +1,120 @@
+@import "../config.less";
+@import "../commom.less";
+
+button {
+    cursor: pointer;
+    outline: none;
+    border: none;
+
+}
+
+.btn {
+    padding: 0.3rem .6rem;
+    height: 2.5rem;
+    .btn-function();
+
+    &:disabled {
+        opacity: .6 !important;
+    }
+
+    .btn-text {
+        text-align: center;
+        line-height: 25px;
+        height: 25px;
+    }
+}
+
+.btn-function() {
+    color: @white;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+
+    .iconfont {
+        font-size: 1rem;
+    }
+
+    label {
+        cursor: pointer;
+    }
+
+    .s-1();
+}
+
+
+.btn-mini {
+    padding: 0.15rem 0.5rem !important;
+    height: 2rem !important;
+    .btn-function();
+}
+
+.btn-active {
+    &:active {
+        opacity: 1 !important;
+        transition: all 0.3s ease;
+    }
+}
+
+.btn-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    color: @black-50;
+}
+
+.btn-default {
+    background-color: @white;
+    color: @black-50;
+    border: .5px solid @bordercolor;
+
+    &:hover {
+        border-color: @theme;
+    }
+}
+
+.btn-type(@type, @bg, @fcolor) {
+
+
+    .btn-@{type} {
+        background: @bg;
+        color: @fcolor;
+    }
+
+    .btn-@{type}-hover {
+        &:hover {
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+    }
+}
+
+.btn-type(default, @white, @black-50);
+.btn-type(info, @info, @white);
+.btn-type(danger, @danger, @white);
+.btn-type(warning, @warning, @white);
+.btn-type(success, @success, @white);
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    animation: rotate 1.5s linear infinite;
+}
+
+.btn-loading {
+    cursor: default !important;
+}
