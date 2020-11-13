@@ -20,7 +20,13 @@ export default {
     const beforeEnter = (el: HTMLElement) => {
       el.style.overflow = "hidden";
       let style = getComputedStyle(el);
-      top = parseInt(style.top);
+      if (style.top) {
+        top = parseFloat(style.top);
+      }
+      if (el.style.top) {
+        top = parseFloat(el.style.top);
+      }
+
       gsap.set(el, {
         opacity: 0,
         top: top * 2 + "px",

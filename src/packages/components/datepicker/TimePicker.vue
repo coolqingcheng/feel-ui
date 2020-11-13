@@ -71,12 +71,10 @@ export default {
     );
 
     const updateTime = () => {
-      console.log("执行update");
       if (props.time) {
         //解析格式的分隔符
 
         let date = moment(props.time, props.format);
-        console.log(`h:${date.hour()} m:${date.minute()} s:${date.second()}`);
         models.h = date.hour();
         models.m = date.minute();
         models.s = date.second();
@@ -85,8 +83,6 @@ export default {
 
     const time = computed(() => {
       let str = `${models.h}:${models.m}:${models.s}`;
-      console.log(str);
-
       return moment(str, props.format).format(props.format);
     });
 

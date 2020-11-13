@@ -25,7 +25,15 @@
 </template>
 
 <script lang="ts">
-import { computed, onMounted, PropType, reactive, ref, watch } from "vue";
+import {
+  computed,
+  onMounted,
+  onUpdated,
+  PropType,
+  reactive,
+  ref,
+  watch,
+} from "vue";
 import d from "../date";
 import gsap from "gsap";
 interface Data {
@@ -72,7 +80,6 @@ export default {
             data.maskClick = false;
             if (timeList.value) {
               data.scrollTop = timeList.value?.scrollTop;
-              console.log("发送:" + props.list[selectIndex.value - 1]);
               context.emit(
                 "update:modelValue",
                 props.list[selectIndex.value - 1]
@@ -99,7 +106,6 @@ export default {
             data.maskClick = false;
             if (timeList.value) {
               data.scrollTop = timeList.value?.scrollTop;
-              console.log("发送:" + props.list[selectIndex.value - 1]);
               context.emit(
                 "update:modelValue",
                 props.list[selectIndex.value - 1]
@@ -127,9 +133,11 @@ export default {
         }
       }
     );
+    onUpdated(() => {});
 
     const initScrollTop = () => {
       //滚动到指定的位置
+
       if (props.modelValue) {
         if (timeList.value) {
           let top = props.modelValue * 25;
@@ -137,7 +145,6 @@ export default {
             scrollTop: top,
             duration: 0.2,
             onComplete: () => {
-              console.log(timeList.value?.scrollTop);
               if (timeList.value) {
                 data.scrollTop = timeList.value?.scrollTop;
               }

@@ -2,8 +2,13 @@
 
 提供输入或者选择日期的功能
 
+## 基本使用
 
 <demo path="./DateTimeDemo1.vue"></demo>
 
 > 本组件依赖moment.js库，格式化配置可以参考moment.js的配置 <a href="https://momentjs.com/" target="_blank">moment.js官网</a>
+
+## 时间选择
+
+<demo path="./DateTimeDemo2.vue"></demo>
 

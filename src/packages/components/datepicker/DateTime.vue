@@ -1,6 +1,9 @@
 <template>
   <div class="f-date-picker" ref="datepicker">
-    <span class="f-icon icon-calendar f-date-icon"></span>
+    <span
+      class="f-icon icon-calendar f-date-icon"
+      :class="[data.open ? 'f-active-color' : '']"
+    ></span>
     <input
       class="f-input"
       hint="选择日期"
@@ -41,7 +44,7 @@ interface Data {
   date: Date;
 }
 export default {
-  name: "f-datetime",
+  name: "f-date",
   props: {
     modelValue: String,
     format: {

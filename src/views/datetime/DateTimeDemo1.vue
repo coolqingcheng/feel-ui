@@ -1,9 +1,9 @@
 <template>
-  <f-datetime
+  <f-date
     format="YYYY年MM月DD日 HH:mm:ss"
     begin="2020-11-10"
     end="2020-11-25"
-  ></f-datetime>
+  ></f-date>
 </template>
 
 <script>
