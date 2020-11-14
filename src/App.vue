@@ -13,7 +13,7 @@
     <router-link to="/progressbar">进度条</router-link> |
     <router-link to="/datetime">时间选择器</router-link> |
     <router-link to="/select">下拉框</router-link> |
-    <router-link to="/button">表单</router-link> |
+    <router-link to="/forms">表单</router-link> |
     <router-link to="/dialog">对话框</router-link> |
     <router-link to="/button">提示框</router-link> |
     <router-link to="/tree">树</router-link> |

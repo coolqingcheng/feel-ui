@@ -1,9 +1,5 @@
 <template>
-  <f-date
-    format="YYYY年MM月DD日 HH:mm:ss"
-    begin="2020-11-10"
-    end="2020-11-25"
-  ></f-date>
+  <f-date format="YYYY年MM月DD日 HH:mm:ss"></f-date>
 </template>
 
 <script>

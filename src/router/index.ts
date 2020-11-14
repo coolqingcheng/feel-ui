@@ -92,6 +92,10 @@ const routes = [
   {
     path: '/colorpicker',
     component: () => import("../views/colorpicker/Index.vue")
+  },
+  {
+    path: '/forms',
+    component: () => import("../views/form/Index.vue")
   }
 ]
 
