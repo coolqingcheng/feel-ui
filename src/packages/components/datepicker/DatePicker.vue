@@ -3,7 +3,7 @@
     <!-- <span>{{ data.selectDate }}</span> -->
     <div class="f-date-picker-select-header">
       <div class="f-date-picker-select-header-tool">
-        <span class="f-icon icon-left"></span>
+        <span class="f-icon icon-left" @click="nextYear('left')"></span>
         <span class="f-icon icon-left" @click="nextMonth('left')"></span>
       </div>
       <div class="f-date-yyyyMM">
@@ -12,7 +12,7 @@
       </div>
       <div class="f-date-picker-select-header-tool">
         <span class="f-icon icon-right" @click="nextMonth('right')"></span>
-        <span class="f-icon icon-right"></span>
+        <span class="f-icon icon-right" @click="nextYear('right')"></span>
       </div>
     </div>
     <div class="f-date-picker-select-content">
@@ -211,6 +211,18 @@ export default {
       return maxDay;
     };
 
+    const nextYear = (diretion: string) => {
+      let date = data.currDate;
+      if (diretion == "left") {
+        date.setFullYear(date.getFullYear() - 1);
+      }
+      if (diretion == "right") {
+        date.setFullYear(date.getFullYear() + 1);
+      }
+      data.year = data.currDate.getFullYear();
+      updateDay();
+    };
+
     const nextMonth = (diretion) => {
       let date = data.currDate;
       if (diretion == "left") {
@@ -317,6 +329,7 @@ export default {
       selectTime,
       timeItemClick,
       nextMonth,
+      nextYear,
       getMonthMaxDay,
       updateDay,
       rangeValidator,
