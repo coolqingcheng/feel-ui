@@ -1,14 +1,16 @@
 <template>
   <div class="f-form-item">
     <div class="f-form-item-label" :style="{ width: width + 'px' }">
-      <span v-if="label">{{ label }}:</span>
+      <span v-if="label">{{ label }}</span>
     </div>
     <div class="f-form-item-input">
       <div class="f-form-item-input-item">
         <slot></slot>
       </div>
       <div class="f-form-error-message">
-        <span v-if="data.message.length > 0">{{ data.message }}</span>
+        <f-fade-anim>
+          <span v-if="showMessage.show">{{ showMessage.message }}</span>
+        </f-fade-anim>
       </div>
     </div>
   </div>
@@ -24,7 +26,7 @@ import {
   reactive,
 } from "vue";
 import mitt from "mitt";
-import { FormEvent } from "*.vue";
+import { FormEvent, ValidField } from "*.vue";
 export default {
   name: "f-form-item",
   props: {
@@ -34,6 +36,10 @@ export default {
       required: true,
     },
     label: String,
+    trigger: {
+      type: String,
+      default: "change",
+    },
   },
   setup(props) {
     const data = reactive({
@@ -41,7 +47,19 @@ export default {
     });
     const event = mitt();
     const form = <any>inject("form");
-
+    console.log(form);
+    const showMessage = computed(() => {
+      let items = <ValidField[]>form.fieldValid(props.for);
+      if (items?.length > 0) {
+        return {
+          message: items[0].message,
+          show: true,
+        };
+      }
+      return {
+        show: false,
+      };
+    });
     const width = computed(() => {
       return form.data.labelWidth;
     });
@@ -63,6 +81,7 @@ export default {
     return {
       data,
       width,
+      showMessage,
     };
   },
 };

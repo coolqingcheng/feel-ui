@@ -7,7 +7,9 @@
 <script lang="ts">
 import mitt from "mitt";
 import { onUnmounted, provide, reactive, watch } from "vue";
-import schema from "async-validator";
+import Schema from "async-validator";
+import { FieldErrorList, ErrorList, ValidateError } from "async-validator";
+import { ValidField } from "*.vue";
 export default {
   name: "f-form",
   props: {
@@ -28,15 +30,22 @@ export default {
   },
 
   setup(props) {
+    console.log(props.model);
+
     const data = reactive({
       labelWidth: props.labelWidth,
       model: props.model,
     });
 
+    const validtionMessages = reactive<ValidField[]>([]);
     const event = mitt();
+    const fieldValid = (field: string) => {
+      return validtionMessages.filter((a) => a.field == field);
+    };
     provide("form", {
       data: data,
       rules: props.rules,
+      fieldValid: fieldValid,
     });
     const submit = () => {};
 
@@ -47,12 +56,61 @@ export default {
     watch(
       () => data.model,
       () => {
-        console.log("model被子组件修改");
+        data.model = props.model;
       }
     );
+
+    const validate = () => {
+      return new Promise((resolve, reject) => {
+        const validator = new Schema(props.rules);
+        validator
+          .validate(data.model)
+          .then((res) => {
+            validtionMessages.splice(0, validtionMessages.length);
+            resolve({
+              valid: true,
+              field: res,
+            });
+          })
+          .catch((err: { errors: ErrorList; fields: FieldErrorList }) => {
+            validtionMessages.splice(0, validtionMessages.length);
+            for (const key in err.fields) {
+              let item = <ValidateError[]>err.fields[key];
+              item.map((i) => {
+                validtionMessages.push({
+                  message: i.message,
+                  field: i.field,
+                });
+              });
+            }
+
+            reject({
+              valid: false,
+              fields: err.fields,
+            });
+          });
+      });
+    };
+
+    /**
+     * 重置表单
+     */
+    const reset = () => {};
+
+    /**
+     * 清空表单验证信息
+     */
+    const clearValidate = () => {
+      console.log("清空验证信息");
+
+      validtionMessages.splice(0, validtionMessages.length);
+    };
+
     return {
       event,
       submit,
+      validate,
+      clearValidate,
     };
   },
 };

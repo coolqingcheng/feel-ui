@@ -32,7 +32,7 @@ module.exports = function (source) {
         let code = fs.readFileSync(file, { encoding: 'utf8' })
         code = prismjs.highlight(code, Prism.languages.javascript, 'javascript')
         code = `<pre><code class="languages-javascript">${code}</code></pre>`
-        console.log('组件名称:' + name);
+        // console.log('组件名称:' + name);
         let dom = `<div class="f-demo"><div><${name}></${name}></div><f-code>${code}</f-code></div>`
         // let p = $(ele).parent();
         // console.log(p.name);

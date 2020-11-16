@@ -67,7 +67,6 @@ export default {
     watch(
       () => props.modelValue,
       () => {
-        console.log("修改modelValue:" + props.modelValue);
         data.v = props.modelValue;
       }
     );

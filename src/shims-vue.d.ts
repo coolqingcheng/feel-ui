@@ -8,6 +8,11 @@ declare module '*.vue' {
     value: any
   }
 
+  export interface ValidField {
+    message: string
+    field: string
+  }
+
 }
 
 declare module '*.md' {
