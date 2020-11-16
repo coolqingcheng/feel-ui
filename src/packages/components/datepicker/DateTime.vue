@@ -100,8 +100,10 @@ export default {
       data.open = !data.open;
     };
     const updateTime = () => {
-      data.date = moment(props.modelValue).toDate();
-      data.time = moment(props.modelValue).format(props.format).toString();
+      if (props.modelValue) {
+        data.date = moment(props.modelValue).toDate();
+        data.time = moment(props.modelValue).format(props.format).toString();
+      }
     };
     watch(() => props.modelValue, updateTime);
 

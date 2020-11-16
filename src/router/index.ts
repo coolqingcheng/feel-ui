@@ -1,9 +1,8 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 // import Cx from '../views/Cx.vue'
-import Table from "../views/table/Table.vue"
+import Table from "../views/table/Index.vue"
 import Uploader from "../views/uploader/Uploader.vue"
-import Input from "../views/input/Input.vue"
 import Radio from "../views/radio/index.vue"
 import CheckBox from "../views/checkbox/index.vue";
 import Pager from "../views/pager/index.vue"
@@ -19,7 +18,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Input
+    component: () => import('../views/input/Index.vue')
   },
   {
     path: '/example',
@@ -47,7 +46,7 @@ const routes = [
   {
     path: '/input',
     name: 'input',
-    component: Input
+    component: () => import('../views/input/Index.vue')
   },
   {
     path: '/radio',

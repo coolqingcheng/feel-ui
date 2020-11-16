@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, Ref } from 'vue';
+import { inject, onMounted, onUnmounted, Ref } from 'vue';
 
 function outClick(html: Ref<Element | undefined>, func: Function) {
     const outClick = (e: MouseEvent) => {
@@ -93,6 +93,14 @@ function getRightXByBody(el: HTMLElement) {
     return w - el.offsetWidth;
 }
 
+/**
+ * 判断是否在表单组件的FormItem组件内
+ */
+function checkInFormItem() {
+    if (inject('form-item')) return true
+    return false
+}
+
 export default {
     outClick,
     windowOnResize,
@@ -102,5 +110,6 @@ export default {
     getRightXByBody,
     getBottomYbyBody,
     getCenterXbyBody,
-    getCenterYbyBody
+    getCenterYbyBody,
+    checkInFormItem
 }

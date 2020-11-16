@@ -1,39 +1,43 @@
 <template>
   <!-- <div :class="[type=='text'?'f-item-box':'f-item-box-textarea',status]"> -->
-  <template v-if="type != 'textarea'">
-    <input
-      class="f-input"
-      :type="type"
-      :value="modelValue"
-      @click="onClick"
-      @input="inputHandler($event)"
-      :placeholder="hint"
-      @change="inputChange($event)"
-      @blur="inputBlur($event)"
-      :disabled="disabled"
-      @focus="onFocus($event)"
-      autocomplete="false"
-    />
-  </template>
-  <template v-if="type == 'textarea'">
-    <textarea
-      :rows="row"
-      class="f-textarea"
-      :value="modelValue"
-      @click="onClick"
-      @input="inputHandler($event)"
-      :placeholder="hint"
-      @change="inputChange($event)"
-      @blur="inputBlur($event)"
-      :disabled="disabled"
-      @focus="onFocus($event)"
-      autocomplete="false"
-    />
-  </template>
-  <!-- </div> -->
+  <div class="f-input-container">
+    <template v-if="type != 'textarea'">
+      <input
+        class="f-input"
+        :type="type"
+        v-model="data.v"
+        @click="onClick"
+        @input="inputHandler($event)"
+        :placeholder="hint"
+        @change="inputChange($event)"
+        @blur="inputBlur($event)"
+        :disabled="disabled"
+        @focus="onFocus($event)"
+        autocomplete="false"
+      />
+    </template>
+    <template v-if="type == 'textarea'">
+      <textarea
+        :rows="row"
+        class="f-textarea"
+        :value="modelValue"
+        @click="onClick"
+        @input="inputHandler($event)"
+        :placeholder="hint"
+        @change="inputChange($event)"
+        @blur="inputBlur($event)"
+        :disabled="disabled"
+        @focus="onFocus($event)"
+        autocomplete="false"
+      />
+    </template>
+  </div>
 </template>
 
-<script>
+<script lang="ts">
+import { getCurrentInstance, inject, reactive, watch } from "vue";
+
+import cdk from "@/packages/utils/cdk";
 export default {
   name: "f-input",
   props: {
@@ -53,39 +57,61 @@ export default {
       default: 6,
     },
   },
-  data: function () {
-    return {
-      v: this.value,
+  setup(props, context) {
+    const ctx = getCurrentInstance();
+    const data = reactive({
+      v: props.modelValue,
       status: "",
+    });
+
+    watch(
+      () => props.modelValue,
+      () => {
+        console.log("修改modelValue:" + props.modelValue);
+        data.v = props.modelValue;
+      }
+    );
+
+    const inputHandler = (e) => {
+      context.emit("update:modelValue", e.target.value);
+      context.emit("input", e);
+    };
+    const inputChange = (e) => {
+      context.emit("change", e);
+      emitData("change");
+    };
+    const inputBlur = (e) => {
+      context.emit("blur", e);
+      emitData("blur");
+      data.status = "";
+    };
+    const onFocus = (e) => {
+      context.emit("focus", e);
+      data.status = "f-item-box-active";
+    };
+    const onClick = (e) => {
+      context.emit("click", e);
+    };
+    let formItem = <any>inject("form-item");
+    const emitData = (type: string) => {
+      if (formItem) {
+        formItem.update({
+          type: type,
+          value: data.v,
+        });
+      }
+    };
+
+    return {
+      data,
+      inputHandler,
+      inputChange,
+      inputBlur,
+      onFocus,
+      onClick,
     };
   },
-  watch: {
-    modelValue: function () {
-      console.log("修改modelValue:" + this.modelValue);
-      this.v = this.modelValue;
-    },
-  },
   methods: {
-    inputHandler(e) {
-      this.$emit("update:modelValue", e.target.value);
-      this.$emit("input", e);
-    },
-    inputChange(e) {
-      this.$emit("change", e);
-      this.emitData();
-    },
-    inputBlur(e) {
-      this.emitData();
-      this.$emit("blur", e);
-      this.status = "";
-    },
-    onFocus(e) {
-      this.$emit("focus", e);
-      this.status = "f-item-box-active";
-    },
-    onClick(e) {
-      this.$emit("click", e);
-    },
     emitData() {
       //   if (this.isInFieldItem()) {
       //     // this.$parent.$emit("form-input-update-status", {
@@ -97,8 +123,3 @@ export default {
   },
 };
 </script>
-
-<style>
-/* .f-input {
-} */
-</style>
