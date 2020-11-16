@@ -47,8 +47,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.fade-bg {
-}
-</style>>
