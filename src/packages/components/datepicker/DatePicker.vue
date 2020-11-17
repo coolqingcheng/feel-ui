@@ -49,9 +49,9 @@
         <span>{{ time }}</span>
       </div>
       <div class="f-date-picker-footer-tool">
-        <button class="f-button" @click="clear">清空</button>
-        <button class="f-button" @click="currClick">现在</button>
-        <button class="f-button" @click="close">确定</button>
+        <button type="button" class="f-button" @click="clear">清空</button>
+        <button type="button" class="f-button" @click="currClick">现在</button>
+        <button type="button" class="f-button" @click="close">确定</button>
       </div>
     </div>
     <f-year-picker v-if="data.showYear" @select="selectYear"></f-year-picker>

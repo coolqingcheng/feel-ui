@@ -40,6 +40,7 @@ import {
   reactive,
   ref,
   watch,
+  inject,
 } from "vue";
 
 import cdk from "../../utils/cdk";
@@ -102,6 +103,15 @@ export default defineComponent({
         context.emit(data.show ? "show" : "close", { status: data.show });
       }
     );
+    let formItem = <any>inject("form-item");
+    const emitData = (type: string) => {
+      if (formItem) {
+        formItem.update({
+          type: type,
+          value: data.select.key,
+        });
+      }
+    };
     const itemClick = (e: SelectDto) => {
       if (e == null) {
         data.show = false;
@@ -116,6 +126,7 @@ export default defineComponent({
         data.show = false;
         data.selectValue = e.value;
       }
+      emitData('change')
       context.emit("itemClick", {
         data: e,
       });

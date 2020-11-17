@@ -18,6 +18,19 @@
         v-model="model.payway"
       ></f-checkbox>
     </f-form-item>
+    <f-form-item label="开始时间" for="begin">
+      <f-date v-model="model.begin"></f-date>
+    </f-form-item>
+    <f-form-item label="爱好" for="hobby">
+      <f-select
+        :data="[
+          { key: 1, value: '吃饭' },
+          { key: 2, value: '睡觉' },
+          { key: 3, value: '打豆豆' },
+        ]"
+        v-model="model.hobby"
+      ></f-select>
+    </f-form-item>
     <f-form-item>
       <f-button text="登录" @click="valid()"></f-button>
       <f-button text="清空验证信息" @click="clear()" class="m-l-1"></f-button>
@@ -36,6 +49,7 @@ export default {
       cate: "",
       payway: [],
       begin: "",
+      hobby: "",
     });
     const rules = reactive({
       username: [
@@ -65,14 +79,25 @@ export default {
         type: "array",
         required: true,
         message: "必须选择两种支付方式",
-        validator: function (rule, value, callback) {
+        validator: (rule, value, callback) => {
           return value.length >= 2;
         },
+      },
+      begin: {
+        type: "date",
+        required: true,
+        message: "开始时间不能为空",
+      },
+      hobby: {
+        type: "number",
+        required: true,
+        message: "爱好必须选择",
       },
     });
 
     const valid = async () => {
       try {
+        console.log(model);
         let res = await ctx.refs.form.validate();
         console.log("验证通过");
       } catch (error) {

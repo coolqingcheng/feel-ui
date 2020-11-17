@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { onMounted, reactive, ref, watch } from "vue";
+import { onMounted, reactive, ref, watch, inject } from "vue";
 import d from "./date";
 import cdk from "../../utils/cdk";
 import date from "./date";
@@ -69,7 +69,7 @@ export default {
   data() {
     return {};
   },
-  setup(props) {
+  setup(props, context) {
     const data = reactive<Data>({
       open: false,
       time: "",
@@ -77,10 +77,21 @@ export default {
     });
     const selectPanel = ref<HTMLElement>();
     const datepicker = ref<HTMLElement>();
+    let formItem = <any>inject("form-item");
+    const emitData = (type: string) => {
+      if (formItem) {
+        console.log("发送" + data.time);
 
+        formItem.update({
+          type: type,
+          value: data.time,
+        });
+      }
+    };
     const selectTime = (e) => {
       data.time = moment(e).format(props.format);
-      // close();
+      context.emit("update:modelValue", data.time);
+      emitData("change");
     };
     const close = () => {
       data.open = false;
@@ -89,7 +100,6 @@ export default {
       if (selectPanel.value) {
         selectPanel.value.style.top = datepicker.value?.offsetHeight + "px";
       }
-      console.log(datepicker.value);
       updateTime();
     });
     cdk.outClick(datepicker, () => {
@@ -109,6 +119,8 @@ export default {
 
     const clear = () => {
       data.time = "";
+      context.emit("update:modelValue", data.time);
+      emitData("change");
       close();
     };
     return {
