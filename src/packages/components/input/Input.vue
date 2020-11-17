@@ -1,6 +1,6 @@
 <template>
   <!-- <div :class="[type=='text'?'f-item-box':'f-item-box-textarea',status]"> -->
-  <div class="f-input-container">
+  <div class="f-input-container" :style="{ width: width }">
     <template v-if="type != 'textarea'">
       <input
         class="f-input"
@@ -55,6 +55,10 @@ export default {
     row: {
       type: Number,
       default: 6,
+    },
+    width: {
+      type: String,
+      default: "100%",
     },
   },
   setup(props, context) {

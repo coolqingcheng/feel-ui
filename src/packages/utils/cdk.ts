@@ -101,6 +101,33 @@ function checkInFormItem() {
     return false
 }
 
+enum Grid {
+    sm,
+    md,
+    lg,
+    xl,
+    max
+}
+
+/**
+ * 获取屏幕宽高的栅格值
+ * @param call 
+ */
+function ScreenWdith(call: (grid: Grid) => void) {
+    let w = document.body.scrollWidth;
+    if (w <= 540) {
+        call(Grid.sm)
+    } else if (w > 540 && w <= 720) {
+        call(Grid.md)
+    } else if (w > 720 && w <= 960) {
+        call(Grid.lg)
+    } else if (w > 960 && w <= 1200) {
+        call(Grid.xl)
+    } else {
+        call(Grid.max)
+    }
+}
+
 export default {
     outClick,
     windowOnResize,

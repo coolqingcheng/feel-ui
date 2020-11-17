@@ -42,10 +42,43 @@ export default {
     const fieldValid = (field: string) => {
       return validtionMessages.filter((a) => a.field == field);
     };
+    /**
+     * 验证单个值
+     */
+    const validateItem = async (field: string) => {
+      let rule = props.rules[field];
+      let schema = {};
+      schema[field] = rule;
+      let model = {};
+      model[field] = props.model[field];
+
+      const validator = new Schema(schema);
+      try {
+        let res = await validator.validate(model);
+        //移除当前验证信息
+        let messages = validtionMessages.filter((a) => a.field == field);
+        messages.map((item) => {
+          let i = validtionMessages.findIndex((a) => a.field == field);
+          validtionMessages.splice(i, 1);
+        });
+      } catch (err) {
+        let error = <{ errors: ErrorList; fields: FieldErrorList }>err;
+        for (const key in error.fields) {
+          let item = <ValidateError[]>error.fields[key];
+          item.map((i) => {
+            validtionMessages.push({
+              message: i.message,
+              field: i.field,
+            });
+          });
+        }
+      }
+    };
     provide("form", {
       data: data,
       rules: props.rules,
       fieldValid: fieldValid,
+      validateItem: validateItem,
     });
     const submit = () => {};
 

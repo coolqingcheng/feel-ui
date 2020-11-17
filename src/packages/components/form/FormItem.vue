@@ -1,6 +1,6 @@
 <template>
-  <div class="f-form-item">
-    <div class="f-form-item-label" :style="{ width: width + 'px' }">
+  <div class="f-form-item" :style="{ width: width }">
+    <div class="f-form-item-label" :style="{ width: labelWidth + 'px' }">
       <span v-if="label">{{ label }}</span>
     </div>
     <div class="f-form-item-input">
@@ -9,7 +9,11 @@
       </div>
       <div class="f-form-error-message">
         <f-fade-anim>
-          <span v-if="showMessage.show">{{ showMessage.message }}</span>
+          <span v-if="showMessage.show">
+            <slot name="error" v-on:message="showMessage">{{
+              showMessage.message
+            }}</slot>
+          </span>
         </f-fade-anim>
       </div>
     </div>
@@ -40,6 +44,10 @@ export default {
       type: String,
       default: "change",
     },
+    width: {
+      type: String,
+      default: "100%",
+    },
   },
   setup(props) {
     const data = reactive({
@@ -47,7 +55,6 @@ export default {
     });
     const event = mitt();
     const form = <any>inject("form");
-    console.log(form);
     const showMessage = computed(() => {
       let items = <ValidField[]>form.fieldValid(props.for);
       if (items?.length > 0) {
@@ -60,16 +67,17 @@ export default {
         show: false,
       };
     });
-    const width = computed(() => {
+    const labelWidth = computed(() => {
       return form.data.labelWidth;
     });
 
     onMounted(() => {});
 
-    const formItemUpdate = (e: FormEvent | undefined) => {
+    const formItemUpdate = async (e: FormEvent | undefined) => {
       if (e) {
-        console.log("更新当前的form:");
-        console.log(e);
+        if (props.trigger == e.type) {
+          await form.validateItem(props.for);
+        }
       }
     };
     provide("form-item", {
@@ -80,7 +88,7 @@ export default {
     });
     return {
       data,
-      width,
+      labelWidth,
       showMessage,
     };
   },

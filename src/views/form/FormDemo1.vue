@@ -6,6 +6,18 @@
     <f-form-item label="密码" for="password">
       <f-input v-model="model.password"></f-input>
     </f-form-item>
+    <f-form-item label="分类" for="cate">
+      <f-radio
+        :data="['分类1', '分类2', '分类3', '分类4']"
+        v-model="model.cate"
+      ></f-radio>
+    </f-form-item>
+    <f-form-item label="支付方式" for="payway">
+      <f-checkbox
+        :data="['支付宝', '微信', '云闪付', '抖音']"
+        v-model="model.payway"
+      ></f-checkbox>
+    </f-form-item>
     <f-form-item>
       <f-button text="登录" @click="valid()"></f-button>
       <f-button text="清空验证信息" @click="clear()" class="m-l-1"></f-button>
@@ -21,6 +33,9 @@ export default {
     const model = reactive({
       username: "",
       password: "",
+      cate: "",
+      payway: [],
+      begin: "",
     });
     const rules = reactive({
       username: [
@@ -41,10 +56,22 @@ export default {
         required: true,
         message: "密码不能为空！",
       },
+      cate: {
+        type: "string",
+        required: true,
+        message: "分类必须选择",
+      },
+      payway: {
+        type: "array",
+        required: true,
+        message: "必须选择两种支付方式",
+        validator: function (rule, value, callback) {
+          return value.length >= 2;
+        },
+      },
     });
 
     const valid = async () => {
-      console.log("验证");
       try {
         let res = await ctx.refs.form.validate();
         console.log("验证通过");
