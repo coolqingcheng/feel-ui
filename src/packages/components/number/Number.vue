@@ -3,6 +3,7 @@
     class="f-num"
     @keyup.up="operaAdd($event)"
     @keyup.down="operaSub($event)"
+    @mousewheel="mousewheel($event)"
   >
     <span class="f-num-sub" @click="operaSub()">-</span>
     <input
@@ -75,12 +76,6 @@ export default {
     };
 
     const operaAdd = (e) => {
-      if (e) {
-        var obj = e.srcElement;
-        obj.focus();
-        obj.selectionStart = obj.value.length;
-        obj.selectionEnd = obj.value.length;
-      }
       if (props.max) {
         data.value = math.floatAdd(data.value, props.step);
         if (data.value >= props.max) data.value = props.max;
@@ -102,12 +97,21 @@ export default {
     const keydown = (e) => {
       e.preventDefault();
     };
+
+    const mousewheel = (e) => {
+      if (e.wheelDelta > 0) {
+        operaAdd(e);
+      } else {
+        operaSub(e);
+      }
+    };
     return {
       data,
       change,
       operaAdd,
       operaSub,
       keydown,
+      mousewheel,
     };
   },
 };
