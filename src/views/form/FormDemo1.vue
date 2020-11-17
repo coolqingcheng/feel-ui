@@ -31,6 +31,9 @@
         v-model="model.hobby"
       ></f-select>
     </f-form-item>
+    <f-form-item label="开关" for="status">
+      <f-switch v-model="model.status"></f-switch>
+    </f-form-item>
     <f-form-item>
       <f-button text="登录" @click="valid()"></f-button>
       <f-button text="清空验证信息" @click="clear()" class="m-l-1"></f-button>
@@ -50,6 +53,7 @@ export default {
       payway: [],
       begin: "",
       hobby: "",
+      status: false,
     });
     const rules = reactive({
       username: [
@@ -92,6 +96,11 @@ export default {
         type: "number",
         required: true,
         message: "爱好必须选择",
+      },
+      status: {
+        type: "bool",
+        message: "开关必须打开",
+        validator: (rule, v) => v == true,
       },
     });
 

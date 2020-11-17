@@ -1,6 +1,6 @@
 @import "../config.less";
 
-.c-switch {
+.f-switch {
     display: inline-flex;
     border: 1px solid @theme;
     flex-direction: row;
@@ -14,20 +14,20 @@
     cursor: pointer;
     transition: all 0.3s linear;
 
-    .c-switch-icon {
+    .f-switch-icon {
         width: 20px;
         height: 20px;
         position: absolute;
     }
 
-    .c-switch-icon-close {
-        background: @theme;
+    .f-switch-icon-close {
+        background: @bordercolor;
         border-radius: 20px;
         left: 1px;
         transition: all 0.3s linear;
     }
 
-    .c-switch-icon-open {
+    .f-switch-icon-open {
         background: @white;
         border-radius: 20px;
         margin-left: 20px;
@@ -36,8 +36,14 @@
     }
 }
 
-.c-switch-open-bg {
+.f-switch-bg {
     background: @theme;
+    border: 1px solid @theme;
+    transition: all 0.3s linear;
+}
+
+.f-switch-bg-close {
+    background: @white;
     border: 1px solid @bordercolor;
     transition: all 0.3s linear;
 }

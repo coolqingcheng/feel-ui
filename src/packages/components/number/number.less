@@ -1,0 +1,33 @@
+.f-num {
+    display: inline-flex;
+    flex-direction: row;
+    border: 1px solid @bordercolor;
+    border-radius: @border-radius;
+    height: 35px;
+
+    span {
+        width: 35px;
+        text-align: center;
+        line-height: 35px;
+        cursor: pointer;
+    }
+
+    input {
+        border: none;
+        text-align: center;
+        width: 3rem;
+    }
+
+    .f-num-sub {
+        border-right: 1px solid @bordercolor;
+    }
+
+    .f-num-add {
+        border-left: 1px solid @bordercolor;
+    }
+
+}
+
+.f-num-active {
+    border-color: @theme;
+}

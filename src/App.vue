@@ -6,8 +6,10 @@
     <router-link to="/table">表格控件</router-link> |
     <router-link to="/uploader">上传文件</router-link> |
     <router-link to="/input">输入框</router-link> |
+    <router-link to="/number">数字输入</router-link> |
     <router-link to="/radio">单选框</router-link> |
     <router-link to="/checkbox">复选框</router-link> |
+    <router-link to="/switch">开关</router-link> |
     <router-link to="/pager">分页组件</router-link> |
     <router-link to="/button">按钮</router-link> |
     <router-link to="/progressbar">进度条</router-link> |

@@ -1,10 +1,18 @@
 <template>
-  <div class="c-switch" @click="switchClick()" :class="[modelValue?'c-switch-open-bg':'']">
-    <span class="c-switch-icon" :class="[modelValue?'c-switch-icon-open':'c-switch-icon-close']"></span>
+  <div
+    class="f-switch"
+    @click="switchClick()"
+    :class="[modelValue ? 'f-switch-bg' : 'f-switch-bg-close']"
+  >
+    <span
+      class="f-switch-icon"
+      :class="[modelValue ? 'f-switch-icon-open' : 'f-switch-icon-close']"
+    ></span>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { inject } from "vue";
 export default {
   name: "f-switch",
   props: {
@@ -13,13 +21,24 @@ export default {
       default: false,
     },
   },
-  data: function () {
-    return {};
-  },
-  methods: {
-    switchClick() {
-      this.$emit("update:modelValue", !this.modelValue);
-    },
+  setup(props, context) {
+    let formItem = <any>inject("form-item");
+    const emitData = (type: string) => {
+      if (formItem) {
+        formItem.update({
+          type: type,
+          value: props.modelValue,
+        });
+      }
+    };
+    const switchClick = () => {
+      context.emit("update:modelValue", !props.modelValue);
+      emitData("change");
+    };
+
+    return {
+      switchClick,
+    };
   },
 };
 </script>

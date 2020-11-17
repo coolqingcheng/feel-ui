@@ -5,6 +5,8 @@ import Layout from './components/layout/index'
 
 import Input from './components/input/index'
 
+import Number from "./components/number/Index"
+
 import Radio from './components/radio/index'
 
 import CheckBox from './components/checkbox/index'
@@ -82,6 +84,7 @@ const components = {
     ...button,
     ...Layout,
     ...Input,
+    ...Number,
     ...Radio,
     ...CheckBox,
     ...Switch,

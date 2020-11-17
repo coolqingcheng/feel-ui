@@ -95,6 +95,14 @@ const routes = [
   {
     path: '/forms',
     component: () => import("../views/form/Index.vue")
+  },
+  {
+    path: '/switch',
+    component: () => import("../views/switch/Index.vue")
+  },
+  {
+    path: '/number',
+    component: () => import("../views/number/Index.vue")
   }
 ]
 
