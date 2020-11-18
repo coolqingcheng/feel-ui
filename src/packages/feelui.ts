@@ -76,6 +76,8 @@ import ColorPicker from "./components/colorpicker/Index"
 
 import Position from "./components/position/Index"
 
+import Card from "./components/card/Index"
+
 import { App } from 'vue';
 
 
@@ -111,7 +113,8 @@ const components = {
     ...Tag,
     ...Spin,
     ...ColorPicker,
-    ...Position
+    ...Position,
+    ...Card
 }
 
 import Drag from "./directive/DragDirective"

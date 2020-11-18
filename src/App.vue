@@ -21,7 +21,7 @@
       <router-link to="/tree">树</router-link>
       <router-link to="/spin">spin 加载中</router-link>
       <router-link to="/button">面板</router-link>
-      <router-link to="/button">卡片</router-link>
+      <router-link to="/card">卡片</router-link>
       <router-link to="/button">手风琴面板</router-link>
       <router-link to="/button">导航条</router-link>
       <router-link to="/button">侧边菜单</router-link>

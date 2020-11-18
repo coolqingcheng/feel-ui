@@ -103,6 +103,10 @@ const routes = [
   {
     path: '/number',
     component: () => import("../views/number/Index.vue")
+  },
+  {
+    path: '/card',
+    component: () => import("../views/card/Index.vue")
   }
 ]
 
