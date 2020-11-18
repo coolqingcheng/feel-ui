@@ -113,6 +113,8 @@ export default {
       if (props.modelValue) {
         data.date = moment(props.modelValue).toDate();
         data.time = moment(props.modelValue).format(props.format).toString();
+      } else {
+        data.time = "";
       }
     };
     watch(() => props.modelValue, updateTime);

@@ -41,6 +41,7 @@ import {
   ref,
   watch,
   inject,
+  onMounted,
 } from "vue";
 
 import cdk from "../../utils/cdk";
@@ -82,15 +83,29 @@ export default defineComponent({
     watch(
       () => props.modelValue,
       () => {
-        let item = props.data.filter((a) => a.value == props.modelValue);
-        if (item.length > 0) {
-          data.select = {
-            key: item[0].key,
-            value: item[0].value,
-          };
-        }
+        updateStatus();
       }
     );
+    onMounted(() => {
+      updateStatus();
+    });
+    const updateStatus = () => {
+      let item = props.data.filter((a) => a.key == props.modelValue);
+
+      if (item.length > 0) {
+        data.select = {
+          key: item[0].key,
+          value: item[0].value,
+        };
+        data.selectValue = data.select.value;
+      }
+      if (!props.modelValue) {
+        data.select.key = "";
+        data.select.value = "";
+        data.selectValue = "";
+      }
+      console.log(data.selectValue);
+    };
     watch(
       () => props.data,
       () => {
@@ -126,7 +141,7 @@ export default defineComponent({
         data.show = false;
         data.selectValue = e.value;
       }
-      emitData('change')
+      emitData("change");
       context.emit("itemClick", {
         data: e,
       });

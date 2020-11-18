@@ -36,6 +36,7 @@
     </f-form-item>
     <f-form-item>
       <f-button text="登录" @click="valid()"></f-button>
+      <f-button text="重置" @click="reset()" class="m-l-1"></f-button>
       <f-button text="清空验证信息" @click="clear()" class="m-l-1"></f-button>
     </f-form-item>
   </f-form>
@@ -118,11 +119,16 @@ export default {
       ctx.refs.form.clearValidate();
     };
 
+    const reset = () => {
+      ctx.refs.form.reset();
+    };
+
     return {
       rules,
       model,
       valid,
       clear,
+      reset,
     };
   },
 };

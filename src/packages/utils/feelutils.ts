@@ -1,4 +1,9 @@
 
+function deepClone(obj) {
+    return JSON.parse(JSON.stringify(obj))
+}
+
+
 function clone(...objs: any[]) {
     const result = Object.create(null)
     objs.forEach(obj => {
@@ -21,6 +26,7 @@ function clone(...objs: any[]) {
     return result
 
 }
+
 function isPlainObject(val: any): val is Object {
     return toString.call(val) === '[object Object]'
 }
@@ -37,5 +43,6 @@ function guid() {
 export {
     clone,
     genRandCode,
-    guid
+    guid,
+    deepClone
 }

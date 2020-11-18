@@ -6,10 +6,11 @@
 
 <script lang="ts">
 import mitt from "mitt";
-import { onUnmounted, provide, reactive, watch } from "vue";
+import { onMounted, onUnmounted, provide, reactive, watch } from "vue";
 import Schema from "async-validator";
 import { FieldErrorList, ErrorList, ValidateError } from "async-validator";
 import { ValidField } from "*.vue";
+import { deepClone } from "@/packages/utils/feelutils";
 export default {
   name: "f-form",
   props: {
@@ -86,8 +87,14 @@ export default {
       event.all.clear();
     });
 
+    let modelClone = {};
+
+    onMounted(() => {
+      modelClone = deepClone(data.model);
+    });
+
     watch(
-      () => data.model,
+      () => props.model,
       () => {
         data.model = props.model;
       }
@@ -128,14 +135,19 @@ export default {
     /**
      * 重置表单
      */
-    const reset = () => {};
+    const reset = () => {
+      let model = deepClone(modelClone);
+      for (const key in model) {
+        if (Object.prototype.hasOwnProperty.call(model, key)) {
+          data.model[key] = model[key];
+        }
+      }
+    };
 
     /**
      * 清空表单验证信息
      */
     const clearValidate = () => {
-      console.log("清空验证信息");
-
       validtionMessages.splice(0, validtionMessages.length);
     };
 
@@ -144,6 +156,7 @@ export default {
       submit,
       validate,
       clearValidate,
+      reset,
     };
   },
 };
