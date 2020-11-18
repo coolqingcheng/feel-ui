@@ -2,216 +2,31 @@
 
 ### 基本使用
 
-<slot name="t1"></slot>
-
-``` javascript
-<template>
-  <f-tree :data="data.data"></f-tree>
-  <br />
-</template>
-
-<script>
-import { reactive } from "vue";
-export default {
-  setup(props, context) {
-    const data = reactive({
-      data: [],
-    });
-    data.data = [
-      {
-        label: "四川省",
-        expand: true,
-        children: [
-          {
-            label: "成都市",
-          },
-          {
-            label: "绵阳市",
-            children: [
-              {
-                label: "安州区",
-              },
-              {
-                label: "游仙区",
-              },
-            ],
-          },
-          {
-            label: "南充市",
-            children: [
-              {
-                label: "嘉陵区",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        label: "重庆市",
-        children: [
-          {
-            label: "万州区",
-          },
-          {
-            label: "江北区",
-          },
-        ],
-      },
-    ];
-
-    return {
-      data,
-    };
-  },
-};
-</script>
-```
+<demo path="./TreeDemo1.vue"></demo>
 
 ### 默认选中
 
 需要默认选中某项，只需要设置当前界面的checked为true，然后组件会自动渲染选中状态
 
-<slot name="t2"></slot>
+<demo path="./TreeDemo2.vue"></demo>
 
 > 如果需要选中父节点，只需要设置选中全部子节点。单独设置选中父节点，但是未选中子子节点，节点选择框是未选中状态
-
-``` javascript
-<template>
-  <f-tree :tree="data.data"></f-tree>
-</template>
-
-<script>
-import { reactive } from "vue";
-export default {
-  setup(props, context) {
-    const data = reactive({
-      data: [],
-    });
-    data.data = [
-      {
-        label: "四川省",
-        expand: true,
-        children: [
-          {
-            label: "成都市",
-          },
-          {
-            label: "绵阳市",
-            children: [
-              {
-                label: "安州区",
-                checked: true,
-              },
-              {
-                label: "游仙区",
-              },
-            ],
-          },
-          {
-            label: "南充市",
-            children: [
-              {
-                label: "嘉陵区",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        label: "重庆市",
-        children: [
-          {
-            label: "万州区",
-          },
-          {
-            label: "江北区",
-          },
-        ],
-      },
-    ];
-
-    return {
-      data,
-    };
-  },
-};
-</script>
-```
 
 
 
 ### 树节点点击事件和选中事件
 
 需要监听文字点击事件，监听node-click事件，需要监听节点选择框的选中或者取消选中事件监听node-check事件
-<slot name="t3"></slot>
+
+<demo path="./TreeDemo3.vue"></demo>
 
 
 
 ### 不显示选中
 设置组件的 ***show-check*** 属性为false，即可隐藏组件节点前的选择框
-<slot name="t4"></slot>
-``` javascript
-<template>
-  <f-tree :tree="data.data" :show-check="false"></f-tree>
-</template>
 
-<script>
-import { reactive } from "vue";
-export default {
-  setup() {
-    const data = reactive({
-      data: [],
-      nodeClickLabel: "",
-      nodeCheckLabel: "",
-    });
-    data.data = [
-      {
-        label: "四川省",
-        expand: true,
-        children: [
-          {
-            label: "成都市",
-          },
-          {
-            label: "绵阳市",
-            children: [
-              {
-                label: "安州区",
-              },
-              {
-                label: "游仙区",
-              },
-            ],
-          },
-          {
-            label: "南充市",
-            children: [
-              {
-                label: "嘉陵区",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        label: "重庆市",
-        children: [
-          {
-            label: "万州区",
-          },
-          {
-            label: "江北区",
-          },
-        ],
-      },
-    ];
-    return {
-      data,
-    };
-  },
-};
-</script>
-```
+<demo path="./TreeDemo4.vue"></demo>
+
 ## 属性
 
 | 名称       | 说明                                                         | 类型  | 可选值 | 默认值 |

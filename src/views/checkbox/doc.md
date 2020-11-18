@@ -2,64 +2,16 @@
 一组选择项中选中一项或多项
 
 ### 基础使用
-<slot name="t1"></slot>
-``` javascript
-<template>
-  <f-checkbox :data="data"></f-checkbox>
-</template>
 
-<script>
-export default {
-  data() {
-    return {
-      data: ["支付宝", "微信", "云闪付", "paypal"],
-    };
-  },
-};
-</script>
-```
+<demo path="./CheckBoxDemo1.vue"></demo>
 
 ### 默认选中
-<slot name="t2"></slot>
-``` javascript
-<template>
-  <f-checkbox :data="data" v-model="value"></f-checkbox>
-</template>
 
-<script>
-export default {
-  data() {
-    return {
-      data: ["支付宝", "微信", "云闪付", "paypal"],
-      value: ["支付宝", "微信"],
-    };
-  },
-};
-</script>
-```
+<demo path="./CheckBoxDemo2.vue"></demo>
 
 ### 禁用部分选择项
 
-<slot name="t3"></slot>
-
-``` javascript
-<template>
-  <f-checkbox :data="data" v-model="value" :disables="disables"></f-checkbox>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      data: ["支付宝", "微信", "云闪付", "paypal"],
-      value: ["支付宝", "云闪付"],
-      disables: ["微信"],
-    };
-  },
-};
-</script>
-
-```
+<demo path="./CheckBoxDemo3.vue"></demo>
 
 # 属性
 
