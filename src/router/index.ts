@@ -107,6 +107,10 @@ const routes = [
   {
     path: '/card',
     component: () => import("../views/card/Index.vue")
+  },
+  {
+    path: '/collapse',
+    component: () => import('../views/collapse/Index.vue')
   }
 ]
 

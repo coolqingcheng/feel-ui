@@ -1,0 +1,62 @@
+.f-collapse-panel {
+    display: flex;
+    flex-direction: column;
+
+    .f-collapse-panel-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: rgba(0, 0, 0, .03);
+        cursor: pointer;
+        height: 40px;
+        box-sizing: border-box;
+        padding: @p;
+        border-bottom: .5px solid @bordercolor;
+        border-top: .5px solid @bordercolor
+    }
+
+    .f-collapse-panel-body {
+        background: @white;
+        overflow: hidden;
+
+        .body {
+            padding: @p;
+            box-sizing: border-box;
+        }
+    }
+}
+
+.f-collapse {
+    width: 100%;
+    .f-shadow-small;
+    background-color: @white;
+    border-radius: @border-radius;
+    border: .5px solid @bordercolor;
+    display: flex;
+    flex-direction: column;
+
+    .f-collapse-open {
+        border-bottom: .5px solid @bordercolor;
+    }
+
+    :first-child {
+        border-top: none;
+
+        .f-collapse-panel-header {
+            border-top-left-radius: @border-radius;
+            border-top-right-radius: @border-radius;
+        }
+    }
+
+    :last-child {
+        border-bottom: none;
+        border-radius: @border-radius;
+
+        .f-collapse-close {
+            border-bottom-left-radius: @border-radius;
+            border-bottom-right-radius: @border-radius;
+        }
+
+
+    }
+}
