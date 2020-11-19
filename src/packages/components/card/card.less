@@ -1,9 +1,8 @@
 .f-card {
     display: flex;
     flex-direction: column;
-
     border-radius: @border-radius;
-
+    border: .5px solid @bordercolor;
     .f-shadow-small;
 
     .f-card-header {
@@ -11,6 +10,7 @@
         border-bottom: 1px solid @bordercolor;
         display: flex;
         flex-direction: row;
+        background-color: rgba(0, 0, 0, .03);
     }
 
     .f-card-body {
@@ -24,5 +24,6 @@
         box-sizing: border-box;
         display: flex;
         flex-direction: row;
+        background-color: rgba(0, 0, 0, .03);
     }
 }

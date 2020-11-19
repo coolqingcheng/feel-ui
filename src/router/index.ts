@@ -41,7 +41,7 @@ const routes = [
   {
     path: "/uploader",
     name: 'uploader',
-    component: Uploader
+    component: () => import('../views/uploader/Index.vue')
   },
   {
     path: '/input',
