@@ -1,5 +1,5 @@
 <template>
-  <f-uploader :server="uploadServer" :allow="allow"
+  <f-uploader :server="data.uploadServer" :allow="data.allow"
     ><f-button text="点击选择文件"></f-button>
   </f-uploader>
 </template>

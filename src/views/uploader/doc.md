@@ -1,4 +1,4 @@
-## 文件上传组件
+# 文件上传组件
 
 上传各种图片文档等资源到服务器的组件  
 
@@ -14,7 +14,7 @@
 
 预览图片，需要设置preview属性为true，设置当前属性后，每次选择文件后，会触发upload-preview事件，该事件中e.currentTarget.result会有当前选择文件的base64信息
 
-<!-- <demo path="./UploaderDemo3.vue"></demo> -->
+<demo path="./UploaderDemo3.vue"></demo>
 
 > 建议使用当前属性只适用于图片和文本等小文件。大文件不建议使用
 

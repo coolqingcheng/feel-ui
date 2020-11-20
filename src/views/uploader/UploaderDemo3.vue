@@ -1,6 +1,6 @@
 <template>
   <ul class="upload-preview">
-    <li v-for="(item, i) in previews" :key="i">
+    <li v-for="(item, i) in data.previews" :key="i">
       <img :src="item" :alt="item" />
     </li>
   </ul>
@@ -8,7 +8,7 @@
     <f-col>
       <f-uploader
         ref="uploader3"
-        :server="uploadServer"
+        :server="data.uploadServer"
         :auto="false"
         :preview="true"
         @upload-preview="previewEvent($event)"

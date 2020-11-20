@@ -57,20 +57,25 @@
 //     }
 //   }
 // }
-
+@left: 150px;
 #doc {
-  display: flex;
-  flex-direction: row;
+  position: relative;
   #nav {
+    position: absolute;
+    left: 0;
+    top: 0;
     display: flex;
     flex-direction: column;
-    width: 180px;
-    padding-left: 30px;
-    padding-top: 50px;
     box-sizing: border-box;
+    width: @left;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background: white;
+    z-index: 10;
   }
   .doc-right {
-    flex: 1;
+    margin-left: @left;
   }
 }
 </style>
