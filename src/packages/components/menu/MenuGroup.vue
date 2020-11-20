@@ -43,7 +43,7 @@ export default {
     const group = provide("menu-group", {
       data: data,
     });
-    const injetGroup = inject("menu-group");
+    const injetGroup = inject("menu-group", {});
     onMounted(() => {
       if (injetGroup && injetGroup.data) {
         data.left = injetGroup.data.left + 15;
