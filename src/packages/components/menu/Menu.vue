@@ -1,50 +1,51 @@
 <template>
   <div class="f-menu">
     <slot></slot>
+    <span></span>
   </div>
 </template>
 
 <script>
+import { getCurrentInstance, provide, reactive } from "vue";
 export default {
   name: "f-menu",
-  data() {
-    return {
+  setup() {
+    const ctx = getCurrentInstance();
+    const data = reactive({
       items: [],
       activeUUID: "默认",
-    };
-  },
-  provide() {
-    return {
-      menu: this,
-    };
-  },
-  methods: {
-    activeItem(guid) {
-      this.items.map((item) => {
+    });
+    const activeItem = (guid) => {
+      data.items.map((item) => {
         let status = item.key == guid;
         if (status) {
           item.component.active();
-          this.activeUUID = guid;
+          data.activeUUID = guid;
         } else {
           item.component.unActive();
         }
       });
-    },
-    pushItem(component, key) {
-      let item = this.items.filter((a) => a.key == key)[0];
+    };
+    const pushItem = (component, key) => {
+      let item = data.items.filter((a) => a.key == key)[0];
       if (!item) {
-        this.items.push({
+        data.items.push({
           key: key,
           component: component,
         });
       } else {
         item.component = component;
       }
-    },
-    checkActive(guid) {
+    };
+    const checkActive = (guid) => {
       // console.log(`当前激活:${this.activeUUID} 传入guid:${guid}`);
-      return this.activeUUID == guid;
-    },
+      return data.activeUUID == guid;
+    };
+    provide("menu", {
+      checkActive: checkActive,
+      pushItem: pushItem,
+      activeItem: activeItem,
+    });
   },
 };
 </script>

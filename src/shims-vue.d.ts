@@ -13,6 +13,11 @@ declare module '*.vue' {
     field: string
   }
 
+  export interface MenuModel {
+    label: string
+    open: boolean
+  }
+
 }
 
 declare module '*.md' {
