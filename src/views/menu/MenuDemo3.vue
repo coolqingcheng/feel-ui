@@ -1,9 +1,16 @@
 <template>
-  <f-menu>
+  <f-menu :open-groups="['用户中心']" active-id="3">
     <f-menu-group label="用户中心" name="用户中心">
+      <template #label>
+        <span style="color: blue">用户中心</span>
+      </template>
       <f-menu-item label="网站用户" id="1"></f-menu-item>
       <f-menu-item label="管理员" id="2"></f-menu-item>
-      <f-menu-item label="用户角色" id="3"></f-menu-item>
+      <f-menu-item label="用户角色" id="3">
+        <template #label>
+          <span style="color: red">用户角色</span>
+        </template>
+      </f-menu-item>
     </f-menu-group>
     <f-menu-group label="设置" name="设置">
       <f-menu-item label="系统日志" id="4"></f-menu-item>
@@ -31,9 +38,7 @@
 </template>
 
 <script>
-export default {
-  setup() {},
-};
+export default {};
 </script>
 
 <style>

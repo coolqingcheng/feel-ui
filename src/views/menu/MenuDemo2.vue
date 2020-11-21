@@ -1,5 +1,5 @@
 <template>
-  <f-menu>
+  <f-menu :open-groups="['用户中心']" active-id="3">
     <f-menu-group label="用户中心" name="用户中心">
       <f-menu-item label="网站用户" id="1"></f-menu-item>
       <f-menu-item label="管理员" id="2"></f-menu-item>

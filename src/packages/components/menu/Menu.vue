@@ -5,46 +5,74 @@
   </div>
 </template>
 
-<script>
-import { getCurrentInstance, provide, reactive } from "vue";
+<script lang="ts">
+import { getCurrentInstance, PropType, provide, reactive, watch } from "vue";
 export default {
   name: "f-menu",
-  setup() {
+  props: {
+    activeId: {
+      type: String,
+    },
+    openGroups: {
+      type: Array as PropType<Array<String>>,
+      default: () => [],
+    },
+  },
+  setup(props) {
     const ctx = getCurrentInstance();
     const data = reactive({
       items: [],
-      activeUUID: "默认",
+      activeID: props.activeId,
+      openGroups: props.openGroups,
     });
-    const activeItem = (guid) => {
-      data.items.map((item) => {
-        let status = item.key == guid;
-        if (status) {
-          item.component.active();
-          data.activeUUID = guid;
-        } else {
-          item.component.unActive();
-        }
-      });
-    };
-    const pushItem = (component, key) => {
-      let item = data.items.filter((a) => a.key == key)[0];
-      if (!item) {
-        data.items.push({
-          key: key,
-          component: component,
-        });
-      } else {
-        item.component = component;
+    watch(
+      () => props.activeId,
+      () => {
+        data.activeID = props.activeId;
+      }
+    );
+    watch(
+      () => props.openGroups,
+      () => {
+        data.openGroups = props.openGroups;
+      }
+    );
+    const activeItem = (id) => {
+      if (data.activeID !== id) {
+        data.activeID = id;
       }
     };
-    const checkActive = (guid) => {
-      // console.log(`当前激活:${this.activeUUID} 传入guid:${guid}`);
-      return data.activeUUID == guid;
+
+    const checkOpenGroup = (name: String) => {
+      let index = data.openGroups?.findIndex((a) => a == name);
+      return index > -1;
+    };
+
+    const openGroud = (name: String) => {
+      let index = data.openGroups.findIndex((a) => a == name);
+      if (index > -1) {
+        data.openGroups.splice(index, 1);
+      } else {
+        data.openGroups.push(name);
+      }
+
+      ctx?.emit("expand", {
+        name: name,
+        open: index == -1,
+      });
+    };
+
+    const checkActive = (id) => {
+      ctx?.emit("active", {
+        id: id,
+      });
+      return data.activeID == id;
     };
     provide("menu", {
       checkActive: checkActive,
-      pushItem: pushItem,
       activeItem: activeItem,
+      checkOpenGroup: checkOpenGroup,
+      openGroud: openGroud,
     });
   },
 };

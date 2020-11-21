@@ -2,11 +2,12 @@
   <div
     class="f-menu-item"
     @click="itemClick()"
-    :class="[data.status ? 'f-menu-item-active' : '']"
+    :class="[activeStatus ? 'f-menu-item-active' : '']"
   >
     <div class="f-menu-item-left" :style="{ paddingLeft: left + 'px' }">
-      <!-- <span>icon:{{ data.status }}</span> -->
-      <span class="f-menu-item-left-label">{{ label }}</span>
+      <span class="f-menu-item-left-label">
+        <slot name="label">{{ label }}</slot>
+      </span>
     </div>
     <div class="f-menu-item-right">
       <slot></slot>
@@ -25,7 +26,7 @@ export default {
     },
     id: {
       type: String,
-      default: "0",
+      required: true,
     },
   },
 
@@ -37,20 +38,19 @@ export default {
     onMounted(() => {
       data.status = menu.checkActive(props.id);
     });
-    const menu = inject("menu");
-    const group = inject("menu-group");
+    const menu = inject("menu", null);
+    const group = inject("menu-group", null);
+
+    const activeStatus = computed(() => {
+      return menu.checkActive(props.id);
+    });
 
     const itemClick = () => {
       if (props.id) {
+        menu.activeItem(props.id);
       } else {
         console.error("ID没有设置，无法选中");
       }
-      // console.log("修改状态前:" + this.status);
-      // if (menu.checkActive(this.uuid)) {
-      //   return;
-      // }
-      // this.menu.activeItem(this.uuid);
-      // console.log("修改状态后:" + this.status);
     };
     const active = () => {
       // console.log("点击:" + status + " - uuid:" + this.uuid);
@@ -62,7 +62,8 @@ export default {
     };
 
     const left = computed(() => {
-      return group.data.left + 15;
+      if (group) return group.data.left + 15;
+      else return 15;
     });
 
     return {
@@ -71,6 +72,7 @@ export default {
       active,
       unActive,
       left,
+      activeStatus,
     };
   },
   created() {

@@ -5,63 +5,71 @@
       @click="toggle()"
       :style="{ paddingLeft: data.left + 'px' }"
     >
-      <span class="f-menu-group-header-label">{{ label }}</span>
+      <span class="f-menu-group-header-label">
+        <slot name="label">{{ label }}</slot>
+      </span>
       <span
         class="f-menu-group-header-icon f-icon icon-right"
-        :class="[data.status ? 'bottom' : 'right']"
+        :class="[isActive ? 'bottom' : 'right']"
       ></span>
     </div>
     <f-expand-transition>
-      <div class="f-menu-group-body" v-show="data.status">
+      <div class="f-menu-group-body" v-show="isActive">
         <slot></slot>
       </div>
     </f-expand-transition>
   </div>
 </template>
 
-<script>
-import { getCurrentInstance, inject, onMounted, provide, reactive } from "vue";
+<script lang="ts">
+import {
+  computed,
+  getCurrentInstance,
+  inject,
+  onMounted,
+  provide,
+  reactive,
+} from "vue";
 export default {
   props: {
     label: {
       type: String,
       default: "",
     },
-    open: {
-      type: Boolean,
-      default: false,
+    name: {
+      type: String,
+      required: true,
     },
   },
   name: "f-menu-group",
   setup(props) {
     const ctx = getCurrentInstance();
     const data = reactive({
-      status: props.open,
       left: 15,
       height: 0,
     });
     const group = provide("menu-group", {
       data: data,
     });
-    const injetGroup = inject("menu-group", {});
+    const injetGroup = <any>inject("menu-group", {});
     onMounted(() => {
       if (injetGroup && injetGroup.data) {
         data.left = injetGroup.data.left + 15;
       }
     });
+    const menu = <any>inject("menu", {});
+    const isActive = computed(() => {
+      return menu.checkOpenGroup(props.name);
+    });
     const toggle = () => {
-      console.log("点击");
-      data.status = !data.status;
-    };
-    const test = () => {
-      // console.log(this.$parent);
-      // console.log(this.$parent.left);
+      menu.openGroud(props.name);
     };
     const update = () => {
-      if (data.status) {
-        ctx.refs.body.style.height = data.height + "px";
+      let el = <HTMLElement>ctx?.refs.body;
+      if (isActive) {
+        el.style.height = data.height + "px";
       } else {
-        ctx.refs.body.style.height = "0px";
+        el.style.height = "0px";
       }
     };
 
@@ -69,6 +77,7 @@ export default {
       data,
       toggle,
       update,
+      isActive,
     };
   },
 };
