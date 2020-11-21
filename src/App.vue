@@ -22,7 +22,7 @@
       <router-link to="/spin">spin 加载中</router-link>
       <router-link to="/card">卡片</router-link>
       <router-link to="/collapse">手风琴面板</router-link>
-      <!-- <router-link to="/tab">tab</router-link> -->
+      <router-link to="/tab">选项卡</router-link>
       <router-link to="/button">导航条</router-link>
       <router-link to="/menu">菜单</router-link>
       <router-link to="/colorpicker">颜色选择器</router-link>

@@ -13,7 +13,5 @@ export function AutoRegisterComponent(app: App) {
             name = cdk.toLine(name)
             app.component(name, component.default)
         }
-
-
     });
 }

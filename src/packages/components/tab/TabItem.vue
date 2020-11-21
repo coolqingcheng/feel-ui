@@ -4,7 +4,8 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { computed, inject, onMounted, reactive } from "vue";
 export default {
   name: "f-tab-item",
   props: {
@@ -16,19 +17,18 @@ export default {
       default: false,
     },
   },
-  data() {
+  setup(props) {
+    const tab = <any>inject("tab");
+    onMounted(() => {
+      tab.register(props.title);
+    });
+
+    const show = computed(() => {
+      return tab.data.selectTitle == props.title;
+    });
     return {
-      status: false,
+      show,
     };
-  },
-  inject: ["tab"],
-  mounted: function () {
-    this.tab.register(this.title);
-  },
-  computed: {
-    show() {
-      return this.tab.selectTitle == this.title;
-    },
   },
 };
 </script>

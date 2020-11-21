@@ -115,6 +115,10 @@ const routes = [
   {
     path: '/menu',
     component: () => import('../views/menu/Index.vue')
+  },
+  {
+    path: '/tab',
+    component: () => import('../views/tab/Index.vue')
   }
 ]
 

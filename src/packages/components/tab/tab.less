@@ -3,19 +3,42 @@
 .f-tab {
     display: flex;
     flex-direction: column;
-    border: 1px solid #ccc;
+    // border: 1px solid #ccc;
     width: 100%;
 
     .f-tab-header {
         display: flex;
         flex-direction: column;
         border-bottom: 1px solid @bordercolor;
-        height: 40px;
+
+        position: relative;
+        overflow: hidden;
+
+        .f-tab-header-more {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 30px;
+            height: 40px;
+            background: #ccc;
+            cursor: pointer;
+            text-align: center;
+            line-height: 40px;
+
+            .f-icon {
+                transform: rotate(90deg);
+                transition: transform .3s linear;
+            }
+        }
 
         ul {
             display: flex;
             flex-direction: row;
             margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow: hidden;
 
             li {
                 height: 40px;
@@ -34,6 +57,8 @@
             background: #fff;
         }
     }
+
+
 
     .f-tab-content {
         min-height: 150px;
