@@ -1,17 +1,35 @@
 <template>
-  <div class="f-tab">
-    <div class="f-tab-header">
-      <ul ref="header" :style="{ flexWrap: data.more ? 'wrap' : 'nowrap' }">
+  <div class="f-tab" ref="container">
+    <div class="f-tab-header" :class="type">
+      <ul
+        ref="header"
+        :style="{ flexWrap: data.more ? 'wrap' : 'nowrap' }"
+        :class="[data.showMore ? 'f-tab-hidden' : '']"
+      >
         <li
           v-for="(item, i) in data.titles"
           :key="i"
           @click="headerClick(item)"
-          :class="[item == data.selectTitle ? 'active' : '']"
+          :class="[
+            item == data.selectTitle && data.more == false ? 'active' : '',
+            data.more && item == data.selectTitle ? 'active-more' : '',
+          ]"
         >
-          {{ item }}
+          <span>
+            {{ item }}
+          </span>
+          <span
+            class="f-icon icon-close"
+            @click.stop="close(item)"
+            v-if="showClose"
+          ></span>
         </li>
       </ul>
-      <div class="f-tab-header-more" @click="moreClick(false)">
+      <div
+        class="f-tab-header-more"
+        @click="moreClick(false)"
+        v-if="data.showMore"
+      >
         <span
           class="f-icon icon-left"
           :style="{ transform: data.more ? 'rotate(-90deg)' : 'rotate(90deg)' }"
@@ -29,9 +47,10 @@ interface DataModel {
   titles: Array<string>;
   selectTitle: string;
   more: boolean;
+  showMore: boolean;
 }
 import cdk from "../../utils/cdk";
-import { provide, reactive, ref } from "vue";
+import { getCurrentInstance, onMounted, provide, reactive, ref } from "vue";
 export default {
   name: "f-tab",
   props: {
@@ -39,12 +58,25 @@ export default {
       type: String,
       default: "",
     },
+    type: {
+      type: String,
+      default: "card",
+      validator: (v: string) => {
+        return ["card", "simple"].indexOf(v) > -1;
+      },
+    },
+    showClose: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props) {
+    const ctx = getCurrentInstance();
     const data = reactive<DataModel>({
       titles: [],
       selectTitle: props.active,
       more: false,
+      showMore: false,
     });
 
     const register = (title) => {
@@ -56,7 +88,22 @@ export default {
     };
     const headerClick = (title) => {
       data.selectTitle = title;
+      data.more = false;
       console.log(data.selectTitle);
+    };
+    onMounted(() => {
+      setTimeout(() => {
+        updateMoreStatus();
+      }, 10);
+      if (!props.active && data.titles.length > 0) {
+        data.selectTitle = data.titles[0];
+      }
+    });
+
+    const close = (item) => {
+      ctx?.emit("close", {
+        title: item,
+      });
     };
 
     provide("tab", {
@@ -65,9 +112,23 @@ export default {
       data: data,
     });
 
-    const header = ref<Element>();
-    const updateMoreStatus = () => {};
-
+    const header = ref<HTMLElement>();
+    const container = ref<HTMLElement>();
+    const updateMoreStatus = () => {
+      if (header.value && container.value)
+        if (header.value?.scrollWidth > container.value?.offsetWidth) {
+          data.showMore = true;
+        } else {
+          data.showMore = false;
+        }
+      // console.log(
+      //   `header:${header.value?.scrollWidth} container:${container.value?.offsetWidth}`
+      // );
+    };
+    cdk.windowOnResize(() => {
+      updateMoreStatus();
+      data.more = false;
+    });
     const moreClick = () => {
       data.more = !data.more;
     };
@@ -77,6 +138,8 @@ export default {
       header,
       updateMoreStatus,
       moreClick,
+      container,
+      close,
     };
   },
 };

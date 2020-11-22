@@ -5,14 +5,13 @@
     flex-direction: column;
     // border: 1px solid #ccc;
     width: 100%;
+    border: .5px solid @bordercolor;
 
     .f-tab-header {
         display: flex;
         flex-direction: column;
         border-bottom: 1px solid @bordercolor;
-
         position: relative;
-        overflow: hidden;
 
         .f-tab-header-more {
             position: absolute;
@@ -20,11 +19,15 @@
             top: 0;
             bottom: 0;
             width: 30px;
-            height: 40px;
-            background: #ccc;
+            height: 42px;
+            background: #f2f2f2;
             cursor: pointer;
             text-align: center;
-            line-height: 40px;
+            line-height: 41px;
+            border: .2px solid @bordercolor;
+            border-right: none;
+            border-top: none;
+            box-sizing: border-box;
 
             .f-icon {
                 transform: rotate(90deg);
@@ -32,33 +35,86 @@
             }
         }
 
+        .f-tab-hidden {
+            overflow: hidden;
+        }
+
+        .active-card-more {
+            background-color: #f2f2f2;
+            height: 42px;
+            border: none;
+            color: @theme;
+
+        }
+    }
+
+    .card {
         ul {
-            display: flex;
+            display: inline-flex;
             flex-direction: row;
             margin: 0;
             padding: 0;
-            width: 100%;
-            overflow: hidden;
+            // overflow: hidden;
+            background-color: #f2f2f2;
+
+            :first-child {
+                border-left: none !important;
+            }
 
             li {
+
                 height: 40px;
-                font-size: 14px;
+                font-size: 16px;
                 line-height: 40px;
-                padding-left: @p;
-                padding-right: @p;
-                border-right: 1px solid @bordercolor;
+                padding-left: 30px;
+                padding-right: 30px;
+                border: .5px solid transparent;
                 cursor: pointer;
                 box-sizing: border-box;
+                border-left: none;
+                align-items: center;
+                position: relative;
+                display: flex;
+                flex-direction: row;
+
+                .f-icon {
+                    font-size: 16px;
+                    line-height: 16px;
+                    padding: 2px;
+                    border-radius: 3px;
+                    margin-left: 5px;
+
+                    &:hover {
+                        background-color: @theme  !important;
+                        color: @white  !important;
+                    }
+                }
             }
         }
 
         .active {
             height: 41px;
             background: #fff;
+            border: .5px solid @bordercolor;
+            border-bottom: none;
+            border-top: none;
+            position: relative;
+
+            &::after {
+                content: ' ';
+                position: absolute;
+                border-bottom: 1px solid @white;
+                left: 0;
+                right: 0;
+                height: 1px;
+                bottom: -1px;
+            }
+        }
+
+        .active-more {
+            color: @theme;
         }
     }
-
-
 
     .f-tab-content {
         min-height: 150px;
