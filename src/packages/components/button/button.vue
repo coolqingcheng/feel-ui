@@ -44,9 +44,6 @@ export default {
       default: false,
     },
   },
-  data: function () {
-    return {};
-  },
   setup(props) {
     const readOnly = computed(() => {
       if (props.disabled) {

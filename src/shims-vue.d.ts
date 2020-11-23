@@ -1,6 +1,6 @@
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
-  const component: DefineComponent
+  const component: ReturnType<typeof defineComponent>
   export default component
 
   export interface FormEvent {

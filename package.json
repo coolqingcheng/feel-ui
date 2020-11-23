@@ -10,8 +10,11 @@
     "publish": "vue-cli-service build --target lib src/packages/feelui.ts"
   },
   "dependencies": {
+    "@babel/core": "^7.12.7",
+    "@babel/preset-env": "^7.12.7",
     "async-validator": "^3.4.0",
     "axios": "^0.20.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "gsap": "^3.5.1",
     "highlight.js": "^10.2.1",
     "marked": "^1.2.0",
@@ -32,13 +35,14 @@
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-router": "^4.5.6",
     "@vue/cli-plugin-typescript": "^4.5.7",
-    "@vue/cli-plugin-unit-jest": "^4.5.6",
+    "@vue/cli-plugin-unit-jest": "^4.5.9",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.2",
     "@vue/component-compiler-utils": "^3.2.0",
     "@vue/eslint-config-typescript": "^5.0.2",
     "@vue/test-utils": "^2.0.0-0",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.6.3",
     "cheerio": "^1.0.0-rc.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0-0",
@@ -64,7 +68,18 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {},
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   },
   "browserslist": [
     "> 1%",

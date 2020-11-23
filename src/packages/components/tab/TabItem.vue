@@ -18,14 +18,18 @@ export default {
     },
   },
   setup(props) {
-    const tab = <any>inject("tab");
+    // const tab = <any>inject("tab");
     onMounted(() => {
-      tab.register(props.title);
+      // console.log(tab);
+      // if (tab) {
+      //   tab.register(props.title);
+      // }
     });
 
-    const show = computed(() => {
-      return tab.data.selectTitle == props.title;
-    });
+    const show = true; // computed(() => {
+    //   return tab.data.selectTitle == props.title;
+    // });
+
     return {
       show,
     };
