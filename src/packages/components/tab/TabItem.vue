@@ -12,10 +12,6 @@ export default {
     title: {
       type: String,
     },
-    showClose: {
-      type: Boolean,
-      default: false,
-    },
   },
   setup(props) {
     // const tab = <any>inject("tab");

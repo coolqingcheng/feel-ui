@@ -89,7 +89,7 @@ export default {
     const headerClick = (title) => {
       data.selectTitle = title;
       data.more = false;
-      console.log(data.selectTitle);
+      ctx?.emit("change", { title: data.selectTitle });
     };
     onMounted(() => {
       setTimeout(() => {
