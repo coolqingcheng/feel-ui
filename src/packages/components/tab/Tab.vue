@@ -1,6 +1,6 @@
 <template>
-  <div class="f-tab" ref="container">
-    <div class="f-tab-header" :class="type">
+  <div class="f-tab" ref="container" :class="type">
+    <div class="f-tab-header">
       <ul
         ref="header"
         :style="{ flexWrap: data.more ? 'wrap' : 'nowrap' }"
@@ -100,7 +100,20 @@ export default {
       }
     });
 
-    const close = (item) => {
+    const close = (item: string) => {
+      let i = data.titles.indexOf(item);
+      if (i > -1) {
+        data.titles.splice(i, 1);
+        //如果删除的是选中的，那么默认重新选中一个
+        if (item == data.selectTitle) {
+          if (data.titles.length > 0) {
+            data.selectTitle = data.titles[0];
+          }
+        }
+      }
+      if (data.titles.length == 0) {
+        data.selectTitle = "";
+      }
       ctx?.emit("close", {
         title: item,
       });
