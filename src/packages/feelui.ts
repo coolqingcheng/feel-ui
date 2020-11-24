@@ -33,7 +33,7 @@ import Tab from './components/tab/index'
 
 import ProgressBar from './components/progressbar/index'
 
-import Icon from './components/ficon/index'
+import Icon from './components/icon/index'
 
 import Tree from './components/tree/index'
 

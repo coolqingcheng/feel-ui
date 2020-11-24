@@ -1,19 +1,25 @@
 <template>
   <div class="f-code">
     <div class="f-code-header" @click="testClick">
-      <f-icon icon="icon-code"></f-icon>
-      <span class="f-code-text">{{ show ? "隐藏代码" : "查看代码" }}</span>
+      <f-icon type="feather" icon="code"></f-icon>
+      <span class="f-code-text m-l-2">{{
+        show ? "隐藏代码" : "查看代码"
+      }}</span>
     </div>
-    <f-expand-anim>
+    <ExpandAnim>
       <div class="f-code-content" v-if="show">
         <slot></slot>
       </div>
-    </f-expand-anim>
+    </ExpandAnim>
   </div>
 </template>
 
 <script>
+import ExpandAnim from "@/packages/components/anim/ExpandAnim.vue";
 export default {
+  components: {
+    ExpandAnim,
+  },
   name: "f-code",
   data() {
     return {
