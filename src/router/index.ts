@@ -119,6 +119,10 @@ const routes = [
   {
     path: '/tab',
     component: () => import('../views/tab/Index.vue')
+  },
+  {
+    path: '/grid',
+    component: () => import('../views/layout/Index.vue')
   }
 ]
 
