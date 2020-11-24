@@ -43,15 +43,29 @@
 </template>
 
 <script lang="ts">
-interface DataModel {
+export interface DataModel {
   titles: Array<string>;
   selectTitle: string;
   more: boolean;
   showMore: boolean;
 }
+
+export interface TabInject {
+  register: (title: string) => void;
+  headerClick: (title: string) => void;
+  data: DataModel;
+}
 import cdk from "../../utils/cdk";
-import { getCurrentInstance, onMounted, provide, reactive, ref } from "vue";
-export default {
+import {
+  defineComponent,
+  getCurrentInstance,
+  onMounted,
+  provide,
+  reactive,
+  ref,
+} from "vue";
+
+export default defineComponent({
   name: "f-tab",
   props: {
     active: {
@@ -79,7 +93,8 @@ export default {
       showMore: false,
     });
 
-    const register = (title) => {
+    const register = (title: string) => {
+      if (!title) return;
       let index = data.titles.findIndex((a) => a == title);
       if (index == -1) {
         data.titles.push(title);
@@ -119,7 +134,7 @@ export default {
       });
     };
 
-    provide("tab", {
+    provide<TabInject>("tab", {
       register: register,
       headerClick: headerClick,
       data: data,
@@ -155,7 +170,7 @@ export default {
       close,
     };
   },
-};
+});
 </script>
 
 <style>

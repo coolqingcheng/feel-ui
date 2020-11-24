@@ -3,22 +3,26 @@
     class="f-spin"
     :style="{ display: type == 'block' ? 'block' : 'inline-block' }"
   >
-    <f-fade-anim>
+    <FadeAnim>
       <div class="f-spin-mask" v-if="loading">
         <div class="f-spin-mask-center">
-          <f-icon icon="icon-loading" class="f-loading"></f-icon>
+          <span class="f-icon icon-loading f-loading"></span>
           <label v-if="text">{{ text }}</label>
         </div>
       </div>
-    </f-fade-anim>
+    </FadeAnim>
 
     <slot></slot>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import FadeAnim from "@/packages/components/anim/FadeAnim.vue";
 export default {
   name: "f-spin",
+  components: {
+    FadeAnim,
+  },
   props: {
     loading: {
       type: Boolean,
