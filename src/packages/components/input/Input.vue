@@ -95,7 +95,7 @@ export default {
     const onClick = (e) => {
       context.emit("click", e);
     };
-    let formItem = <any>inject("form-item");
+    let formItem = <any>inject("form-item", {});
     const emitData = (type: string) => {
       if (formItem) {
         formItem.update({

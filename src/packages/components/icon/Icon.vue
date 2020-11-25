@@ -13,7 +13,8 @@
 
 <script lang="ts">
 import { HttpClient } from "@/packages/utils/HttpClient";
-import { onMounted, ref, watch } from "vue";
+import { getCurrentInstance, onMounted, ref, watch } from "vue";
+import IconOption from "./IconOption";
 export default {
   name: "f-icon",
   props: {
@@ -47,9 +48,15 @@ export default {
       eva: "/icon/eva/",
     };
 
-    const url = `${iconUrls[props.type]}${props.icon}.svg`;
+    console.log(process.env);
+
+    console.log("配置:" + process.env.ICON_BASE);
 
     onMounted(async () => {
+      let url = `${iconUrls[props.type]}${props.icon}.svg`;
+      if (process.env.VUE_APP_ICON_BASE) {
+        url = `${process.env.VUE_APP_ICON_BASE}${url}`;
+      }
       let http = new HttpClient();
       let res = await http.GetStringAsync(url);
       let el = document.createElement("div");

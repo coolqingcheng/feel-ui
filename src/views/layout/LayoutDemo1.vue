@@ -14,7 +14,7 @@
   <div class="row">
     <div class="col col-6">test1</div>
     <div class="col col-6">test1</div>
-    <div class="col">test1</div>
+    <div class="col col-1">col-1</div>
     <div class="col">test1</div>
   </div>
 </template>
@@ -30,7 +30,11 @@ export default {};
   border: 1px solid #ccc;
   .col {
     flex-grow: 1;
-    flex-basis: 0;
+    flex-basis: 1;
+  }
+
+  .col-1 {
+    flex-shrink: 0.1;
   }
   .col-6 {
     min-width: (60/100) * 100%;
