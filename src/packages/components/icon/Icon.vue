@@ -47,11 +47,6 @@ export default {
       md: "/icons/md/",
       eva: "/icon/eva/",
     };
-
-    console.log(process.env);
-
-    console.log("配置:" + process.env.ICON_BASE);
-
     onMounted(async () => {
       let url = `${iconUrls[props.type]}${props.icon}.svg`;
       if (process.env.VUE_APP_ICON_BASE) {
