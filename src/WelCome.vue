@@ -74,9 +74,21 @@
     padding-bottom: 30px;
     background: white;
     z-index: 10;
+    transition: margin 0.3s linear;
   }
   .doc-right {
     margin-left: @left;
+    transition: margin 0.3s linear;
+  }
+  @media screen and (max-width: 600px) {
+    #nav {
+      margin-left: -@left;
+      transition: margin 0.3s linear;
+    }
+    .doc-right {
+      margin-left: 0;
+      transition: margin 0.3s linear;
+    }
   }
 }
 </style>

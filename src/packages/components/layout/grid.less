@@ -1,65 +1,72 @@
 @import "../../styles/commom.less";
 
 .row {
-    margin: @p;
     display: flex;
-    flex-direction: row;
     box-sizing: border-box;
-    flex-wrap: wrap;
 }
 
 .f-row {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     padding: .5rem;
     box-sizing: border-box;
-    justify-content: flex-start;
-    max-width: 100%;
 }
 
 .f-col {
     padding: @p;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     box-sizing: border-box;
+    flex-grow: 0;
+    flex-basis: 0;
+    max-width: 100%;
+}
+
+.f-left {
+    justify-content: flex-start;
+}
+
+.f-right {
+    justify-content: flex-end;
+}
+
+.f-center {
+    justify-content: center;
 }
 
 .col(@i, @max) {
 
 
     .f-col-@{i} {
-        width: (@i/@max)*100%;
+        flex-basis: (@i/@max)*100%;
     }
 
-    @media screen and (max-width:@sm) {
+    @media screen and (max-width:@xs) {
+
+        .f-col-xs-@{i} {
+            flex-basis: (@i/@max)*100%;
+        }
+    }
+
+    @media screen and(min-width:@xs) and (max-width:@sm) {
         .f-col-sm-@{i} {
-            width: (@i/@max)*100%;
+            flex-basis: (@i/@max)*100%;
         }
     }
 
-    @media screen and (max-width:@md) {
+    @media screen and (min-width:@sm) and (max-width:@md) {
         .f-col-md-@{i} {
-            width: (@i/@max)*100%;
+            flex-basis: (@i/@max)*100%;
         }
     }
 
-    @media screen and (max-width:@lg) {
+    @media screen and(min-width:@md) and (max-width:@lg) {
         .f-col-lg-@{i} {
-            width: (@i/@max)*100%;
+            flex-basis: (@i/@max)*100%;
         }
     }
 
-    @media screen and (max-width:@xl) {
+    @media screen and (min-width:@lg) {
         .f-col-xl-@{i} {
-            width: (@i/@max)*100%;
-        }
-    }
-
-    @media screen and (min-width:@xl) {
-        .f-col-xl-@{i} {
-            width: (@i/@max)*100%;
+            flex-basis: (@i/@max)*100%;
         }
     }
 

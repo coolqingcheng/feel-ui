@@ -1,5 +1,5 @@
 <template>
-  <f-row>
+  <f-row align="center">
     <f-col xs="12" sm="6" md="4" lg="3" xl="2">
       <div class="f-demo-1"></div>
     </f-col>
