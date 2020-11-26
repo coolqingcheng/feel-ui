@@ -1,16 +1,16 @@
 <template>
   <f-row>
-    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
-      <div class="f-demo-1"></div>
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2" :order="1">
+      <div class="f-demo-1">1</div>
     </f-col>
-    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
-      <div class="f-demo-2"></div>
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2" :order="2">
+      <div class="f-demo-2">2</div>
     </f-col>
-    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
-      <div class="f-demo-3"></div>
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2" :order="3">
+      <div class="f-demo-3">3</div>
     </f-col>
-    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
-      <div class="f-demo-4"></div>
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2" :order="0">
+      <div class="f-demo-4">4</div>
     </f-col>
   </f-row>
 </template>

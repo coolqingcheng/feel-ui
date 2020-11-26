@@ -1,13 +1,18 @@
 {
-  "name": "feel-ui",
+  "name": "v-feelui",
   "version": "0.1.0",
-  "private": true,
+  "description": "基于vue3.0和composition api + typescript开发的组件库",
+  "license": "Apache-2.0",
+  "main": "./dist/feelui.common.js",
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
     "dev": "vue-cli-service serve --mode dev",
     "build": "vue-cli-service build --mode prod",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "publish": "vue-cli-service build --target lib src/packages/feelui.ts"
+    "publish": "vue-cli-service build --target lib --name feelui src/packages/feelui.ts"
   },
   "dependencies": {
     "async-validator": "^3.4.0",

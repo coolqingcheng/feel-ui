@@ -1,15 +1,43 @@
 <template>
-  <f-row align="center">
-    <f-col xs="12" sm="6" md="4" lg="3" xl="2">
+  <f-row align="start">
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
       <div class="f-demo-1"></div>
     </f-col>
-    <f-col xs="12" sm="6" md="4" lg="3" xl="2">
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
       <div class="f-demo-2"></div>
     </f-col>
-    <f-col xs="12" sm="6" md="4" lg="3" xl="2">
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
       <div class="f-demo-3"></div>
     </f-col>
-    <f-col xs="12" sm="6" md="4" lg="3" xl="2">
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
+      <div class="f-demo-4"></div>
+    </f-col>
+  </f-row>
+  <f-row align="center">
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
+      <div class="f-demo-1"></div>
+    </f-col>
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
+      <div class="f-demo-2"></div>
+    </f-col>
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
+      <div class="f-demo-3"></div>
+    </f-col>
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
+      <div class="f-demo-4"></div>
+    </f-col>
+  </f-row>
+  <f-row align="end">
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
+      <div class="f-demo-1"></div>
+    </f-col>
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
+      <div class="f-demo-2"></div>
+    </f-col>
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
+      <div class="f-demo-3"></div>
+    </f-col>
+    <f-col :xs="12" :sm="6" :md="4" :lg="3" :xl="2">
       <div class="f-demo-4"></div>
     </f-col>
   </f-row>

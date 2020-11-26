@@ -8,7 +8,7 @@ module.exports = {
       patterns: []
     }
   },
-  outputDir: 'docs',
+  outputDir: 'dist',
   configureWebpack: config => {
     config.module.rules.push({
       test: /\.md$/,

@@ -1,17 +1,24 @@
 <template>
-  <div class="f-col" v-bind:class="css">
+  <div
+    class="f-col"
+    v-bind:class="css"
+    :style="{ order: order, padding: padding / 2 + 'px' }"
+  >
     <slot></slot>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive } from "vue";
+import { computed, defineComponent, inject, reactive } from "vue";
+
+import { RowInject } from "./Row.vue";
 
 export default defineComponent({
   name: "f-col",
   props: {
     order: {
-      type: String,
+      type: Number,
+      default: 1,
     },
     col: {
       type: Number,
@@ -30,6 +37,19 @@ export default defineComponent({
     },
     xl: {
       type: Number,
+    },
+    /**方向 */
+    direction: {
+      type: String,
+      default: "h",
+      validator: (v: string) => ["h", "v"].indexOf(v) > -1,
+    },
+    align: {
+      type: String,
+      default: "start",
+      validator: (v: string) => {
+        return ["start", "center", "end"].indexOf(v) > -1;
+      },
     },
   },
   setup(props) {
@@ -53,14 +73,27 @@ export default defineComponent({
       if (props.xl) {
         classList.push(`f-col-xl-${props.xl}`);
       }
+      if (props.direction == "v") {
+        classList.push("f-flex-v");
+      }
+      if (props.align) {
+        classList.push(`f-${props.align}`);
+      }
       return classList.join(" ");
     });
     const data = reactive({
       qc: "sadfasdf",
     });
+    const row = inject<RowInject>("row", { gutter: 10 });
+
+    const padding = computed(() => {
+      return row.gutter;
+    });
+
     return {
       css,
       data,
+      padding,
     };
   },
 });
