@@ -1,6 +1,6 @@
-import FForm from './FForm.vue'
+import Form from './Form.vue'
 import FormItem from './FormItem.vue'
 
 export default {
-    FForm, FormItem
+    Form, FormItem
 }

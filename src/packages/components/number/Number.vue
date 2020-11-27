@@ -4,6 +4,7 @@
     @keyup.up="operaAdd($event)"
     @keyup.down="operaSub($event)"
     @mousewheel="mousewheel($event)"
+    ref="num"
   >
     <span class="f-num-sub" @click="operaSub()">-</span>
     <input
@@ -17,8 +18,17 @@
 </template>
 
 <script lang="ts">
-import { getCurrentInstance, reactive, inject } from "vue";
+import {
+  getCurrentInstance,
+  reactive,
+  inject,
+  ref,
+  onMounted,
+  onUnmounted,
+} from "vue";
 import math from "../../utils/MathUtils";
+import { formItemInjectKey, FormItemInject } from "../form/formOption";
+import "default-passive-events";
 export default {
   name: "f-number",
   props: {
@@ -60,9 +70,12 @@ export default {
         ctx?.update();
       }
     };
-    let formItem = <any>inject("form-item");
+    const formItem = inject<FormItemInject>(
+      formItemInjectKey,
+      {} as FormItemInject
+    );
     const emitData = (type: string) => {
-      if (formItem) {
+      if (formItem.update) {
         formItem.update({
           type: type,
           value: props.modelValue,
@@ -72,10 +85,11 @@ export default {
 
     const update = () => {
       ctx?.emit("update:modelValue", data.value);
+      ctx?.emit("change", { value: data.value });
       emitData("change");
     };
 
-    const operaAdd = (e) => {
+    const operaAdd = () => {
       if (props.max) {
         data.value = math.floatAdd(data.value, props.step);
         if (data.value >= props.max) data.value = props.max;
@@ -84,10 +98,10 @@ export default {
       }
       update();
     };
-    const operaSub = (e) => {
+    const operaSub = () => {
       if (props.min) {
         data.value = math.floatSub(data.value, props.step);
-        if (data.value <= props.min) data.value = props.min;
+        if (data.value < props.min) data.value = props.min;
       } else {
         data.value = math.floatSub(data.value, props.step);
       }
@@ -98,11 +112,11 @@ export default {
       e.preventDefault();
     };
 
-    const mousewheel = (e) => {
-      if (e.wheelDelta > 0) {
-        operaAdd(e);
+    const mousewheel = (e: WheelEvent) => {
+      if (e["wheelDelta"] > 0) {
+        operaAdd();
       } else {
-        operaSub(e);
+        operaSub();
       }
     };
     return {

@@ -31,6 +31,9 @@ import {
 } from "vue";
 import mitt from "mitt";
 import { FormEvent, ValidField } from "*.vue";
+
+import { formItemInjectKey, FormItemInject } from "./formOption";
+
 export default {
   name: "f-form-item",
   props: {
@@ -54,7 +57,7 @@ export default {
       message: "",
     });
     const event = mitt();
-    const form = <any>inject("form");
+    const form = <any>inject("form-item");
     const showMessage = computed(() => {
       let items = <ValidField[]>form.fieldValid(props.for);
       if (items?.length > 0) {
@@ -80,7 +83,7 @@ export default {
         }
       }
     };
-    provide("form-item", {
+    provide<FormItemInject>(formItemInjectKey, {
       update: formItemUpdate,
     });
     onUnmounted(() => {

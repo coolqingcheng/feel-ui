@@ -18,6 +18,7 @@
 
 <script lang="ts">
 import { getCurrentInstance, inject, reactive, watch } from "vue";
+import { formItemInjectKey, FormItemInject } from "../form/formOption";
 export default {
   name: "f-radio",
   props: {
@@ -47,9 +48,11 @@ export default {
       }
     );
 
-    let formItem = <any>inject("form-item");
+    let formItem = <FormItemInject>(
+      inject(formItemInjectKey, {} as FormItemInject)
+    );
     const emitData = (type: string) => {
-      if (formItem) {
+      if (formItem.update) {
         formItem.update({
           type: type,
           value: data.v,

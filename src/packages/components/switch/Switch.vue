@@ -12,7 +12,8 @@
 </template>
 
 <script lang="ts">
-import { inject } from "vue";
+import { getCurrentInstance, inject } from "vue";
+import { FormItemInject, formItemInjectKey } from "../form/formOption";
 export default {
   name: "f-switch",
   props: {
@@ -22,17 +23,23 @@ export default {
     },
   },
   setup(props, context) {
-    let formItem = <any>inject("form-item");
+    const ctx = getCurrentInstance();
+    let formItem = inject<FormItemInject>(
+      formItemInjectKey,
+      {} as FormItemInject
+    );
     const emitData = (type: string) => {
-      if (formItem) {
+      if (formItem.update)
         formItem.update({
           type: type,
           value: props.modelValue,
         });
-      }
     };
     const switchClick = () => {
       context.emit("update:modelValue", !props.modelValue);
+      ctx?.emit("change", {
+        value: !props.modelValue,
+      });
       emitData("change");
     };
 

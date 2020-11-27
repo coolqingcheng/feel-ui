@@ -28,6 +28,7 @@
       <router-link to="/menu">菜单</router-link>
       <router-link to="/colorpicker">颜色选择器</router-link>
       <router-link to="/button">面包屑</router-link>
+      <router-link to="/directives">指令</router-link>
       <router-link to="/button">css帮助类</router-link>
       <router-link to="/button">Feel-Admin</router-link>
       <router-link to="/button">入门教程</router-link>

@@ -123,6 +123,10 @@ const routes = [
   {
     path: '/grid',
     component: () => import('../views/layout/Index.vue')
+  },
+  {
+    path: '/directives',
+    component: () => import('../views/directives/Index.vue')
   }
 ]
 
