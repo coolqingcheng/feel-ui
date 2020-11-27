@@ -10,7 +10,10 @@
         disables.indexOf(item) > -1 ? 'f-disable' : '',
       ]"
     >
-      <f-icon :icon="item == data.v ? 'icon-radio' : 'icon-unradio'"></f-icon>
+      <span
+        class="f-radio-icon"
+        :class="[data.v == item ? 'f-radio-icon-checked' : '']"
+      ></span>
       <span class="txt">{{ item }}</span>
     </div>
   </div>

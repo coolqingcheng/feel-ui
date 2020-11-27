@@ -1,0 +1,74 @@
+@import "../../styles/commom.less";
+
+.f-checkbox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .f-checkbox-item {
+        display: flex;
+        flex-direction: row;
+        margin-right: 0.5rem;
+        cursor: pointer;
+
+        &:hover {
+            // .select-hover;
+        }
+
+        .f-checkbox-icon {
+            border: 1px solid @bordercolor;
+            width: 18px;
+            height: 18px;
+            box-sizing: border-box;
+            position: relative;
+            border-radius: 2px;
+            transition: all .1s linear;
+
+            &::after {
+                content: '';
+                position: absolute;
+                width: 5px;
+                height: 5px;
+                border: 2px solid @white;
+                box-sizing: border-box;
+                border-right: none;
+                border-top: none;
+                top: 4px;
+                left: 3px;
+                transform: rotate(-40deg);
+                transition: width .1s ease-in, height .1s ease-in;
+            }
+        }
+
+        .f-checkbox-icon-seleced {
+            border-color: @theme;
+            transition: all .1s linear;
+            background-color: @theme;
+
+            &::after {
+                top: 4px;
+                left: 3px;
+                width: 10px;
+                height: 6px;
+                transition: width .1s ease-in, height .1s ease-in;
+            }
+        }
+
+        .f-checkbox-icon-disable {
+            &::after {
+                border-color: @disable-color;
+            }
+        }
+
+        .txt {
+            text-align: center;
+            height: 18px;
+            line-height: 18px;
+            margin-left: 3px
+        }
+    }
+
+    .checkbox-select {
+        .commom-select;
+    }
+}

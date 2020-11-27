@@ -10,11 +10,12 @@
         disables.indexOf(item) > -1 ? 'f-disable' : '',
       ]"
     >
-      <f-icon
-        :icon="
-          data.selectData.indexOf(item) == -1 ? 'icon-uncheck' : 'icon-checked'
+      <span
+        class="f-checkbox-icon"
+        :class="
+          data.selectData.indexOf(item) == -1 ? '' : 'f-checkbox-icon-seleced'
         "
-      ></f-icon>
+      ></span>
       <span class="txt" v-if="showText">{{ item }}</span>
     </div>
   </div>

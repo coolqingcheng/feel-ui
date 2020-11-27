@@ -1,0 +1,68 @@
+@import "../../styles/config.less";
+@import "../../styles/commom.less";
+
+.f-radio {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .f-radio-item {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        margin-right: 0.5rem;
+        align-items: center;
+        cursor: pointer;
+
+        &:hover {
+            .select-hover;
+        }
+
+        .f-radio-icon {
+            border: 1px solid @bordercolor;
+            width: 18px;
+            height: 18px;
+            box-sizing: border-box;
+            border-radius: 100%;
+            position: relative;
+
+            &::after {
+                content: ' ';
+                position: absolute;
+                background: @theme;
+                left: 8px;
+                top: 8px;
+                width: 0px;
+                height: 0px;
+                box-sizing: border-box;
+                border-radius: 100%;
+                transition: all .1s ease-in;
+            }
+        }
+
+        .f-radio-icon-checked {
+            border-color: @theme;
+
+            &::after {
+                content: '';
+                left: 3px;
+                top: 3px;
+                width: 10px;
+                height: 10px;
+                box-sizing: border-box;
+                border-radius: 100%;
+                transition: all .1s ease-in;
+            }
+        }
+
+        .txt {
+            margin-left: 3px;
+            align-items: center;
+            font-size: 16px
+        }
+    }
+
+    .f-radio-select {
+        .commom-select;
+    }
+}
