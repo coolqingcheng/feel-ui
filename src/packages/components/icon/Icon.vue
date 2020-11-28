@@ -8,12 +8,13 @@
       textAlign: 'center',
       lineHeight: height + 'px',
     }"
+    ref="iconRef"
   ></span>
 </template>
 
 <script lang="ts">
 import { HttpClient } from "@/packages/utils/HttpClient";
-import { getCurrentInstance, onMounted, ref, watch } from "vue";
+import { getCurrentInstance, nextTick, onMounted, ref, watch } from "vue";
 import IconOption from "./IconOption";
 export default {
   name: "f-icon",
@@ -25,15 +26,19 @@ export default {
     },
     width: {
       type: Number,
-      default: 16,
+      default: 18,
     },
     height: {
       type: Number,
-      default: 16,
+      default: 18,
     },
     type: {
       type: String,
-      default: "md",
+      default: "feather",
+    },
+    color: {
+      type: String,
+      default: "white",
     },
   },
   setup(props) {
@@ -44,7 +49,7 @@ export default {
     const iconUrls = {
       ant: "/icons/ant/",
       feather: "/icons/feather/",
-      md: "/icons/md/",
+      md: "/icons/md_icons/",
       eva: "/icon/eva/",
     };
     onMounted(async () => {
@@ -57,13 +62,28 @@ export default {
       let el = document.createElement("div");
       el.innerHTML = res;
       let svgEl = el.querySelector("svg") as SVGElement;
-      svgEl.setAttribute("width", props.width.toString());
-      svgEl.setAttribute("height", props.height.toString());
       svg.value = svgEl.outerHTML;
+      nextTick(() => {
+        updateIcon();
+      });
     });
+
+    const iconRef = ref<HTMLElement>();
+    watch(
+      () => [props.color, props.width, props.height],
+      () => updateIcon
+    );
+
+    const updateIcon = () => {
+      let ele = <SVGElement>iconRef.value?.querySelector("svg");
+      // ele.style.fill = props.color;
+      ele.setAttribute("width", props.width.toString());
+      ele.setAttribute("height", props.height.toString());
+    };
 
     return {
       svg,
+      iconRef,
     };
   },
 };

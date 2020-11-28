@@ -32,7 +32,12 @@ import {
 import mitt from "mitt";
 import { FormEvent, ValidField } from "*.vue";
 
-import { formItemInjectKey, FormItemInject } from "./formOption";
+import {
+  formItemInjectKey,
+  FormItemInject,
+  formInjectKey,
+  FormInject,
+} from "./formOption";
 
 export default {
   name: "f-form-item",
@@ -57,10 +62,10 @@ export default {
       message: "",
     });
     const event = mitt();
-    const form = <any>inject("form-item");
+    const form = inject<FormInject>(formInjectKey);
     const showMessage = computed(() => {
-      let items = <ValidField[]>form.fieldValid(props.for);
-      if (items?.length > 0) {
+      let items = form?.fieldValid(props.for);
+      if (items && items?.length > 0) {
         return {
           message: items[0].message,
           show: true,
@@ -71,7 +76,7 @@ export default {
       };
     });
     const labelWidth = computed(() => {
-      return form.data.labelWidth;
+      return form?.data.labelWidth;
     });
 
     onMounted(() => {});
@@ -79,7 +84,7 @@ export default {
     const formItemUpdate = async (e: FormEvent | undefined) => {
       if (e) {
         if (props.trigger == e.type) {
-          await form.validateItem(props.for);
+          await form?.validateItem(props.for);
         }
       }
     };

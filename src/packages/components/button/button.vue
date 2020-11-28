@@ -11,7 +11,7 @@
     ]"
     :disabled="readOnly"
   >
-    <span class="f-icon icon-loading loading" v-if="loading"></span>
+    <f-icon icon="loader" class="loading" v-if="loading"></f-icon>
     <slot name="icon" v-if="!loading"> </slot>
     <slot></slot>
     <span class="btn-text" v-if="text">{{ text }}</span>

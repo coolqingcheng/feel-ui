@@ -24,11 +24,7 @@
           <slot name="header">
             <span>{{ title }}</span>
           </slot>
-          <f-icon
-            icon="icon-close"
-            class="f-modal-close"
-            @click="close(false)"
-          ></f-icon>
+          <f-icon icon="x" class="f-modal-close" @click="close(false)"></f-icon>
         </div>
         <div class="f-dialog-content">
           <slot></slot>

@@ -6,14 +6,18 @@
     @mousewheel="mousewheel($event)"
     ref="num"
   >
-    <span class="f-num-sub" @click="operaSub()">-</span>
+    <span class="f-num-sub" @click="operaSub()">
+      <f-icon icon="minus"></f-icon>
+    </span>
     <input
       type="text"
       :value="data.value"
       @change="change"
       @keydown.up="keydown"
     />
-    <span class="f-num-add" @click="operaAdd()">+</span>
+    <span class="f-num-add" @click="operaAdd()">
+      <f-icon icon="plus"></f-icon>
+    </span>
   </div>
 </template>
 

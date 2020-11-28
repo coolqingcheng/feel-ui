@@ -18,11 +18,7 @@
           <span>
             {{ item }}
           </span>
-          <span
-            class="f-icon icon-close"
-            @click.stop="close(item)"
-            v-if="showClose"
-          ></span>
+          <f-icon icon="x" @click.stop="close(item)" v-if="showClose"></f-icon>
         </li>
       </ul>
       <div

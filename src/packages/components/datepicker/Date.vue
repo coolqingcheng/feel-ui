@@ -1,9 +1,6 @@
 <template>
   <div class="f-date-picker" ref="datepicker">
-    <span
-      class="f-icon icon-time f-date-icon"
-      :class="[data.open ? 'f-active-color' : '']"
-    ></span>
+    <f-icon icon="clock" class="f-date-icon"></f-icon>
     <input
       class="f-input"
       :class="[data.open ? 'f-input-focus' : '']"

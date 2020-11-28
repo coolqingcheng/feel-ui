@@ -12,17 +12,7 @@ import { FieldErrorList, ErrorList, ValidateError } from "async-validator";
 import { ValidField } from "*.vue";
 import { deepClone } from "@/packages/utils/feelutils";
 
-export interface FormData {
-  labelWidth: number;
-  model: Object;
-}
-
-export interface FormInject {
-  data: FormData;
-  rules: Object;
-  fieldValid: (field: string) => void;
-  validateItem: (field: string) => Promise<void>;
-}
+import { FormInject, formInjectKey, FormData } from "./formOption";
 
 export default {
   name: "f-form",
@@ -88,7 +78,7 @@ export default {
         }
       }
     };
-    provide<FormInject>("form", {
+    provide<FormInject>(formInjectKey, {
       data: data,
       rules: props.rules,
       fieldValid: fieldValid,

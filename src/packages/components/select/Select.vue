@@ -8,12 +8,10 @@
       :value="data.selectValue"
       @input="searchChange"
     />
-    <div
-      class="f-select-icon"
-      :class="[data.show ? 'f-select-icon-active' : '']"
-    >
-      <f-icon icon="icon-right"></f-icon>
-    </div>
+    <f-icon
+      icon="chevron-right"
+      :class="[data.show ? 'f-select-icon-active' : '', 'f-select-icon']"
+    ></f-icon>
     <f-drop-anim>
       <div class="f-select-options f-shadow" v-show="data.show">
         <div class="option option-tip" @click="itemClick(null)">{{ hint }}</div>

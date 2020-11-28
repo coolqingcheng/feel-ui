@@ -6,7 +6,8 @@
     <FadeAnim>
       <div class="f-spin-mask" v-if="loading">
         <div class="f-spin-mask-center">
-          <span class="f-icon icon-loading f-loading"></span>
+          <f-icon icon="loader" class="f-loading"></f-icon>
+          <!-- <span class="f-icon icon-loading f-loading"></span> -->
           <label v-if="text">{{ text }}</label>
         </div>
       </div>

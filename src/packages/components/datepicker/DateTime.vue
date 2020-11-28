@@ -1,9 +1,10 @@
 <template>
   <div class="f-date-picker" ref="datepicker">
-    <span
+    <!-- <span
       class="f-icon icon-calendar f-date-icon"
       :class="[data.open ? 'f-active-color' : '']"
-    ></span>
+    ></span> -->
+    <f-icon icon="calendar" class="f-date-icon"></f-icon>
     <input
       class="f-input"
       hint="选择日期"

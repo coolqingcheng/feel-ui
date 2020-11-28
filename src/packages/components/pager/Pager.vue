@@ -2,7 +2,7 @@
   <div class="f-pager">
     <ul class="f-pager-list m-b-1">
       <li class="pre f-pager-item" @click="prev()">
-        <f-icon icon="icon-left"></f-icon>
+        <f-icon icon="chevron-left"></f-icon>
       </li>
       <li
         v-for="(item, i) in pageNums"
@@ -18,7 +18,7 @@
         <span v-if="item.type == 1">...</span>
       </li>
       <li class="next f-pager-item" @click="next()">
-        <f-icon icon="icon-right"></f-icon>
+        <f-icon icon="chevron-right"></f-icon>
       </li>
     </ul>
     <span class="f-pager-sum m-b-1">一共:{{ count }}条</span>
