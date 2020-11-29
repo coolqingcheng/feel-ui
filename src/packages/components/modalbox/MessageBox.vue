@@ -1,10 +1,10 @@
 <template>
   <div class="f-messagebox">
     <transition name="mask">
-      <ModalMask v-if="show"></ModalMask>
+      <ModalMask v-if="data.show"></ModalMask>
     </transition>
     <transition name="dialog">
-      <div class="f-messagebox-container" v-if="show">
+      <div class="f-messagebox-container" v-if="data.show">
         <div class="f-messagebox-header">
           <h1>{{ title }}</h1>
         </div>
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { onMounted, reactive } from "vue";
 import ModalMask from "./ModalMask.vue";
 export default {
   name: "f-messagebox",
@@ -46,22 +47,24 @@ export default {
       type: Function,
     },
   },
-  data() {
-    return {
-      show: false,
-    };
-  },
   setup(props) {
-    console.log(props);
+    const data = reactive({
+      show: false,
+    });
     const close = () => {
+      data.show = false;
       if (props.closeFunc) {
         setTimeout(() => {
           props.closeFunc();
         }, 300);
       }
     };
+    onMounted(() => {
+      data.show = true;
+    });
     return {
       close,
+      data,
     };
   },
   // methods: {

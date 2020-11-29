@@ -1,4 +1,4 @@
-import { inject, onMounted, onUnmounted, Ref } from 'vue';
+import { ComponentInternalInstance, inject, onMounted, onUnmounted, Ref } from 'vue';
 
 function outClick(html: Ref<Element | undefined>, func: Function) {
     const outClick = (e: MouseEvent) => {

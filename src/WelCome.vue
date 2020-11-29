@@ -18,7 +18,7 @@
       <router-link to="/select">下拉框</router-link>
       <router-link to="/forms">表单</router-link>
       <router-link to="/dialog">对话框</router-link>
-      <router-link to="/button">提示框</router-link>
+      <router-link to="/message-box">MessageBox提示框</router-link>
       <router-link to="/tree">树</router-link>
       <router-link to="/spin">spin 加载中</router-link>
       <router-link to="/card">卡片</router-link>

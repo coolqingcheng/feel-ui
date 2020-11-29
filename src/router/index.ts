@@ -127,6 +127,10 @@ const routes = [
   {
     path: '/directives',
     component: () => import('../views/directives/Index.vue')
+  },
+  {
+    path: '/message-box',
+    component: () => import('../views/messagebox/Index.vue')
   }
 ]
 
