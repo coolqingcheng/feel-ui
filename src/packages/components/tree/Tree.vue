@@ -207,7 +207,6 @@ export default {
       return this.getCheckeds(this.data, props, indeterminate, []);
     },
     reBuild() {
-      console.log("reBuild tree");
       this.buildTree(this.data, "");
     },
   },

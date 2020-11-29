@@ -6,7 +6,8 @@
   ></span>
 </template>
 
-<script>
+<script lang="ts">
+import { getCurrentInstance, ref, watch } from "vue";
 export default {
   name: "f-tree-checkbox",
   props: {
@@ -19,29 +20,35 @@ export default {
       default: false,
     },
   },
-  data() {
-    return {
-      status: this.modelValue,
+  setup(props) {
+    const status = ref(props.modelValue);
+    watch(
+      () => props.modelValue,
+      () => {
+        status.value = props.modelValue;
+      }
+    );
+
+    const ctx = getCurrentInstance();
+
+    const itemClick = () => {
+      status.value = !status.value;
+      ctx?.emit("update:modelValue", status);
+      ctx?.emit("select", status);
     };
-  },
-  watch: {
-    modelValue() {
-      this.status = this.modelValue;
-    },
-  },
-  methods: {
-    itemClick() {
-      this.status = !this.status;
-      this.$emit("update:modelValue", this.status);
-      this.$emit("select", this.status);
-    },
-    getStatus() {
-      if (!this.status) return "f-checkbox-icon-seleced";
-      if (this.indeterminate) {
+
+    const getStatus = () => {
+      if (!status.value) return "f-checkbox-icon-seleced";
+      if (props.indeterminate) {
         return "f-checkbox-icon-indeterminate";
       }
       return "f-checkbox-icon-unselected";
-    },
+    };
+    return {
+      status,
+      itemClick,
+      getStatus,
+    };
   },
 };
 </script>
