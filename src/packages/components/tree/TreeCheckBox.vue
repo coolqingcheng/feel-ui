@@ -1,14 +1,9 @@
 <template>
-  <div class="f-tree-checkbox">
-    <div
-      class="f-tree-checkbox-item"
-      @click="itemClick()"
-      :class="[modelValue == false ? '' : 'checkbox-select']"
-    >
-      <!-- <span class="f-icon" :class="[getStatus()]"></span> -->
-      <f-icon :icon="getStatus()"></f-icon>
-    </div>
-  </div>
+  <span
+    :class="getStatus()"
+    class="f-checkbox-icon"
+    @click="itemClick()"
+  ></span>
 </template>
 
 <script>
@@ -41,11 +36,11 @@ export default {
       this.$emit("select", this.status);
     },
     getStatus() {
-      if (!this.status) return "icon-uncheck";
+      if (!this.status) return "f-checkbox-icon-seleced";
       if (this.indeterminate) {
-        return "icon-indeterminate";
+        return "f-checkbox-icon-indeterminate";
       }
-      return "icon-checked";
+      return "f-checkbox-icon-unselected";
     },
   },
 };

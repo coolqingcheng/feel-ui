@@ -1,4 +1,4 @@
-@import "../config.less";
+@import "../../styles/config.less";
 
 .f-tree-node {
     // padding-left: 2rem;
@@ -16,20 +16,17 @@
 
         @iconSize: 10px;
 
-        .iconfont {
-            height: @iconSize;
-            width: @iconSize;
-            line-height: @iconSize;
-            cursor: pointer;
-            font-size: @iconSize;
-        }
-
         .text {
             margin-left: 0.1rem;
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
             cursor: pointer;
+            align-items: center;
+
+            .f-checkbox-icon {
+                margin-right: 3px;
+            }
         }
 
         .f-tree-icon-text {
@@ -58,30 +55,10 @@
     display: flex;
     flex-direction: row;
 
-    .f-tree-checkbox-item {
+    .text {
         display: flex;
         flex-direction: row;
-        margin-right: 0.5rem;
-        cursor: pointer;
-
-        &:hover {
-            .select-hover;
-        }
-
-        // .iconfont {
-        //     .iconfont;
-        // }
-
-        .txt {
-            text-align: center;
-            height: 1.5625rem;
-            line-height: 1.5625rem;
-        }
-
-
-    }
-
-    .checkbox-select {
-        .commom-select;
+        align-items: center;
+        color: red;
     }
 }

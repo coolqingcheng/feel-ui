@@ -11,51 +11,6 @@
         margin-right: 0.5rem;
         cursor: pointer;
 
-        .f-checkbox-icon {
-            border: 1px solid @bordercolor;
-            width: 18px;
-            height: 18px;
-            box-sizing: border-box;
-            position: relative;
-            border-radius: 2px;
-            transition: all .1s linear;
-
-            &::after {
-                content: '';
-                position: absolute;
-                width: 5px;
-                height: 5px;
-                border: 2px solid @white;
-                box-sizing: border-box;
-                border-right: none;
-                border-top: none;
-                top: 4px;
-                left: 3px;
-                transform: rotate(-40deg);
-                transition: width .1s ease-in, height .1s ease-in;
-            }
-        }
-
-        .f-checkbox-icon-seleced {
-            border-color: @theme;
-            transition: all .1s linear;
-            background-color: @theme;
-
-            &::after {
-                top: 4px;
-                left: 3px;
-                width: 10px;
-                height: 6px;
-                transition: width .1s ease-in, height .1s ease-in;
-            }
-        }
-
-        .f-checkbox-icon-disable {
-            &::after {
-                border-color: @disable-color;
-            }
-        }
-
         .txt {
             text-align: center;
             height: 18px;
@@ -66,5 +21,77 @@
 
     .checkbox-select {
         .commom-select;
+    }
+}
+
+.f-checkbox-icon {
+    border: 1px solid @bordercolor;
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 2px;
+    transition: all .1s linear;
+
+    &::after {
+        content: '';
+        position: absolute;
+    }
+
+}
+
+.f-checkbox-icon-unselected {
+    &::after {
+        width: 5px;
+        height: 5px;
+
+
+        top: 4px;
+        left: 3px;
+
+        transition: width .1s ease-in, height .1s ease-in;
+    }
+}
+
+.f-checkbox-icon-seleced {
+    border-color: @theme;
+    transition: all .1s linear;
+    background-color: @theme;
+    position: relative;
+
+    &::after {
+        top: 4px;
+        left: 3px;
+        width: 10px;
+        height: 6px;
+        border: 2px solid @white;
+        box-sizing: border-box;
+        border-right: none;
+        border-top: none;
+
+        transform: rotate(-40deg);
+        transition: width .1s ease-in, height .1s ease-in;
+    }
+}
+
+.f-checkbox-icon-indeterminate {
+    border-color: @theme;
+    transition: all .1s linear;
+    background-color: @white;
+
+    &::after {
+        top: 3px;
+        left: 3px;
+        width: 10px;
+        height: 10px;
+        background-color: @theme;
+        transform: rotate(0deg);
+        transition: width .1s ease-in, height .1s ease-in;
+    }
+}
+
+.f-checkbox-icon-disable {
+    &::after {
+        border-color: @disable-color;
     }
 }

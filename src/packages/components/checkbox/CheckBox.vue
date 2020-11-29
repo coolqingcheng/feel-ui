@@ -13,7 +13,9 @@
       <span
         class="f-checkbox-icon"
         :class="
-          data.selectData.indexOf(item) == -1 ? '' : 'f-checkbox-icon-seleced'
+          data.selectData.indexOf(item) == -1
+            ? 'f-checkbox-icon-unselected'
+            : 'f-checkbox-icon-seleced'
         "
       ></span>
       <span class="txt" v-if="showText">{{ item }}</span>
