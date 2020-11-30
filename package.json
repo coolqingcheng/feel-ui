@@ -1,10 +1,10 @@
 {
   "name": "v-feelui",
-  "version": "0.1.9",
+  "version": "0.1.15",
   "description": "基于vue3.0和composition api + typescript开发的组件库",
   "license": "Apache-2.0",
-  "main": "./lib/feelui.common.js",
-  "types": "/types/Index.d.ts",
+  "main": "./dist/feelui.umd.min.js",
+  "typings": "/types/feelui.umd.min.d.ts",
   "files": [
     "dist/*",
     "types/*"
@@ -14,7 +14,7 @@
     "build": "vue-cli-service build --mode prod",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "publish": "vue-cli-service build --target lib --name feelui src/packages/feelui.ts"
+    "publish": "vue-cli-service build --target lib --name feelui src/packages/Index.ts"
   },
   "dependencies": {
     "async-validator": "^3.4.0",

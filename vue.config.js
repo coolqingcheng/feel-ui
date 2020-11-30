@@ -6,14 +6,18 @@ module.exports = {
   lintOnSave: false,
   productionSourceMap: false,
   publicPath: '/',
+  outputDir: 'dist',
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'less',
       patterns: []
     }
   },
-  outputDir: 'dist',
+
   configureWebpack: config => {
+    config.output.filename = 'index.js'
+    config.output.chunkFilename = '[name].[chunkhash:8].js'
+    console.log(config);
     config.module.rules.push({
       test: /\.md$/,
       use: [
@@ -32,7 +36,6 @@ module.exports = {
     config["performance"] = {
       hints: false
     }
-    // config.resolve.alias.set('@v-feelui', resolve("./src/types"))
   },
   chainWebpack: config => {
     config.resolve.alias.set('@v-feelui', resolve("./src/types"))

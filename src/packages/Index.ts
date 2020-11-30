@@ -135,6 +135,4 @@ const feelui = {
 
 
 
-export {
-    feelui
-}
+export default feelui

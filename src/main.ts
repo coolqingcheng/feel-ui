@@ -2,7 +2,7 @@ import {
     createApp
 } from 'vue'
 import WelCome from './WelCome.vue'
-import { feelui } from './packages/feelui'
+import feelui from './packages/Index'
 import router from './router'
 import "./assets/typora-vue-theme-master/vue.css"
 import "prismjs/themes/prism.css"
