@@ -1,6 +1,6 @@
 {
   "name": "v-feelui",
-  "version": "0.1.5",
+  "version": "0.1.9",
   "description": "基于vue3.0和composition api + typescript开发的组件库",
   "license": "Apache-2.0",
   "main": "./lib/feelui.common.js",
