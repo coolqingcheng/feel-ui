@@ -1,11 +1,13 @@
 {
   "name": "v-feelui",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "description": "基于vue3.0和composition api + typescript开发的组件库",
   "license": "Apache-2.0",
-  "main": "./dist/feelui.common.js",
+  "main": "./lib/feelui.common.js",
+  "types": "/types/Index.d.ts",
   "files": [
-    "dist/*"
+    "dist/*",
+    "types/*"
   ],
   "scripts": {
     "dev": "vue-cli-service serve --mode dev",
@@ -69,17 +71,15 @@
       "parser": "babel-eslint"
     },
     "rules": {},
-    "overrides": [
-      {
-        "files": [
-          "**/__tests__/*.{j,t}s?(x)",
-          "**/tests/unit/**/*.spec.{j,t}s?(x)"
-        ],
-        "env": {
-          "jest": true
-        }
+    "overrides": [{
+      "files": [
+        "**/__tests__/*.{j,t}s?(x)",
+        "**/tests/unit/**/*.spec.{j,t}s?(x)"
+      ],
+      "env": {
+        "jest": true
       }
-    ]
+    }]
   },
   "browserslist": [
     "> 1%",

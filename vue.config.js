@@ -1,3 +1,7 @@
+const path = require("path");
+function resolve(dir) {
+  return path.join(__dirname, dir);
+}
 module.exports = {
   lintOnSave: false,
   productionSourceMap: false,
@@ -28,6 +32,10 @@ module.exports = {
     config["performance"] = {
       hints: false
     }
+    // config.resolve.alias.set('@v-feelui', resolve("./src/types"))
   },
+  chainWebpack: config => {
+    config.resolve.alias.set('@v-feelui', resolve("./src/types"))
+  }
 
 }

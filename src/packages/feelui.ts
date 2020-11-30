@@ -56,7 +56,6 @@ import Slider from "./components/slider/index"
 
 import ModalBox from "./components/modalbox/index"
 
-import msgBox from "./components/modalbox/msgbox"
 
 import Uploader from "./components/uploader/index"
 
@@ -79,7 +78,6 @@ import Position from "./components/position/Index"
 import Card from "./components/card/Index"
 
 import { App } from 'vue';
-
 
 
 const components = {
@@ -119,15 +117,18 @@ const components = {
 
 import Drag from "./directive/DragDirective"
 
+import MsgBox from "./components/message-box/Index"
+
+import MessageBox from "@feelui/MessageBox"
 
 const feelui = {
     install: function (Vue: App<Element>, options: any) {
+        Vue.use(MsgBox)
         for (let item in components) {
             Vue.component(components[item].name, components[item])
         }
         Vue.config.globalProperties.$notify = notify.notify.show();
         Vue.config.globalProperties.$message = msg.msg.init();
-        Vue.config.globalProperties.$messagebox = msgBox.msgBox.init();
         Drag.Install(Vue);
     }
 }
