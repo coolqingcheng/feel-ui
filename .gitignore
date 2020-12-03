@@ -13,3 +13,5 @@ lib/
 dist/
 
 package-lock.json
+
+bin/

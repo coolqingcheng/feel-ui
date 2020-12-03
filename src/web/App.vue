@@ -39,7 +39,7 @@
   </div>
 </template>
 <style lang="less">
-@left: 150px;
+@left: 250px;
 #doc {
   position: relative;
   #nav {

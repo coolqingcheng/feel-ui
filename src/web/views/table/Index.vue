@@ -1,8 +1,7 @@
 <template>
   <md>
     <template v-slot:t1>
-      <f-table :header="header" :data="data" idkey="id" selector="radio">
-      </f-table>
+     
     </template>
 
     <template v-slot:t2>

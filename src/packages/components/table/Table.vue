@@ -1,5 +1,4 @@
 <template>
-  <span>{{ w }}</span>
   <div ref="container">
     <div class="f-table" ref="table">
       <div class="f-table-header" ref="cols">

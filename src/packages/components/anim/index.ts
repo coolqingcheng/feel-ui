@@ -13,5 +13,6 @@ export default {
         app.component(FadeAnim.name, FadeAnim)
         app.component(DialogAnim.name, DialogAnim)
         app.component(ExpandAnim.name, ExpandAnim)
+        app.component(ExpandTransition.name, ExpandTransition)
     }
 }
