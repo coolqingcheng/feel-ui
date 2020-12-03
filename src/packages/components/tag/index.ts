@@ -1,5 +1,8 @@
+import { App } from "vue"
 import FTag from "./FTag.vue"
 
 export default {
-    FTag
+    install: (app: App) => {
+        app.component(FTag.name, FTag)
+    }
 }

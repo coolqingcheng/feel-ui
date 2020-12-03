@@ -1,5 +1,8 @@
+import { App } from "vue"
 import Position from "./Position.vue"
 
 export default {
-    Position
+    install:(app: App)=>{
+        app.component(Position.name, Position)
+    }
 }

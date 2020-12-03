@@ -1,5 +1,8 @@
+import { App } from 'vue';
 import Switch from './Switch.vue';
 
 export default {
-    Switch
+    install: (app: App) => {
+        app.component(Switch.name, Switch)
+    }
 }

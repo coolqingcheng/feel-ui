@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import ExpandAnim from "@/packages/components/anim/ExpandAnim.vue";
+import ExpandAnim from "../anim/ExpandAnim.vue";
 export default {
   components: {
     ExpandAnim,

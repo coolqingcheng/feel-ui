@@ -1,4 +1,7 @@
+import { App } from 'vue'
 import Code from './Code.vue'
 export default {
-    Code
+    install: (app: App) => {
+        app.component(Code.name, Code)
+    }
 }

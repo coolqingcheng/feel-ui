@@ -1,5 +1,8 @@
+import { App } from 'vue'
 import Button from './Button.vue'
 
 export default {
-    Button
+    install:(app: App)=>{
+        app.component(Button.name, Button)
+    }
 }

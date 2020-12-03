@@ -84,9 +84,9 @@
 
 <script>
 // import TableFooter from "./TableFooter";
-import TableCheckBox from "./TableCheckBox";
-import TableRadio from "./TableRadio";
-import TableSort from "./TableSort";
+import TableCheckBox from "./TableCheckBox.vue";
+import TableRadio from "./TableRadio.vue";
+import TableSort from "./TableSort.vue";
 export default {
   name: "f-table",
   components: {

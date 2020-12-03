@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import { computed } from "vue";
-export default {
+import { computed, defineComponent } from "vue";
+export default defineComponent( {
   name: "f-button",
   props: {
     type: {
@@ -58,5 +58,5 @@ export default {
       readOnly,
     };
   },
-};
+})
 </script>

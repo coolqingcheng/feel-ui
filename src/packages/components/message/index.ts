@@ -1,5 +1,8 @@
+import { App } from 'vue'
 import Message from './Message.vue'
 
 export default {
-    Message
+    install: (app: App) => {
+        app.component(Message.name, Message)
+    }
 }

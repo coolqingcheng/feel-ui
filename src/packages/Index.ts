@@ -80,56 +80,47 @@ import Card from "./components/card/Index"
 import { App } from 'vue';
 
 
-const components = {
-    ...button,
-    ...Layout,
-    ...Input,
-    ...Number,
-    ...Radio,
-    ...CheckBox,
-    ...Switch,
-    ...Anim,
-    ...Collapse,
-    ...Form,
-    ...Select,
-    ...Tab,
-    ...DateTimePicker,
-    ...ProgressBar,
-    ...Icon,
-    ...Tree,
-    ...Menu,
-    ...NotifyBox,
-    ...Message,
-    ...Slider,
-    ...ModalBox,
-    ...Table,
-    ...Uploader,
-    ...Code,
-    ...Line,
-    ...Pager,
-    ...Text,
-    ...Tag,
-    ...Spin,
-    ...ColorPicker,
-    ...Position,
-    ...Card
-}
 
 import Drag from "./directive/DragDirective"
 
 import MsgBox from "./components/message-box/Index"
 
-import MessageBox from "@feelui/MessageBox"
+// import MessageBox from "@feelui/MessageBox"
 
 const feelui = {
-    install: function (Vue: App<Element>, options: any) {
-        Vue.use(MsgBox)
-        for (let item in components) {
-            Vue.component(components[item].name, components[item])
-        }
-        Vue.config.globalProperties.$notify = notify.notify.show();
-        Vue.config.globalProperties.$message = msg.msg.init();
-        Drag.Install(Vue);
+    install: function (app: App<Element>, options: any) {
+        button.install(app)
+        Layout.install(app)
+        Input.install(app)
+        Number.install(app)
+        Radio.install(app)
+        CheckBox.install(app)
+        Switch.install(app)
+        Anim.install(app)
+        Collapse.install(app)
+        Form.install(app)
+        Select.install(app)
+        Tab.install(app)
+        DateTimePicker.install(app)
+        ProgressBar.install(app)
+        Icon.install(app)
+        Tree.install(app)
+        Menu.install(app)
+        NotifyBox.install(app)
+        Message.install(app)
+        Slider.install(app)
+        ModalBox.install(app)
+        Table.install(app)
+        Uploader.install(app)
+        Code.install(app)
+        Line.install(app)
+        Pager.install(app)
+        Text.install(app)
+        Tag.install(app)
+        Spin.install(app)
+        ColorPicker.install(app)
+        Position.install(app)
+        Card.install(app)
     }
 }
 

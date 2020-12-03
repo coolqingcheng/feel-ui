@@ -1,8 +1,14 @@
 import { genRandCode } from '@/packages/utils/feelutils';
-import { MessageBoxInput } from '@feelui/MessageBox';
 import { createApp } from 'vue';
 
 import msgBox from "./MessageBox.vue"
+
+export interface MessageBoxInput {
+    title: string
+    content: string
+    closeFunc: () => void
+}
+
 const alert = (message: MessageBoxInput) => {
 
     let code = genRandCode();

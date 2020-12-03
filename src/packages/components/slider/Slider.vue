@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import SliderSelector from "./SliderSelector";
+import SliderSelector from "./SliderSelector.vue";
 export default {
   name: "f-slider",
   components: {

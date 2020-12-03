@@ -1,4 +1,7 @@
+import { App } from 'vue';
 import Input from './Input.vue';
 export default {
-    Input
+    install: (app: App) => {
+        app.component(Input.name, Input)
+    }
 }

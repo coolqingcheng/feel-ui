@@ -1,7 +1,10 @@
+import { App } from 'vue'
 import Col from './grid/Col.vue'
 import Row from './grid/Row.vue'
 
 export default {
-    Col,
-    Row
+    install: (app: App) => {
+        app.component(Col.name, Col)
+        app.component(Row.name, Row)
+    }
 }

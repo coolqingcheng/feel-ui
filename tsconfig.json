@@ -1,48 +1,45 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "strict": true,
-    "jsx": "preserve",
-    "noImplicitAny": false,
-    "importHelpers": true,
-    "moduleResolution": "node",
-    "allowJs": true,
-    "declaration": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "types": [
-      "webpack-env",
-      "jest"
-    ],
-    "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@feelui/*":[
-        "./types/*"
-      ]
-
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "noImplicitAny": false,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ],
+            "@feelui/*": [
+                "./types/*"
+            ]
+        },
+        "lib": [
+            "dom",
+            "es5",
+            "es6",
+            "es7",
+            "es2015.promise",
+            "esnext",
+            "scripthost"
+        ],
+        // 允许从没有设置默认导出的模块中默认导入
+        "allowSyntheticDefaultImports": true,
+        // 采用的模块系统
+        "module": "esnext",
+        // 编译输出目标 ES 版本
+        "target": "es5",
+        // 如何处理模块
+        "moduleResolution": "node",
+        // 编译过程中需要引入的库文件的列表
+        "sourceMap": true,
+        "allowJs": true,
+        "strict": true,
+        "jsx": "preserve",
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+    ],
+    "exclude": [
+        "node_modules"
     ]
-  },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
 }
