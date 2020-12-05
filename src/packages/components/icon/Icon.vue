@@ -47,10 +47,10 @@ export default {
     const svg = ref();
 
     const iconUrls = {
-      ant: "/icons/ant/",
-      feather: "/icons/feather/",
-      md: "/icons/md_icons/",
-      eva: "/icon/eva/",
+      ant: "icons/ant/",
+      feather: "icons/feather/",
+      md: "icons/md_icons/",
+      eva: "icon/eva/",
     };
     onMounted(async () => {
       let url = `${iconUrls[props.type]}${props.icon}.svg`;
