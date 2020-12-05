@@ -17,7 +17,7 @@ module.exports = {
     entry: "./src/web/main.ts",
     output: {
         filename: 'index.[hash].js',
-        libraryTarget: 'umd',
+        // libraryTarget: 'umd',
         path: path.resolve(__dirname, "../dist")
     },
     module: {
@@ -43,11 +43,28 @@ module.exports = {
                         limit: 8192
                     }
                 }]
+            },
+            {
+                test: /\.md$/,
+                use: [
+                    {
+                        loader: 'vue-loader'
+                    },
+                    {
+                        loader: require.resolve("../src/packages/utils/docs-loader.js")
+                    },
+                    {
+                        loader: require.resolve("../src/packages/utils/md-loader.ts")
+                    }
+                ]
             }
         ]
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js', '.json']
+        extensions: ['.tsx', '.ts', '.js', '.json'],
+        alias: {
+            '@': path.resolve('src')
+        }
     },
     // externals: [
     //     {
