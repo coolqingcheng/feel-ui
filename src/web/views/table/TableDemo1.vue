@@ -6,10 +6,6 @@
 <script>
 import { onMounted, reactive } from "vue";
 export default {
-  data() {
-    return;
-  },
-  created() {},
   setup() {
     const data = reactive({
       header: [

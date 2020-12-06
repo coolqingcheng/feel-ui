@@ -1,9 +1,6 @@
 # 颜色选择器
 
 一个支持多种多种格式的颜色选择组件
-<div class="f-demo">
-<div><button style="height:40px">c测试</button></div>
-</div>
 
 ### 简单使用
 

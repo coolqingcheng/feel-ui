@@ -1,5 +1,5 @@
 <template>
-  <f-table :header="data.header" :data="data.data">
+  <f-table :header="data.header" :data="data.data" idkey="id">
     <template v-slot:sex="item">
       <span style="color: red" v-if="item.sex == 0">男</span>
       <span style="color: green" v-if="item.sex == 1">女</span>
@@ -10,10 +10,6 @@
 <script>
 import { onMounted, reactive } from "vue";
 export default {
-  data() {
-    return;
-  },
-  created() {},
   setup() {
     const data = reactive({
       data: [],

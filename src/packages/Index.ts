@@ -87,6 +87,8 @@ import MsgBox from "./components/message-box/Index"
 
 import Loading from "./directive/Loading"
 
+import Rating from "../packages/components/rating/Index"
+
 // import MessageBox from "@feelui/MessageBox"
 
 const feelui = {
@@ -125,6 +127,7 @@ const feelui = {
         Card.install(app)
         MsgBox.install(app)
         Loading.install(app)
+        Rating.install(app)
     }
 }
 

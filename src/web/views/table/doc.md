@@ -21,6 +21,7 @@
 
 让header数组的第一项的type=radio即可开启表格单选功能
 
+<demo path="./TableDemo3.vue"></demo>
 
 
 ### 表格多选

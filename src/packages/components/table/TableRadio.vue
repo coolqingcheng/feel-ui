@@ -1,9 +1,9 @@
 <template>
   <div class="f-table-radio">
     <span
-      class="iconfont"
+      class="f-radio-icon"
       @click="itemClick"
-      :class="[value == false ? 'icon-yuanxingweixuanzhong' : 'icon-danxuan']"
+      :class="[value == false ? '' : 'f-radio-icon-checked']"
     ></span>
   </div>
 </template>

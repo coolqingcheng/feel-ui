@@ -8,7 +8,6 @@ import { App } from 'vue'
 export default {
     install: (app: App) => {
         app.component(BasicAnimTransition.name, BasicAnimTransition)
-        app.component(BasicAnimTransition.name, BasicAnimTransition)
         app.component(DropAnim.name, DropAnim)
         app.component(FadeAnim.name, FadeAnim)
         app.component(DialogAnim.name, DialogAnim)

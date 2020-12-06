@@ -53,7 +53,7 @@ export function createLoadingComponent(option: LoadingOption): loadingComponentI
                 h(Icon, {
                     icon: 'loader'
                 }),
-                h("div", this.text),
+                h("span", this.text),
             ])
             return h(FadeAnim, {
             }, {

@@ -1,10 +1,10 @@
 <template>
   <div class="f-table-checkbox">
     <span
-      class="iconfont"
+    class="f-checkbox-icon"
       @click="itemClick"
       :class="[
-        value == false ? 'icon-fuxuankuang' : 'icon-fuxuankuangxuanzhong',
+        value == false ? 'f-checkbox-icon-unselected' : 'f-checkbox-icon-seleced',
       ]"
     ></span>
   </div>

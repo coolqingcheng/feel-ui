@@ -29,29 +29,29 @@
         left: 0;
         box-sizing: border-box;
         width: 100%;
-        border: 1px solid @bordercolor;
+        border: .5px solid @bordercolor;
         display: flex;
         flex-direction: column;
         z-index: 999;
         overflow-y: auto;
         background: @white;
 
+        .option:last-child{
+            border-bottom: none;
+        }
+
         .option {
-            color: @black;
-            padding: 0.4rem;
+            padding: 0.4rem 0.4rem 0.4rem .6rem;
             height: 35px;
+            font-size: 16px;
             cursor: pointer;
             box-sizing: border-box;
             background: @white;
             display: flex;
             justify-content: flex-start;
-
-
             &:hover {
-                background: @theme-hover;
+                background:@theme-hover ;
             }
-
-            border-bottom: 0.5px solid @bordercolor;
         }
 
         .option-tip {

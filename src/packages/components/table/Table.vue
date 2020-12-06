@@ -5,7 +5,7 @@
         <table>
           <thead>
             <tr>
-              <td v-for="(item, index) in headerList" :key="index">
+              <td v-for="(item, index) in data.headerList" :key="index">
                 <div
                   class="f-table-td"
                   :class="{ 'f-table-td-center': item.center }"
@@ -16,7 +16,7 @@
                     <span>{{ item.title }}-{{ item.width }}</span>
                     <TableSort
                       v-if="item.sort"
-                      :status="item.field == sort.field ? sort.value : ''"
+                      :status="item.field == data.sort.field ? data.sort.value : ''"
                       @change="sortChange($event, item.field)"
                     ></TableSort>
                   </div>
@@ -24,7 +24,7 @@
                 <div v-else :style="{ width: '60px' }" class="f-table-type">
                   <TableCheckBox
                     v-if="item.type == 'checkbox'"
-                    :status="checkedList.length == dataList.length"
+                    :status="data.checkedList.length == data.dataList.length"
                     @change="checkAll($event)"
                   ></TableCheckBox>
                 </div>
@@ -44,8 +44,8 @@
       >
         <table border="0">
           <tbody>
-            <tr v-for="(item, index) in dataList" :key="index">
-              <td v-for="(header, i) in headerList" :key="i">
+            <tr v-for="(item, index) in data.dataList" :key="index">
+              <td v-for="(header, i) in data.headerList" :key="i">
                 <div
                   v-if="!header.type"
                   class="t-table-content-item f-table-td"
@@ -60,13 +60,13 @@
                   <TableCheckBox
                     v-if="header.type == 'checkbox'"
                     :status="
-                      checkedList.findIndex((a) => a == item[idkey]) > -1
+                      data.checkedList.findIndex((a) => a == item[idkey]) > -1
                     "
                     @change="itemChecked($event, item[idkey])"
                   ></TableCheckBox>
                   <TableRadio
                     v-if="header.type == 'radio'"
-                    :status="radioValue == item[idkey]"
+                    :status="data.radioValue == item[idkey]"
                     @change="radioChange($event, item[idkey])"
                   >
                   </TableRadio>
@@ -81,11 +81,27 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { getCurrentInstance, onMounted, PropType, reactive, ref } from "vue";
 // import TableFooter from "./TableFooter";
 import TableCheckBox from "./TableCheckBox.vue";
 import TableRadio from "./TableRadio.vue";
 import TableSort from "./TableSort.vue";
+
+import cdk from "../../utils/cdk";
+
+interface TableData {
+  headerList: Array<any>;
+  dataList: Array<any>;
+  checkedList: string[];
+  radioValue: string;
+  sort: {
+    field: string;
+    value: string;
+  };
+  w: number;
+}
+
 export default {
   name: "f-table",
   components: {
@@ -96,7 +112,7 @@ export default {
   },
   props: {
     header: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => [],
     },
     data: {
@@ -121,20 +137,18 @@ export default {
      * key，唯一标识列
      */
     idkey: {
-      type: String,
-      required: true,
+      type: String
     },
     selector: {
       type: String,
       default: "",
-      validator: (e) => ["", "checkbox", "radio"].indexOf(e) !== -1,
+      validator: (e: string) => ["", "checkbox", "radio"].indexOf(e) !== -1,
     },
   },
-  computed: {},
-  data() {
-    return {
-      headerList: this.header,
-      dataList: this.data,
+  setup(props) {
+    const data = reactive<TableData>({
+      headerList: props.header,
+      dataList: props.data,
       checkedList: [],
       radioValue: "",
       sort: {
@@ -142,116 +156,40 @@ export default {
         value: "",
       },
       w: 0,
-    };
-  },
-  mounted() {
-    this.updateColWidth();
-    this.w = this.$refs.container.clientWidth;
-    window.addEventListener("resize", this.onScreenResize);
-  },
-  beforeUnmount() {
-    window.removeEventListener("resize", this.onScreenResize);
-  },
-  methods: {
-    // 公共api
+    });
 
-    getCheckAll() {
-      return this.checkedList;
-    },
-    clearCheckAll() {
-      this.checkedList = [];
-    },
-    getRadioValue() {
-      return this.radioValue;
-    },
-    clearRadio() {
-      this.radioValue = "";
-    },
-    /**
-     * 全选
-     */
-    checkAll(e) {
-      console.log(e);
-      if (e.value == false) {
-        this.checkedList = [];
-      } else {
-        this.checkedList = [];
-        this.dataList.forEach((a) => {
-          this.checkedList.push(a[this.idkey]);
-        });
-      }
-    },
-    /**
-     * 选中
-     */
-    itemChecked(e, key) {
-      let index = this.checkedList.findIndex((a) => a == key);
-      if (index == -1) {
-        this.checkedList.push(key);
-      } else {
-        this.checkedList.splice(index, 1);
-      }
-      console.log(this.checkedList);
-      console.log(key);
-      console.log(this.checkedList.findIndex((a) => a == key));
-    },
-    radioChange(e, key) {
-      this.radioValue = key;
-    },
-    test() {
-      let el = this.$refs.content;
-      if (el) {
-        return el.scrollHeight > el.clientHeight;
-      } else {
-        return false;
-      }
-    },
-    contentScroll(e) {
-      this.$refs.cols.scrollLeft = e.srcElement.scrollLeft;
-    },
-    getWidth(header) {
-      if (!header.field) {
-        return "80px";
-      }
-      let field = header.field;
-      let item = this.headerList.filter((a) => a.field == field)[0];
-      if (item.width) {
-        return item.width + "px";
-      }
-      if (item.setWidth) {
-        return item.setWidth + "px";
-      }
+    const container = ref<HTMLElement>();
+    const content = ref<HTMLElement>();
+    const cols = ref<HTMLElement>();
 
-      return "80px";
-    },
-    onScreenResize() {
-      // console.log("修改屏幕大小");
-      this.updateColWidth();
-      this.w = this.$refs.container.clientWidth;
-    },
-    updateColWidth() {
-      let setWidthCols = this.headerList.filter((a) => {
+    const ctx = getCurrentInstance();
+
+    const updateColWidth = () => {
+      let setWidthCols = data.headerList.filter((a) => {
         if (a.width > 0 && !a.type) {
           return true;
         }
         return false;
       });
-      let unSetWidthCols = this.headerList.filter((a) => {
+      let unSetWidthCols = data.headerList.filter((a) => {
         if (a.width || a.type) {
           return false;
         }
         return true;
       });
       let choiceW = 0;
-      let index = this.headerList.findIndex((a) => a.type);
+      let index = data.headerList.findIndex((a) => a.type);
       if (index !== -1) {
         choiceW = 60;
       }
       let patchW = 0;
-      if (this.test()) {
+      if (test()) {
         patchW = 17;
       }
-      let containerWdith = this.$refs.container.clientWidth - patchW - choiceW;
+      let containerWdith = 0;
+      if (container.value) {
+        containerWdith = container.value.clientWidth - patchW - choiceW;
+      }
       let sumWidth = 0;
       for (let i in setWidthCols) {
         let item = setWidthCols[i];
@@ -272,17 +210,123 @@ export default {
           item.setWidth = unSetColW;
         }
       }
-    },
-    sortChange(e, field) {
+
+      if (container.value) {
+        data.w = container.value.clientWidth;
+      }
+    };
+
+    const test = () => {
+      let el = content.value;
+      if (el) {
+        return el.scrollHeight > el.clientHeight;
+      } else {
+        return false;
+      }
+    };
+
+    const getCheckAll = () => {
+      return data.checkedList;
+    };
+
+    const clearCheckAll = () => {
+      data.checkedList = [];
+    };
+
+    const getRadioValue = () => {
+      return data.radioValue;
+    };
+    const clearRadio = () => {
+      data.radioValue = "";
+    };
+    /**
+     * 全选
+     */
+    const checkAll = (e) => {
+      if (e.value == false) {
+        data.checkedList = [];
+      } else {
+        data.checkedList = [];
+        data.dataList.forEach((a) => {
+          data.checkedList.push(a[props.idkey]);
+        });
+      }
+    };
+
+    /**
+     * 选中
+     */
+    const itemChecked = (e, key) => {
+      let index = data.checkedList.findIndex((a) => a == key);
+      if (index == -1) {
+        data.checkedList.push(key);
+      } else {
+        data.checkedList.splice(index, 1);
+      }
+      console.log(data.checkedList);
+      console.log(key);
+      console.log(data.checkedList.findIndex((a) => a == key));
+    };
+    const radioChange = (e, key) => {
+      console.log(key);
+      data.radioValue = key;
+    };
+
+    const contentScroll = (e) => {
+      if (cols.value) {
+        cols.value.scrollLeft = e.srcElement.scrollLeft;
+      }
+    };
+
+    const getWidth = (header) => {
+      if (!header.field) {
+        return "80px";
+      }
+      let field = header.field;
+      let item = data.headerList.filter((a) => a.field == field)[0];
+      if (item.width) {
+        return item.width + "px";
+      }
+      if (item.setWidth) {
+        return item.setWidth + "px";
+      }
+
+      return "80px";
+    };
+
+    const sortChange = (e, field) => {
       console.log(e);
       console.log(field);
-      this.sort.field = field;
-      this.sort.value = e.value ? "asc" : "desc";
-      this.$emit("sort", {
+      data.sort.field = field;
+      data.sort.value = e.value ? "asc" : "desc";
+      ctx?.emit("sort", {
         field: field,
-        sort: this.sort.value,
+        sort: data.sort.value,
       });
-    },
+    };
+
+    cdk.windowOnResize(() => {
+      updateColWidth();
+    });
+
+    onMounted(() => {
+      updateColWidth();
+    });
+
+    return {
+      data,
+      container,
+      content,
+      cols,
+
+      itemChecked,
+      radioChange,
+      getWidth,
+      checkAll,
+      sortChange,
+      test,
+      contentScroll
+    };
   },
 };
 </script>
