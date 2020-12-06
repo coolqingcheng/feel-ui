@@ -10,7 +10,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 module.exports = {
     mode: "development",
     entry: "./src/web/main.ts",
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     devServer: {
         hot: true,
         contentBase: path.resolve(__dirname, "../public"),

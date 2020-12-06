@@ -85,6 +85,8 @@ import Drag from "./directive/DragDirective"
 
 import MsgBox from "./components/message-box/Index"
 
+import Loading from "./directive/Loading"
+
 // import MessageBox from "@feelui/MessageBox"
 
 const feelui = {
@@ -121,6 +123,8 @@ const feelui = {
         ColorPicker.install(app)
         Position.install(app)
         Card.install(app)
+        MsgBox.install(app)
+        Loading.install(app)
     }
 }
 

@@ -6,7 +6,7 @@ import msgBox from "./MessageBox.vue"
 export interface MessageBoxInput {
     title: string
     content: string
-    closeFunc: () => void
+    close: (status:boolean) => void
 }
 
 const alert = (message: MessageBoxInput) => {
@@ -19,10 +19,10 @@ const alert = (message: MessageBoxInput) => {
     let app = createApp(msgBox, {
         title: message.title,
         content: message.content,
-        closeFunc: () => {
+        closeFunc: (status:boolean) => {
             node.remove();
-            if (message['closeFunc']) {
-                message.closeFunc();
+            if (message['close']) {
+                message.close(status);
             }
         }
     })

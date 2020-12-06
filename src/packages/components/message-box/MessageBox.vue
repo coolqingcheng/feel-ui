@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { onMounted, reactive } from "vue";
 import ModalMask from "../modalbox/ModalMask.vue";
 export default {
@@ -51,13 +51,14 @@ export default {
     const data = reactive({
       show: false,
     });
-    const close = () => {
+    const close = (status: Boolean) => {
       data.show = false;
-      if (props.closeFunc) {
-        setTimeout(() => {
-          props.closeFunc();
-        }, 300);
-      }
+
+      setTimeout(() => {
+        if (props.closeFunc) {
+          props.closeFunc(status);
+        }
+      }, 100);
     };
     onMounted(() => {
       data.show = true;

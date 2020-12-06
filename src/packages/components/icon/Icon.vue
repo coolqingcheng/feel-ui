@@ -54,14 +54,14 @@ export default {
     };
     onMounted(async () => {
       let url = `${iconUrls[props.type]}${props.icon}.svg`;
-      console.log('icon-url:'+url);
+      // console.log('icon-url:'+url);
       
       // if (process.env.VUE_APP_ICON_BASE) {
       //   url = `${process.env.VUE_APP_ICON_BASE}${url}`;
       // }
       let http = new HttpClient();
       let res = await http.GetStringAsync(url);
-      console.log('加载的icon:'+res);
+      // console.log('加载的icon:'+res);
       
       let el = document.createElement("div");
       el.innerHTML = res;

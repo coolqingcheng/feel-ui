@@ -13,6 +13,13 @@ export default {
         title: "标题",
         content:
           "模拟系统的消息提示框而实现的一套模态对话框组件，用于消息提示、确认消息和提交内容。",
+        close: (status) => {
+          if (status) {
+            console.log("点击的确定");
+          } else {
+            console.log("点击的取消");
+          }
+        },
       });
     };
     return {
