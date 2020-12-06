@@ -1,7 +1,7 @@
 import { App, createApp, createCommentVNode, createVNode, h, onMounted, render } from "vue";
 
 
-import { createLoadingComponent } from "./LoadingComponent"
+import { createLoadingComponent, loadingComponentInfo } from "./LoadingComponent"
 
 
 export default {
@@ -16,13 +16,15 @@ export default {
                 if (!text) {
                     text = "loading..."
                 }
-                const { loadingComponent } = createLoadingComponent({
+                console.log(bind.value);
+                
+                const  loadingComponentInstance  = createLoadingComponent({
                     text: text,
                     visible: bind.value
                 })
-                render(loadingComponent, document.createElement('div'))
-                el.appendChild(loadingComponent.el as Element)
-                el['instance'] = loadingComponent;
+                render(loadingComponentInstance.vm, document.createElement('div'))
+                el.appendChild(loadingComponentInstance.vm.el as Element)
+                el['instance'] = loadingComponentInstance;
             },
             updated(el, bind) {
                 if (el.tagName !== 'DIV') return;
@@ -31,13 +33,15 @@ export default {
                     text = "loading..."
                 }
                 if (el['instance']) {
-                    el['instance'].component.ctx.setText(text)
-                    el['instance'].component.ctx.setVisible(bind.value)
+                    let instance = el['instance'] as loadingComponentInfo;
+                    instance?.setText(text)
+                    instance?.setVisible(bind.value)
                 }
             },
             unmounted(el: HTMLElement) {
                 if (el['instance']) {
-                    el['instance'].component.ctx.destory(el)
+                    let instance = el['instance'] as loadingComponentInfo;
+                    instance.destory();
                 }
             }
         })
