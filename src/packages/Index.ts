@@ -1,4 +1,3 @@
-import "./styles/app.less";
 import button from './components/button/index'
 
 import Layout from './components/layout/index'
@@ -91,7 +90,11 @@ import Rating from "../packages/components/rating/Index"
 
 // import MessageBox from "@feelui/MessageBox"
 
-const feelui = {
+
+
+
+
+export default {
     install: function (app: App<Element>, options: any) {
         button.install(app)
         Layout.install(app)
@@ -130,7 +133,3 @@ const feelui = {
         Rating.install(app)
     }
 }
-
-
-
-export default feelui

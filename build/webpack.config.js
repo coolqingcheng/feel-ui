@@ -8,18 +8,21 @@ const CopyPlugin = require('copy-webpack-plugin')
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-
-
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const isDev = process.env.NODE_ENV !== 'production';
 
 module.exports = {
     mode: "production",
-    entry: "./src/packages/Index.ts",
+    entry: path.resolve("./src/packages/index.ts"),
     output: {
+        path: path.resolve(__dirname, '../bin'),
+        publicPath: '/',
         filename: 'index.js',
         libraryTarget: 'umd',
-        path: path.resolve(__dirname, "../bin")
+        library: 'button',
+        umdNamedDefine: true,
+        globalObject: 'typeof self !== \'undefined\' ? self : this',
     },
     module: {
         rules: [
@@ -76,6 +79,7 @@ module.exports = {
         }
     ],
     plugins: [
+        new ProgressBarPlugin(),
         new CleanWebpackPlugin(),
         new VueLoaderPlugin(),
         new CopyPlugin({
