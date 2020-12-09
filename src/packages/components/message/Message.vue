@@ -1,16 +1,17 @@
 <template>
-  <div class="f-message">
+  <div class="f-message" ref="msgRef">
     <p v-html="message"></p>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent, onMounted, reactive, ref } from "vue";
+export default defineComponent({
   name: "f-message",
   props: {
     message: {
       type: String,
-      default: "react 多级折叠菜单",
+      default: "",
     },
     id: {
       type: String,
@@ -24,42 +25,48 @@ export default {
       type: Function,
     },
   },
-  data() {
-    return {
-      closed: null,
-    };
-  },
-  methods: {
-    // setCloseCallBack(func) {
-    //   this.closed = func;
-    // },
-    updateAnimProperty() {
-      // this.animproperty = "all";
-    },
-    close() {
-      if (this.closed) {
+  setup(props) {
+    const data = reactive({
+      closed: props.closedFunc,
+    });
+
+    const msgRef = ref<HTMLElement>();
+
+    const close = () => {
+      if (data.closed) {
         console.log("关闭组件");
-        this.$el.style.top = 0;
-        this.$el.style.opacity = 0.3;
+        if (msgRef.value) {
+          msgRef.value.style.top = "0";
+          msgRef.value.style.opacity = "0.3";
+        }
         setTimeout(() => {
-          let node = document.querySelector("#" + this.id);
-          document.body.removeChild(node);
-          node?.remove();
-          if (this.closed) {
-            this.closed(this.id);
+          let node = document.querySelector("#" + props.id);
+          if (node) {
+            document.body.removeChild(node);
+            node?.remove();
+            if (data.closed) {
+              data.closed(props.id);
+            }
           }
         }, 550);
       }
-    },
+    };
+
+    onMounted(() => {
+      if (props.duration > 0) {
+        setTimeout(() => {
+          close();
+        }, props.duration);
+      }
+    });
+
+    return {
+      close,
+      msgRef,
+      data,
+    };
   },
-  mounted() {
-    if (this.duration > 0) {
-      setTimeout(() => {
-        this.close();
-      }, this.duration);
-    }
-  },
-};
+});
 </script>
 
 <style>

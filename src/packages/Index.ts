@@ -91,6 +91,8 @@ import Rating from "../packages/components/rating/Index"
 // import MessageBox from "@feelui/MessageBox"
 
 
+import "../packages/styles/app.less";
+
 
 
 
@@ -99,22 +101,31 @@ export default {
         button.install(app)
         Layout.install(app)
         Input.install(app)
+
         Number.install(app)
         Radio.install(app)
+
         CheckBox.install(app)
         Switch.install(app)
+
         Anim.install(app)
         Collapse.install(app)
+
         Form.install(app)
         Select.install(app)
+
         Tab.install(app)
         DateTimePicker.install(app)
+
         ProgressBar.install(app)
         Icon.install(app)
         Tree.install(app)
+
         Menu.install(app)
         NotifyBox.install(app)
+
         Message.install(app)
+
         Slider.install(app)
         ModalBox.install(app)
         Table.install(app)

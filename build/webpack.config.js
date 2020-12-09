@@ -14,13 +14,13 @@ const isDev = process.env.NODE_ENV !== 'production';
 
 module.exports = {
     mode: "production",
-    entry: path.resolve("./src/packages/index.ts"),
+    entry: path.resolve(__dirname,"../src/packages/Index.ts"),
     output: {
         path: path.resolve(__dirname, '../bin'),
         publicPath: '/',
         filename: 'index.js',
         libraryTarget: 'umd',
-        library: 'button',
+        library: 'feelui',
         umdNamedDefine: true,
         globalObject: 'typeof self !== \'undefined\' ? self : this',
     },
@@ -88,6 +88,10 @@ module.exports = {
                     from: path.resolve(__dirname, "../src/packages/types/index.d.ts"),
                     to: path.resolve(__dirname, "../bin/index.d.ts")
                 },
+                {
+                    from: path.resolve(__dirname, "../public/icons"),
+                    to:path.resolve(__dirname,"../bin/icons")
+                }
             ]
         }),
         new CssMinimizerPlugin(),

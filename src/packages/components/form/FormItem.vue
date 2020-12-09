@@ -1,7 +1,7 @@
 <template>
   <div class="f-form-item" :style="{ width: width }">
     <div class="f-form-item-label" :style="{ width: labelWidth + 'px' }">
-      <span v-if="label">{{ label }}</span>
+      <span v-if="label">{{ label }}:</span>
     </div>
     <div class="f-form-item-input">
       <div class="f-form-item-input-item">
@@ -30,13 +30,13 @@ import {
   reactive,
 } from "vue";
 import mitt from "mitt";
-import { FormEvent, ValidField } from "*.vue";
+import { FormEvent } from "*.vue";
 
 import {
   formItemInjectKey,
   FormItemInject,
   formInjectKey,
-  FormInject,
+  FormInject
 } from "./formOption";
 
 export default {
@@ -44,8 +44,8 @@ export default {
   props: {
     for: {
       type: String,
-      default: "",
       required: true,
+      validator:(v:string)=>v.length>0
     },
     label: String,
     trigger: {

@@ -9,10 +9,10 @@ import mitt from "mitt";
 import { onMounted, onUnmounted, provide, reactive, watch } from "vue";
 import Schema from "async-validator";
 import { FieldErrorList, ErrorList, ValidateError } from "async-validator";
-import { ValidField } from "*.vue";
+
 import { deepClone } from "@/packages/utils/feelutils";
 
-import { FormInject, formInjectKey, FormData } from "./formOption";
+import { FormInject, formInjectKey, FormData,ValidField } from "./formOption";
 
 export default {
   name: "f-form",

@@ -1,6 +1,6 @@
 declare module '*.vue' {
     import type { DefineComponent } from 'vue'
-    const component: ReturnType<typeof defineComponent>
+    const component: DefineComponent
     export default component
 
     export interface FormEvent {
@@ -8,10 +8,7 @@ declare module '*.vue' {
         value: any
     }
 
-    export interface ValidField {
-        message: string
-        field: string
-    }
+  
 
     export interface MenuModel {
         label: string

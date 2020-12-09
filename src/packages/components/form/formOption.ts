@@ -6,6 +6,11 @@ interface FormItemInject {
 }
 const formItemInjectKey: InjectionKey<FormItemInject> = Symbol('form-item')
 
+export interface ValidField {
+    message: string
+    field: string
+}
+
 interface FormInject {
     data: FormData;
     rules: Object;
