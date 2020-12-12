@@ -1,4 +1,4 @@
-import { mount, shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import Tab from '../Tab.vue'
 import TabItem from "../TabItem.vue"
 
@@ -8,10 +8,13 @@ describe('Tab.vue', () => {
         expect(wrapper.find('.f-tab').exists()).toBe(true)
     })
     it('test simple type', () => {
-        const wrapper = mount(Tab, {
-            props: {
-                type: 'simple'
-            }
+        const wrapper = mount({
+            components: {
+                "f-tab": Tab
+            },
+            template: `
+            <f-tab type="simple"></f-tab>
+            `
         })
         expect(wrapper.find('.simple').exists()).toBe(true)
     })
