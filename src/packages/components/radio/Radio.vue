@@ -54,9 +54,9 @@ export default {
     let formItem = <FormItemInject>(
       inject(formItemInjectKey, {} as FormItemInject)
     );
-    const emitData = (type: string) => {
+    const emitData = async (type: string) => {
       if (formItem.update) {
-        formItem.update({
+        await formItem.update({
           type: type,
           value: data.v,
         });

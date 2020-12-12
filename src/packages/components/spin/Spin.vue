@@ -18,11 +18,13 @@
 </template>
 
 <script lang="ts">
-import FadeAnim from "@/packages/components/anim/FadeAnim.vue";
+import FadeAnim from "../anim/FadeAnim.vue";
+import Icon from "../icon/Icon.vue"
 export default {
   name: "f-spin",
   components: {
     FadeAnim,
+    'f-icon':Icon
   },
   props: {
     loading: {

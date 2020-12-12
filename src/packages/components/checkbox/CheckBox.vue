@@ -25,6 +25,8 @@
 
 <script lang="ts">
 import { reactive, watch, inject } from "vue";
+
+import { FormItemInject,formItemInjectKey } from "../form/formOption";
 export default {
   name: "f-checkbox",
   props: {
@@ -56,10 +58,10 @@ export default {
         data.selectData = props.modelValue;
       }
     );
-    let formItem = <any>inject("form-item");
-    const emitData = (type: string) => {
-      if (formItem) {
-        formItem.update({
+    let formItem = inject<FormItemInject>(formItemInjectKey,{} as FormItemInject);
+    const emitData = async (type: string) => {
+      if (formItem.update) {
+        await formItem.update({
           type: type,
           value: data.selectData,
         });

@@ -7,7 +7,7 @@
     ref="num"
   >
     <span class="f-num-sub" @click="operaSub()">
-      <f-icon icon="minus"></f-icon>
+      <Icon icon="minus"></Icon>
     </span>
     <input
       type="text"
@@ -16,12 +16,14 @@
       @keydown.up="keydown"
     />
     <span class="f-num-add" @click="operaAdd()">
-      <f-icon icon="plus"></f-icon>
+      <Icon icon="plus"></Icon>
     </span>
   </div>
 </template>
 
 <script lang="ts">
+
+import Icon from "../icon/Icon.vue"
 import {
   getCurrentInstance,
   reactive,
@@ -35,6 +37,9 @@ import { formItemInjectKey, FormItemInject } from "../form/formOption";
 import "default-passive-events";
 export default {
   name: "f-number",
+  components:{
+    Icon
+  },
   props: {
     step: {
       type: Number,

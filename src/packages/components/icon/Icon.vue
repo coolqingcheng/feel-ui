@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { HttpClient } from "@/packages/utils/HttpClient";
+import { HttpClient } from "../../utils/HttpClient";
 import { getCurrentInstance, nextTick, onMounted, ref, watch } from "vue";
 import IconOption from "./IconOption";
 export default {
@@ -79,7 +79,7 @@ export default {
     );
 
     const updateIcon = () => {
-      let ele = <SVGElement>iconRef.value?.querySelector("svg");
+      let ele = iconRef.value?.querySelector("svg") as SVGElement;
       // ele.style.fill = props.color;
       ele.setAttribute("width", props.width.toString());
       ele.setAttribute("height", props.height.toString());

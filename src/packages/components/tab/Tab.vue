@@ -18,7 +18,7 @@
           <span>
             {{ item }}
           </span>
-          <f-icon icon="x" @click.stop="close(item)" v-if="showClose"></f-icon>
+          <f-icon icon="x" @click.stop="close(item)" v-if="showClose" class="icon-close"></f-icon>
         </li>
       </ul>
       <div
@@ -52,6 +52,8 @@ export interface TabInject {
   data: DataModel;
 }
 import cdk from "../../utils/cdk";
+
+import Icon from "../icon/Icon.vue"
 import {
   defineComponent,
   getCurrentInstance,
@@ -63,6 +65,9 @@ import {
 
 export default defineComponent({
   name: "f-tab",
+  components:{
+    "f-icon":Icon
+  },
   props: {
     active: {
       type: String,

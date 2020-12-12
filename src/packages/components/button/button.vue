@@ -20,8 +20,12 @@
 
 <script>
 import { computed, defineComponent } from "vue";
+import Icon from "../icon/Icon.vue"
 export default defineComponent( {
   name: "f-button",
+  components:{
+    "f-icon":Icon
+  },
   props: {
     type: {
       type: String,
