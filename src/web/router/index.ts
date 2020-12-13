@@ -14,6 +14,8 @@ import Tree from "../views/tree/Index.vue"
 import Dialog from "../views/dialog/Index.vue"
 import Spin from "../views/spin/Index.vue";
 
+import Circular from "../views/progressbar/circular/Index.vue"
+
 const routes = [
   {
     path: '/',
@@ -71,6 +73,10 @@ const routes = [
   {
     path: '/progressbar',
     component: Progress
+  },
+  {
+    path: '/circular',
+    component: Circular
   },
   {
     path: '/datetime',

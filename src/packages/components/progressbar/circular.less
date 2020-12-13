@@ -1,0 +1,24 @@
+.f-circular {
+    position: relative;
+    .f-circular-bg {
+        stroke: @defaultbgcolor;
+    }
+
+    .f-circular-bar {
+        // stroke-linecap: round;
+        stroke-dashoffset: 0px;
+        transition: stroke-dasharray .2s linear;
+    }
+
+    .f-circular-content{
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+}

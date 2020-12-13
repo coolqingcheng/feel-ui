@@ -14,6 +14,7 @@
       <router-link to="/pager">分页组件</router-link>
       <router-link to="/button">按钮</router-link>
       <router-link to="/progressbar">进度条</router-link>
+      <router-link to="/circular">圆形进度条</router-link>
       <router-link to="/datetime">时间选择器</router-link>
       <router-link to="/select">下拉框</router-link>
       <router-link to="/forms">表单</router-link>
