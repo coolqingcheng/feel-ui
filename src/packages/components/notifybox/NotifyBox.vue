@@ -19,7 +19,6 @@
 </template>
 
 <script>
-// import { genRandCode } from "../../utils/feelutils";
 export default {
   name: "f-notifybox",
   props: {

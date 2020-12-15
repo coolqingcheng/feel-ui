@@ -1,5 +1,5 @@
 import NotifyBox from "./NotifyBox.vue"
-import { ComponentInternalInstance, createApp } from "vue";
+import { createApp } from "vue";
 import { genRandCode } from "../../utils/feelutils"
 
 const notify = {

@@ -4,23 +4,16 @@
 
 <script>
 import { getCurrentInstance } from "vue";
+
+import { ShowMessageBox } from "../../../packages/utils/FUtils"; //在项目中引用 eelui-vue/bin/utils/FUtils
 export default {
   setup() {
     const ctx = getCurrentInstance();
     const show = () => {
       console.log(ctx);
-      ctx.appContext.config.globalProperties.$alert({
-        title: "标题",
-        content:
-          "模拟系统的消息提示框而实现的一套模态对话框组件，用于消息提示、确认消息和提交内容。",
-        close: (status) => {
-          if (status) {
-            console.log("点击的确定");
-          } else {
-            console.log("点击的取消");
-          }
-        },
-      });
+      ShowMessageBox(ctx,"提示内容区域","测试标题",(status)=>{
+        console.log(status);
+      })
     };
     return {
       show,

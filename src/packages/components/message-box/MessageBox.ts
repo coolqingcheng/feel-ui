@@ -1,5 +1,5 @@
 import { genRandCode } from '@/packages/utils/feelutils';
-import { createApp } from 'vue';
+import { createApp, createVNode, render } from 'vue';
 
 import msgBox from "./MessageBox.vue"
 
@@ -16,7 +16,7 @@ const alert = (message: MessageBoxInput) => {
     let node = document.createElement('div')
     node.id = id;
     document.body.appendChild(node);
-    let app = createApp(msgBox, {
+    let app = createVNode(msgBox, {
         title: message.title,
         content: message.content,
         closeFunc: (status:boolean) => {
@@ -26,7 +26,8 @@ const alert = (message: MessageBoxInput) => {
             }
         }
     })
-    app.mount(node)
+    render(app,document.createElement('div'))
+    node.append(app.el as Element)
 
 }
 

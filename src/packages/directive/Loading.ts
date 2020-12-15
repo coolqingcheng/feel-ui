@@ -8,7 +8,6 @@ export default {
     install: (vue: App<Element>) => {
         vue.directive('loading', {
             mounted(el: HTMLElement, bind) {
-                console.log(el.tagName);
                 
                 if (el.tagName !== 'DIV') return;
                 el.style.position = "relative"
@@ -16,7 +15,6 @@ export default {
                 if (!text) {
                     text = "loading..."
                 }
-                console.log(bind.value);
                 
                 const  loadingComponentInstance  = createLoadingComponent({
                     text: text,

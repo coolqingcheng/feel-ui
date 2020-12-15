@@ -92,6 +92,16 @@ module.exports = {
                     from: path.resolve(__dirname, "../public/icons"),
                     to:path.resolve(__dirname,"../bin/icons")
                 }
+                //打包部分类
+                ,
+                {
+                    from: path.resolve(__dirname, "../src/packages/utils/FUtils.d.ts"),
+                    to:path.resolve(__dirname,"../bin/utils/FUtils.d.ts")
+                },
+                {
+                    from: path.resolve(__dirname, "../src/packages/utils/FUtils.js"),
+                    to: path.resolve(__dirname, "../bin/utils/FUtils.js")
+                }
             ]
         }),
         new CssMinimizerPlugin(),
