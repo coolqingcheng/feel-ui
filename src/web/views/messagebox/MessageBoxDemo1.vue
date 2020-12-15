@@ -5,13 +5,13 @@
 <script>
 import { getCurrentInstance } from "vue";
 
-import { ShowMessageBox } from "../../../packages/utils/FUtils"; //在项目中引用 eelui-vue/bin/utils/FUtils
+import { ShowAlert } from "../../../packages/utils/FUtils"; //在项目中引用 feelui-vue/bin/utils/FUtils
 export default {
   setup() {
     const ctx = getCurrentInstance();
     const show = () => {
-      console.log(ctx);
-      ShowMessageBox(ctx,"提示内容区域","测试标题",(status)=>{
+      
+      ShowAlert(ctx,"提示内容区域","测试标题",(status)=>{
         console.log(status);
       })
     };

@@ -1,7 +1,8 @@
 <template>
   <div
     class="f-notify f-notify-right"
-    :style="{ transitionProperty: animproperty }"
+    :style="{ transitionProperty: data.animproperty }"
+    ref="notifybox"
   >
     <li class="f-notify-item">
       <div class="f-notify-item-icon" v-if="icon">
@@ -18,7 +19,8 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { onMounted, reactive, ref } from "vue";
 export default {
   name: "f-notifybox",
   props: {
@@ -46,39 +48,47 @@ export default {
       type: Function,
     },
   },
-  data() {
-    return {
-      closed: null,
+
+  setup(props) {
+    const data = reactive({
       animproperty: "transform",
-    };
-  },
-  mounted() {
-    if (this.duration > 0) {
+    });
+
+    const notifybox = ref<HTMLElement>();
+    var timeRef: number;
+    onMounted(() => {
+      if (props.duration > 0) {
+        timeRef = window.setTimeout(() => {
+          close();
+        }, props.duration);
+      }
+    });
+
+    const close = () => {
+      if (notifybox.value) {
+        notifybox.value.style.transform = `translateX(360px)`;
+      }
+      window.clearTimeout(timeRef);
       setTimeout(() => {
-        this.close();
-      }, this.duration);
-    }
-  },
-  methods: {
-    close() {
-      console.log(this.title);
-      this.$el.style.transform = `translateX(360px)`;
-      setTimeout(() => {
-        let node = document.querySelector("#" + this.id);
+        let node = document.querySelector("#" + props.id);
         if (node) {
           document.body.removeChild(node);
-          if (this.closed) {
-            this.closed(this.id);
+          if (props.closedFunc) {
+            props.closedFunc(props.id);
           }
         }
       }, 550);
-    },
-    setCloseCallBack(func) {
-      this.closed = func;
-    },
-    updateAnimProperty() {
-      this.animproperty = "all";
-    },
+    };
+    const updateAnimProperty = () => {
+      data.animproperty = "all";
+    };
+
+    return {
+      data,
+      close,
+      notifybox,
+      updateAnimProperty,
+    };
   },
 };
 </script>

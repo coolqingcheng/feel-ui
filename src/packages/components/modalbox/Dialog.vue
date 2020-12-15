@@ -12,7 +12,7 @@
     </transition>
     <f-dialog-anim :top="data.top">
       <div
-        class="f-dialog"
+        class="f-dialog f-shadow"
         ref="dialog"
         v-show="show"
         :style="{
@@ -143,8 +143,7 @@ export default {
     };
     onMounted(() => {
       updateCenter();
-
-      let node = <HTMLElement>(<unknown>modal.value);
+      let node = (modal.value as any) as HTMLElement;
       let isexist = false;
       document.querySelectorAll(".f-modal").forEach((item) => {
         if (item === node) {

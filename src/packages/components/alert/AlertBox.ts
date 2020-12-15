@@ -1,7 +1,7 @@
 import { genRandCode } from '@/packages/utils/feelutils';
 import { createApp, createVNode, render } from 'vue';
 
-import msgBox from "./MessageBox.vue"
+import msgBox from "./AlertBox.vue"
 
 export interface MessageBoxInput {
     title: string

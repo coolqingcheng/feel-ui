@@ -1,8 +1,9 @@
 import { App } from "vue"
-import NotifyBox from "./NotifyBox.vue"
+
+import { notify } from "./notify"
 
 export default {
     install: (app: App) => {
-        app.component(NotifyBox.name, NotifyBox)
+        app.config.globalProperties.$notify = notify.show()
     }
 }

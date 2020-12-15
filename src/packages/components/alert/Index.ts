@@ -1,6 +1,6 @@
 import { App } from 'vue';
 
-import { alert } from "./MessageBox"
+import { alert } from "./AlertBox"
 
 
 export default {

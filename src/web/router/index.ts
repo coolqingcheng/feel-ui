@@ -137,6 +137,10 @@ const routes = [
   {
     path: '/message-box',
     component: () => import('../views/messagebox/Index.vue')
+  },
+  {
+    path: '/notify',
+    component: () => import('../views/notify/Index.vue')
   }
 ]
 

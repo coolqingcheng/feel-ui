@@ -44,7 +44,6 @@ import Tag from "./components/tag/index"
 
 import NotifyBox from "./components/notifybox/index"
 
-import notify from "./components/notifybox/notify"
 import msg from "./components/message/msg"
 
 import Message from "./components/message/index"
@@ -82,7 +81,7 @@ import { App } from 'vue';
 
 import Drag from "./directive/DragDirective"
 
-import MsgBox from "./components/message-box/Index"
+import AlertBox from "./components/alert/Index"
 
 import Loading from "./directive/Loading"
 
@@ -139,7 +138,7 @@ export default {
         ColorPicker.install(app)
         Position.install(app)
         Card.install(app)
-        MsgBox.install(app)
+        AlertBox.install(app)
         Loading.install(app)
         Rating.install(app)
     }

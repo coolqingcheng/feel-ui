@@ -2,13 +2,23 @@ import NotifyBox from "./NotifyBox.vue"
 import { createApp } from "vue";
 import { genRandCode } from "../../utils/feelutils"
 
+export interface NotifyOption {
+    title: string;
+    content: String
+}
+
 const notify = {
     show: function () {
+        console.log('初始化Notify');
+
         const list: Array<{ id: string, component: any }> = []
         // console.log('初始化通知组件')
         function update(id: string) {
             let index = list.findIndex(a => a.id == id)
+            console.log('index:' + index);
             if (index > -1) {
+               
+                
                 list.splice(index, 1)
             }
             for (let i = 0; i < list.length; i++) {
@@ -22,7 +32,7 @@ const notify = {
                 }
             }
         }
-        return function (opt: any) {
+        return function (opt: NotifyOption) {
             console.log(opt)
             let code = genRandCode();
             let id = "notify-" + code;
@@ -46,14 +56,16 @@ const notify = {
                 closedFunc: update
             });
             let component = app.mount(node);
-
             // component.setCloseCallBack(update);
+            console.log(list.length);
+            
             if (list.length) {
                 let item = list[list.length - 1].component
                 component.$el.style.top = ((item.$el.clientHeight + parseInt(item.$el.style.top)) + 20) + 'px'
             } else {
                 component.$el.style.top = "40px";
             }
+            
             setTimeout(() => {
                 component.$el.style.transform = `translateX(-10px)`
             }, 50);
@@ -72,6 +84,6 @@ const notify = {
     }
 }
 
-export default {
+export {
     notify
 }

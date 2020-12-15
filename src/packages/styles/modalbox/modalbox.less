@@ -32,26 +32,22 @@
 
 .f-messagebox {
     display: flex;
-    flex-direction: column;
-
-
-
+    flex-direction: row;
     width: 100%;
-
     box-sizing: border-box;
     border-radius: @box-radius;
-    z-index: 9999;
-    position: absolute;
-    top: 100px;
+    z-index: 9998;
+    justify-content: center;
+    position: fixed;
+    top: 0;
 
     .f-messagebox-container {
-        z-index: 99;
+        position: fixed;
+        z-index: 9999;
         background: @white;
         width: 450px;
         max-width: 90%;
         padding: 15px;
-        margin-top: 150px;
-        margin: 0 auto;
         border-radius: @box-radius;
     }
 
@@ -89,7 +85,6 @@
     padding: 15px;
     box-sizing: border-box;
     border-radius: @box-radius;
-    box-shadow: 1px 1px 45px rgba(0, 0, 0, .35);
     z-index: 9999;
     overflow-y: auto;
 
