@@ -1,6 +1,6 @@
 .f-message {
-    padding: 10px 20px;
-    border: 1px solid #ccc;
+    padding-left: 10px;
+    border: .5px solid @bordercolor;
     position: fixed;
     left: 50%;
     max-width: 350px;
@@ -8,8 +8,15 @@
     box-sizing: border-box;
     transform: translateX(-50%);
     transition: all .5s ease;
-    opacity: .3;
+    opacity: .0;
     border-radius: @border-radius;
     .f-shadow;
     z-index: 10000;
+    background: @white;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    p{
+        margin: 0;
+    }
+
 }

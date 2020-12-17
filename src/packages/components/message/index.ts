@@ -1,8 +1,9 @@
 import { App } from 'vue'
-import Message from './Message.vue'
+
+import { msg } from "./msg"
 
 export default {
     install: (app: App) => {
-        app.component(Message.name, Message)
+        app.config.globalProperties.$message = msg.init()
     }
 }

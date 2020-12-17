@@ -135,12 +135,16 @@ const routes = [
     component: () => import('../views/directives/Index.vue')
   },
   {
-    path: '/message-box',
-    component: () => import('../views/messagebox/Index.vue')
+    path: '/alert',
+    component: () => import('../views/alert/Index.vue')
   },
   {
     path: '/notify',
     component: () => import('../views/notify/Index.vue')
+  },
+  {
+    path: '/message',
+    component:()=>import("../views/message/Index.vue")
   }
 ]
 

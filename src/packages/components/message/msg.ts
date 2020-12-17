@@ -24,7 +24,7 @@ const msg = {
             }
         }
         return function (opt: any) {
-            console.log(opt)
+            console.log("初始化")
             let code = genRandCode();
             let id = "notify-" + code;
             let node = document.querySelector("#" + id);
@@ -37,7 +37,7 @@ const msg = {
             if (Object.prototype.hasOwnProperty.call(opt, 'duration')) {
                 duration = opt['duration']
             } else {
-                duration = 2500;
+                duration = 3000;
             }
             let app = createApp(Message, {
                 message: opt.content,
@@ -46,7 +46,6 @@ const msg = {
                 closedFunc: update
             });
             let component = app.mount(node)
-            // component.setCloseCallBack(update);
             if (list.length) {
                 let item = list[list.length - 1].component
                 component.$el.style.top = ((item.$el.clientHeight + parseInt(item.$el.style.top))) + 'px'
@@ -66,16 +65,11 @@ const msg = {
                 id: id,
                 component: component
             })
-            setTimeout(() => {
-                list.map(item => {
-                    item.component.updateAnimProperty()
-                })
-            }, 50);
 
             return component;
         }
     }
 }
-export default {
+export {
     msg
 }

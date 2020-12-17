@@ -10,7 +10,10 @@ const ShowAlert = (ctx: ComponentInternalInstance, content: string, title: strin
 }
 
 const ShowMessage = (ctx: ComponentInternalInstance, type: MessageType, message: string) => {
-
+    ctx.appContext.config.globalProperties.$message({
+        content: message,
+        close: close,
+    });
 }
 
 const ShowNotify = (ctx: ComponentInternalInstance, type: MessageType, title: string, content: string, close: () => void, duration: number = 3000) => {

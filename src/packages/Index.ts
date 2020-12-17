@@ -44,8 +44,6 @@ import Tag from "./components/tag/index"
 
 import NotifyBox from "./components/notifybox/index"
 
-import msg from "./components/message/msg"
-
 import Message from "./components/message/index"
 
 import Slider from "./components/slider/index"
