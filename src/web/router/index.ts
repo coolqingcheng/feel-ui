@@ -123,6 +123,10 @@ const routes = [
     component: () => import('../views/menu/Index.vue')
   },
   {
+    path: '/drawer',
+    component: () => import('../views/drawer/Index.vue')
+  },
+  {
     path: '/tab',
     component: () => import('../views/tab/Index.vue')
   },

@@ -29,6 +29,7 @@
       <router-link to="/tab">选项卡</router-link>
       <router-link to="/button">导航条</router-link>
       <router-link to="/menu">菜单</router-link>
+      <router-link to="/drawer">抽屉</router-link>
       <router-link to="/colorpicker">颜色选择器</router-link>
       <router-link to="/button">面包屑</router-link>
       <router-link to="/directives">指令</router-link>

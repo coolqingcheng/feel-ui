@@ -90,6 +90,8 @@ import Rating from "../packages/components/rating/Index"
 
 import "../packages/styles/app.less";
 
+import Drawer from "../packages/components/drawer/Index"
+
 
 
 
@@ -139,5 +141,6 @@ export default {
         AlertBox.install(app)
         Loading.install(app)
         Rating.install(app)
+        Drawer.install(app)
     }
 }

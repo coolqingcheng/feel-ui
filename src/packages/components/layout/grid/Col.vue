@@ -75,6 +75,8 @@ export default defineComponent({
       }
       if (props.direction == "v") {
         classList.push("f-flex-v");
+      } else {
+        classList.push("f-flex-h");
       }
       if (props.align) {
         classList.push(`f-${props.align}`);
