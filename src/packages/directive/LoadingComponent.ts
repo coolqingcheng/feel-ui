@@ -1,4 +1,3 @@
-import { flushPromises } from "@vue/test-utils"
 import { createVNode, getCurrentInstance, h, onUnmounted, reactive, Ref, toRefs, VNode } from "vue"
 
 import Icon from "../components/icon/Icon.vue"

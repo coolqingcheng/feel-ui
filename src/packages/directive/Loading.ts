@@ -13,7 +13,7 @@ export default {
                 el.style.position = "relative"
                 let text = el.getAttribute("loading-text")
                 if (!text) {
-                    text = "loading..."
+                    text = ""
                 }
                 
                 const  loadingComponentInstance  = createLoadingComponent({
@@ -28,7 +28,7 @@ export default {
                 if (el.tagName !== 'DIV') return;
                 let text = el.getAttribute("loading-text")
                 if (!text) {
-                    text = "loading..."
+                    text = ""
                 }
                 if (el['instance']) {
                     let instance = el['instance'] as loadingComponentInfo;

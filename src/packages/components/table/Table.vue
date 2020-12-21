@@ -13,10 +13,12 @@
                   v-if="!item.type"
                 >
                   <div class="f-table-header-item">
-                    <span>{{ item.title }}-{{ item.width }}</span>
+                    <span>{{ item.title }}</span>
                     <TableSort
                       v-if="item.sort"
-                      :status="item.field == data.sort.field ? data.sort.value : ''"
+                      :status="
+                        item.field == data.sort.field ? data.sort.value : ''
+                      "
                       @change="sortChange($event, item.field)"
                     ></TableSort>
                   </div>
@@ -137,7 +139,7 @@ export default {
      * key，唯一标识列
      */
     idkey: {
-      type: String
+      type: String,
     },
     selector: {
       type: String,
@@ -325,7 +327,7 @@ export default {
       checkAll,
       sortChange,
       test,
-      contentScroll
+      contentScroll,
     };
   },
 };
