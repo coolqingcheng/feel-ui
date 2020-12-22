@@ -36,6 +36,10 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
+    path: "/icon",
+    component: () => import("../views/icon/Index.vue")
+  },
+  {
     path: "/table",
     name: 'table',
     component: Table
@@ -148,7 +152,7 @@ const routes = [
   },
   {
     path: '/message',
-    component:()=>import("../views/message/Index.vue")
+    component: () => import("../views/message/Index.vue")
   }
 ]
 

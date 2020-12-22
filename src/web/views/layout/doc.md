@@ -71,4 +71,5 @@
 | xl        | 大于1904px的设备                          | number |                        |        |
 | direction | 子组件的排列方向，支持横竖排序。h横向 v竖 | string | h\|v                   | h      |
 | align     | 子组件对齐方式                            | string | start \| center \| end |        |
+| justify   | 子组件对齐方式                            | string | start \| center \| end |        |
 

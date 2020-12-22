@@ -51,6 +51,19 @@
 
 ### 分页
 
+可使用[f-pager](/#/pager)组件进行分页
+
+<demo path="./TableDemo6.vue"></demo>
+
+### 合计行
+
+合计行一般用于列统计。
+
+<demo path="./TableDemo7.vue"></demo>
+
+### 大数据量虚拟滚动
+
+
 
 
 

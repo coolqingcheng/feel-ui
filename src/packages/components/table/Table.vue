@@ -140,6 +140,8 @@ export default {
      */
     idkey: {
       type: String,
+      required: true,
+      default: "id",
     },
     selector: {
       type: String,

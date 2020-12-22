@@ -99,7 +99,7 @@ input {
     display: inline-block;
 }
 
-.f-align-center{
+.f-align-center {
     align-self: center;
 }
 
@@ -166,6 +166,28 @@ input {
         // color: @theme;
         transition: all .3s linear;
 
+    }
+}
+
+.f-flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.f-flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.f-hover-shadow {
+    &:hover {
+        .s-1
+    }
+}
+
+.f-hover-point {
+    &:hover {
+        cursor: pointer;
     }
 }
 

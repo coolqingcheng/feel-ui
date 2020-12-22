@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link>
       <router-link to="/about">About</router-link>
+      <router-link to="/icon">图标</router-link>
       <router-link to="/grid">栅格</router-link>
       <router-link to="/table">表格控件</router-link>
       <router-link to="/uploader">上传文件</router-link>

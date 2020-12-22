@@ -25,11 +25,17 @@ module.exports = function (source) {
             name = getFileName(pathattr)
             name = toLine(name)
         }
+        let showcode = true;
+        if ($(ele).attr('showcode')) {
+            if ($(ele).attr('showcode') == 'false') {
+                showcode = false
+            }
+        }
         let file = path.resolve(path.dirname(this.resourcePath), pathattr)
         let code = fs.readFileSync(file, { encoding: 'utf8' })
         code = prismjs.highlight(code, Prism.languages.javascript, 'javascript')
         code = `<pre><code class="languages-javascript">${code}</code></pre>`
-        let dom = `<div class="f-demo"><div><${name}></${name}></div><f-code>${code}</f-code></div>`
+        let dom = `<div class="f-demo"><div><${name}></${name}></div><f-code :showcode="${showcode}">${code}</f-code></div>`
         $(ele).parent().replaceWith(dom)
     })
     let body = $("body").html()

@@ -1,5 +1,5 @@
 <template>
-  <div class="f-code">
+  <div class="f-code" v-if="showcode">
     <div class="f-code-header" @click="testClick">
       <f-icon type="feather" icon="code"></f-icon>
       <span class="f-code-text m-l-2">{{
@@ -21,6 +21,12 @@ export default {
     ExpandAnim,
   },
   name: "f-code",
+  props: {
+    showcode: {
+      type: String,
+      default: true,
+    },
+  },
   data() {
     return {
       show: false,

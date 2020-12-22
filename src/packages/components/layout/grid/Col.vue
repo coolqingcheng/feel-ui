@@ -44,6 +44,13 @@ export default defineComponent({
       default: "h",
       validator: (v: string) => ["h", "v"].indexOf(v) > -1,
     },
+    justify: {
+      type: String,
+      default: "start",
+      validator: (v: string) => {
+        return ["start", "center", "end"].indexOf(v) > -1;
+      },
+    },
     align: {
       type: String,
       default: "start",
@@ -78,8 +85,11 @@ export default defineComponent({
       } else {
         classList.push("f-flex-h");
       }
-      if (props.align) {
-        classList.push(`f-${props.align}`);
+      if (props.justify) {
+        classList.push(`f-${props.justify}`);
+      }
+      if(props.align){
+        classList.push(`f-align-${props.align}`)
       }
       return classList.join(" ");
     });

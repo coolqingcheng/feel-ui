@@ -8,10 +8,15 @@
       <span class="f-menu-group-header-label">
         <slot name="label">{{ label }}</slot>
       </span>
-      <span
+      <f-icon
+        class="f-menu-group-header-icon"
+        :class="[isActive ? 'bottom' : 'right']"
+        icon="chevron-right"
+      ></f-icon>
+      <!-- <span
         class="f-menu-group-header-icon f-icon icon-right"
         :class="[isActive ? 'bottom' : 'right']"
-      ></span>
+      ></span> -->
     </div>
     <f-expand-transition>
       <div class="f-menu-group-body" v-show="isActive">
@@ -30,7 +35,11 @@ import {
   provide,
   reactive,
 } from "vue";
+import Icon from "../icon/Icon.vue";
 export default {
+  components: {
+    "f-icon": Icon,
+  },
   props: {
     label: {
       type: String,
