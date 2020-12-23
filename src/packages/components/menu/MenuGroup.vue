@@ -13,16 +13,12 @@
         :class="[isActive ? 'bottom' : 'right']"
         icon="chevron-right"
       ></f-icon>
-      <!-- <span
-        class="f-menu-group-header-icon f-icon icon-right"
-        :class="[isActive ? 'bottom' : 'right']"
-      ></span> -->
     </div>
-    <f-expand-transition>
+    <f-expand-anim>
       <div class="f-menu-group-body" v-show="isActive">
         <slot></slot>
       </div>
-    </f-expand-transition>
+    </f-expand-anim>
   </div>
 </template>
 

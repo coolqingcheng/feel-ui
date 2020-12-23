@@ -14,7 +14,7 @@
       class="m-t-3 f-hover-shadow"
     >
       <div class="f-center f-align-center f-flex-col p-2 " style="height: 80px">
-        <f-icon :icon="item" width="25"></f-icon>
+        <f-icon :icon="item" :width="25"></f-icon>
         <span>{{ item }}</span>
       </div>
     </f-col>

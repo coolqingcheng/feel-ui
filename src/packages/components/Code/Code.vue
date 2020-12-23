@@ -23,7 +23,7 @@ export default {
   name: "f-code",
   props: {
     showcode: {
-      type: String,
+      type: Boolean,
       default: true,
     },
   },

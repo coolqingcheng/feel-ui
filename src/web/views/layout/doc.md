@@ -18,6 +18,8 @@
 
 <demo path="./LayoutDemo1.vue"></demo>
 
+<demo path="./LayoutDemo6.vue"></demo>
+
 ### 行内对齐方式
 
 在*f-row*上设置**align** 用于设置*f-row*下的*f-col*的对齐，  **align**支持三个属性** left、center、right**

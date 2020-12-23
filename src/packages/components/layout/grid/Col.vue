@@ -88,8 +88,8 @@ export default defineComponent({
       if (props.justify) {
         classList.push(`f-${props.justify}`);
       }
-      if(props.align){
-        classList.push(`f-align-${props.align}`)
+      if (props.align) {
+        classList.push(`f-align-${props.align}`);
       }
       return classList.join(" ");
     });

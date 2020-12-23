@@ -6,7 +6,7 @@
       width: width + 'px',
       height: width + 'px',
       textAlign: 'center',
-      lineHeight: height + 'px',
+      lineHeight: width + 'px',
     }"
     ref="iconRef"
   ></span>

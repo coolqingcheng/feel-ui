@@ -44,8 +44,7 @@ export default {
   props: {
     for: {
       type: String,
-      required: true,
-      validator:(v:string)=>v.length>0
+      default:'',
     },
     label: String,
     trigger: {

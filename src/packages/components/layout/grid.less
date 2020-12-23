@@ -15,8 +15,7 @@
 .f-col {
     padding: @p;
     box-sizing: border-box;
-    flex-grow: 1;
-    flex-basis: 0;
+    width: 100%;
     max-width: 100%;
 }
 
@@ -58,37 +57,37 @@
 
 
     .f-col-@{i} {
-        flex-basis: (@i/@max)*100%;
+        width: (@i/@max)*100%;
     }
 
     @media screen and (max-width:@xs) {
 
         .f-col-xs-@{i} {
-            flex-basis: (@i/@max)*100%;
+            width: (@i/@max)*100%;
         }
     }
 
     @media screen and(min-width:@xs) and (max-width:@sm) {
         .f-col-sm-@{i} {
-            flex-basis: (@i/@max)*100%;
+            width: (@i/@max)*100%;
         }
     }
 
     @media screen and (min-width:@sm) and (max-width:@md) {
         .f-col-md-@{i} {
-            flex-basis: (@i/@max)*100%;
+            width: (@i/@max)*100%;
         }
     }
 
     @media screen and(min-width:@md) and (max-width:@lg) {
         .f-col-lg-@{i} {
-            flex-basis: (@i/@max)*100%;
+            width: (@i/@max)*100%;
         }
     }
 
     @media screen and (min-width:@lg) {
         .f-col-xl-@{i} {
-            flex-basis: (@i/@max)*100%;
+            width: (@i/@max)*100%;
         }
     }
 

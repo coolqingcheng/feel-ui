@@ -1,5 +1,5 @@
 <template>
-  <div class="f-menu">
+  <div class="f-menu" :style="{ width: width + 'px' }">
     <slot></slot>
     <span></span>
   </div>
@@ -13,6 +13,11 @@ export default {
     activeId: {
       type: String,
     },
+    width: {
+      type: String,
+      default: "250",
+    },
+
     openGroups: {
       type: Array as PropType<Array<String>>,
       default: () => [],

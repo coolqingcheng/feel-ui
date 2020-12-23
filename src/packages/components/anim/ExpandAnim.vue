@@ -30,6 +30,7 @@ export default {
         opacity: 1,
         height: height + "px",
         onComplete: () => {
+          el.style.height = ''
           done();
         },
       });
