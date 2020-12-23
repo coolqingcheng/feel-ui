@@ -92,6 +92,8 @@ import "../packages/styles/app.less";
 
 import Drawer from "../packages/components/drawer/Index"
 
+import BreadCrumb from "@/packages/components/breadcrumb/index";
+
 
 
 
@@ -142,5 +144,6 @@ export default {
         Loading.install(app)
         Rating.install(app)
         Drawer.install(app)
+        BreadCrumb.install(app)
     }
 }

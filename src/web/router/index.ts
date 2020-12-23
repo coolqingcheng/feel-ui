@@ -127,6 +127,10 @@ const routes = [
     component: () => import('../views/menu/Index.vue')
   },
   {
+    path: '/breadcrumb',
+    component: () => import('../views/breadcrumb/Index.vue')
+  },
+  {
     path: '/drawer',
     component: () => import('../views/drawer/Index.vue')
   },
