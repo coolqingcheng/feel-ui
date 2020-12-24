@@ -1,15 +1,21 @@
 <template>
   <span class="f-breadcrumb-item">
-    <span class="f-breadcrumb-text" @click="textClick" :class="{'f-breadcrumb-link':isLink}"><slot></slot></span>
+    <span
+      class="f-breadcrumb-text"
+      @click="textClick"
+      :class="{ 'f-breadcrumb-link': isLink }"
+      ><slot></slot
+    ></span>
     <span class="f-breadcrumb-separator">
-      <slot name="separator">/</slot>
+      <slot name="separator">{{ separator }}</slot>
     </span>
   </span>
 </template>
 
 <script lang="ts">
-import { computed } from "vue";
+import { computed, inject } from "vue";
 import { useRouter } from "vue-router";
+import { BreadCrumbInjectKey } from ".";
 export default {
   name: "f-breadcrumb-item",
   props: {
@@ -28,13 +34,20 @@ export default {
       }
     };
 
+    var breadcrumb = inject(BreadCrumbInjectKey);
+
     const isLink = computed(() => {
       return props.path ? true : false;
     });
 
+    const separator = computed(() => {
+      return breadcrumb?.separator;
+    });
+
     return {
       textClick,
-      isLink
+      isLink,
+      separator,
     };
   },
 };
