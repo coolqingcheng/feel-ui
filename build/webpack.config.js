@@ -9,9 +9,6 @@ const CopyPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-
-const isDev = process.env.NODE_ENV !== 'production';
-
 module.exports = {
     mode: "production",
     entry: path.resolve(__dirname,"../src/packages/Index.ts"),
@@ -65,9 +62,9 @@ module.exports = {
         {
             vue: 'vue'
         },
-        {
-            router: 'vue-router'
-        },
+        // {
+        //     router: 'vue-router'
+        // },
         {
             axios: 'axios'
         },

@@ -13,9 +13,8 @@
 </template>
 
 <script lang="ts">
-import { computed, inject } from "vue";
-import { useRouter } from "vue-router";
-import { BreadCrumbInjectKey } from ".";
+import { computed, getCurrentInstance, inject } from "vue";
+import { BreadCrumbInjectKey } from "./index";
 export default {
   name: "f-breadcrumb-item",
   props: {
@@ -25,12 +24,15 @@ export default {
     },
   },
   setup(props) {
-    const router = useRouter();
-    const textClick = () => {
+    const instance = getCurrentInstance();
+    const textClick = async () => {
       if (props.path) {
-        router.push({
-          path: props.path,
-        });
+        if (instance) {
+          let router = instance.appContext.config.globalProperties.$router;
+          if (router) {
+            router.push(props.path);
+          }
+        }
       }
     };
 
