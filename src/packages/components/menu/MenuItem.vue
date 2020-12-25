@@ -5,7 +5,7 @@
     :class="[activeStatus ? 'f-menu-item-active' : '']"
   >
     <div class="f-menu-item-left" :style="{ paddingLeft: left + 'px' }">
-      <span class="f-menu-item-left-label">
+      <span class="f-menu-item-left-label f-flex-row f-flex-align-item-center">
         <slot name="label">{{ label }}</slot>
       </span>
     </div>

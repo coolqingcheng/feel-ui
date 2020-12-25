@@ -5,7 +5,9 @@
       @click="toggle()"
       :style="{ paddingLeft: data.left + 'px' }"
     >
-      <span class="f-menu-group-header-label">
+      <span
+        class="f-menu-group-header-label f-flex-row f-flex-align-item-center"
+      >
         <slot name="label">{{ label }}</slot>
       </span>
       <f-icon

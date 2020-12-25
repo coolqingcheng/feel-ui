@@ -1,12 +1,12 @@
 <template>
   <div class="f-card">
-    <div class="f-card-header" v-if="showHeader">
+    <div class="f-card-header" v-if="showHeader()">
       <slot name="header"></slot>
     </div>
     <div class="f-card-body">
       <slot></slot>
     </div>
-    <div class="f-card-footer" v-if="showFooter">
+    <div class="f-card-footer" v-if="showFooter()">
       <slot name="footer"></slot>
     </div>
   </div>
@@ -27,7 +27,6 @@ export default {
     onMounted(() => {
       let footer = ctx?.slots["footer"];
 
-      // console.log(footer().length);
 
       console.log(footer?.length);
     });
