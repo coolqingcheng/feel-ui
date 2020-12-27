@@ -10,7 +10,7 @@
   "scripts": {
     "test:coverage": "jest --coverage",
     "test": "jest",
-    "dev": "webpack serve --config ./build/webpack.config.dev.js --profile",
+    "dev": "webpack serve --config ./build/webpack.config.dev.js",
     "build": "webpack --config ./build/webpack.config.prod.js",
     "build:lib": "webpack --config ./build/webpack.config.js"
   },

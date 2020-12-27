@@ -34,6 +34,7 @@
       <router-link to="/drawer">抽屉</router-link>
       <router-link to="/colorpicker">颜色选择器</router-link>
       <router-link to="/button">面包屑</router-link>
+      <router-link to="/tag">标签</router-link>
       <router-link to="/directives">指令</router-link>
       <router-link to="/button">css帮助类</router-link>
       <router-link to="/button">Feel-Admin</router-link>

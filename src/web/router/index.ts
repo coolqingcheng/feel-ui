@@ -157,6 +157,10 @@ const routes = [
   {
     path: '/message',
     component: () => import("../views/message/Index.vue")
+  },
+  {
+    path: '/tag',
+    component: () => import("../views/tag/Index.vue")
   }
 ]
 
