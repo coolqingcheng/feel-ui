@@ -96,7 +96,7 @@ export default defineComponent({
     const data = reactive({
       qc: "sadfasdf",
     });
-    const row = inject<RowInject>("row", { gutter: 10 });
+    const row = inject<RowInject>("row", { gutter: 0 });
 
     const padding = computed(() => {
       return row.gutter;

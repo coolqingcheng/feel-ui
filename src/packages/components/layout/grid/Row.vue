@@ -21,7 +21,7 @@ export default defineComponent({
     },
     gutter: {
       type: Number,
-      default: 10,
+      default: 0,
     },
   },
   setup(props) {
