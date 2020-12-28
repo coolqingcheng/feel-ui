@@ -3,8 +3,43 @@
     flex-direction: row;
     flex-wrap: wrap;
     padding: 5px;
+    height: 36px;
+    box-sizing: border-box;
 
     .f-tag-item {
         margin-right: 8px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .f-icon {
+            cursor: pointer;
+        }
     }
+
+    .f-tag-plus {
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .f-icon {
+            cursor: pointer;
+        }
+    }
+
+    .f-tagtype(@type, @color) {
+        .f-tagtype-@{type} {
+            border: .5px solid @color;
+            color: @color;
+        }
+    }
+
+    .f-tagtype('success', @success);
+    .f-tagtype('primary', @primary);
+    .f-tagtype('default', @default);
+    .f-tagtype('danger', @danger);
+    .f-tagtype('warning', @warning);
+    .f-tagtype('info', @info);
+    .f-tagtype('dark', @dark);
 }
