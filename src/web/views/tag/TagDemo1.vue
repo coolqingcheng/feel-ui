@@ -1,9 +1,23 @@
 <template>
-  <f-tag :items="['标签1', '标签2', '标签3']" :edit="true"></f-tag>
+  <f-tag
+    :items="['标签1', {name:'标签2',type:'success'}, '标签3',{name:'标签4',type:'danger'},'标签5']"
+    :edit="true"
+  ></f-tag>
 </template>
 
 <script>
-export default {};
+import { reactive } from "vue";
+export default {
+  setup() {
+    const data = reactive({
+      list: [
+        {
+          name: "tag1",
+        },
+      ],
+    });
+  },
+};
 </script>
 
 <style>
