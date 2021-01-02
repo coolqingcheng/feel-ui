@@ -77,10 +77,14 @@ export default defineComponent({
       items: [],
     });
     const enter = () => {
-      pushTag({
-        name: data.tagValue,
-        type: "primary",
-      });
+      if (
+        pushTag({
+          name: data.tagValue,
+          type: "primary",
+        })
+      ) {
+        ctx?.emit("append", { name: data.tagValue });
+      }
     };
 
     const addTag = () => {
@@ -96,7 +100,6 @@ export default defineComponent({
 
     const init = () => {
       props.modelValue.forEach((item: any) => {
-        console.log(typeof item);
         if (typeof item == "string") {
           pushTag({
             name: item,
@@ -123,7 +126,9 @@ export default defineComponent({
           type: item.type,
         });
         data.tagValue = "";
+        return true;
       }
+      return false;
     };
     onMounted(() => {
       init();
@@ -132,14 +137,13 @@ export default defineComponent({
     const itemClose = (item: string | { name: string; type: string }) => {
       if (typeof item == "string") {
         let i = data.items.findIndex((a) => a.name == item);
-        console.log(i);
-
         data.items.splice(i, 1);
+        ctx?.emit("delete", { name: item });
       }
       if (typeof item == "object") {
         let i = data.items.findIndex((a) => a.name == item.name);
-        console.log(i);
         data.items.splice(i, 1);
+        ctx?.emit("delete", { name: item.name });
       }
       ctx?.emit("update:modelValue", data.items);
     };
