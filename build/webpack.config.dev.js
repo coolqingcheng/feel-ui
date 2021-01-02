@@ -19,7 +19,8 @@ module.exports = {
         overlay: {
             errors: true
         },
-        inline: true
+        inline: true,
+        port: 9090
     },
     output: {
         filename: 'index.js',

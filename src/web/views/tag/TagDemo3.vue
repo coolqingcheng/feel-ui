@@ -1,5 +1,5 @@
 <template>
-  <f-tag v-model="data.list" :edit="true"></f-tag>
+  <f-tag v-model="data.list" :edit="false" style="fill"></f-tag>
 </template>
 
 <script>
@@ -15,13 +15,9 @@ export default {
         "标签5",
       ],
     });
-
     return {
       data,
     };
   },
 };
 </script>
-
-<style>
-</style>

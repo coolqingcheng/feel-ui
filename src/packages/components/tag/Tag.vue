@@ -36,6 +36,7 @@
 <script lang="ts">
 import {
   defineComponent,
+  getCurrentInstance,
   onMounted,
   PropType,
   reactive,
@@ -53,7 +54,7 @@ interface TagModel {
 export default defineComponent({
   name: "f-tag",
   props: {
-    items: {
+    modelValue: {
       type: Array,
       required: true,
     },
@@ -69,6 +70,7 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const ctx = getCurrentInstance();
     const data = reactive<TagModel>({
       status: false,
       tagValue: "",
@@ -86,14 +88,14 @@ export default defineComponent({
     };
 
     watch(
-      () => props.items,
+      () => props.modelValue,
       () => {
         init();
       }
     );
 
     const init = () => {
-      props.items.forEach((item: any) => {
+      props.modelValue.forEach((item: any) => {
         console.log(typeof item);
         if (typeof item == "string") {
           pushTag({
@@ -115,7 +117,7 @@ export default defineComponent({
     };
 
     const pushTag = (item: { name: string; type: string }) => {
-      if (data.items.filter((a) => a.name == data.tagValue).length <= 0) {
+      if (data.items.findIndex((a) => a.name == item.name) == -1) {
         data.items.push({
           name: item.name,
           type: item.type,
@@ -127,9 +129,19 @@ export default defineComponent({
       init();
     });
 
-    const itemClose = (item: string) => {
-      let i = data.items.findIndex((a) => a.name == item);
-      data.items.splice(i, 1);
+    const itemClose = (item: string | { name: string; type: string }) => {
+      if (typeof item == "string") {
+        let i = data.items.findIndex((a) => a.name == item);
+        console.log(i);
+
+        data.items.splice(i, 1);
+      }
+      if (typeof item == "object") {
+        let i = data.items.findIndex((a) => a.name == item.name);
+        console.log(i);
+        data.items.splice(i, 1);
+      }
+      ctx?.emit("update:modelValue", data.items);
     };
 
     const blur = () => {
