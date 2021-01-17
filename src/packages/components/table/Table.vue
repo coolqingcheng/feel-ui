@@ -1,85 +1,83 @@
 <template>
-  <div ref="container">
-    <div class="f-table" ref="table">
-      <div class="f-table-header" ref="cols">
-        <table>
-          <thead>
-            <tr>
-              <td v-for="(item, index) in data.headerList" :key="index">
-                <div
-                  class="f-table-td"
-                  :class="{ 'f-table-td-center': item.center }"
-                  :style="{ width: getWidth(item), textAlign: item.align }"
-                  v-if="!item.type"
-                >
-                  <div class="f-table-header-item">
-                    <span>{{ item.title }}</span>
-                    <TableSort
-                      v-if="item.sort"
-                      :status="
-                        item.field == data.sort.field ? data.sort.value : ''
-                      "
-                      @change="sortChange($event, item.field)"
-                    ></TableSort>
-                  </div>
-                </div>
-                <div v-else :style="{ width: '60px' }" class="f-table-type">
-                  <TableCheckBox
-                    v-if="item.type == 'checkbox'"
-                    :status="data.checkedList.length == data.dataList.length"
-                    @change="checkAll($event)"
-                  ></TableCheckBox>
-                </div>
-              </td>
-              <td v-if="test()" class="f-table-patch">
-                <div style="width: 17px"></div>
-              </td>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <div
-        class="f-table-content"
-        :style="{ maxHeight: contentHeight > 0 ? contentHeight + 'px' : '' }"
-        @scroll="contentScroll"
-        ref="content"
-      >
-        <table border="0">
-          <tbody>
-            <tr v-for="(item, index) in data.dataList" :key="index">
-              <td v-for="(header, i) in data.headerList" :key="i">
-                <div
-                  v-if="!header.type"
-                  class="t-table-content-item f-table-td"
-                  :style="{ width: getWidth(header), textAlign: header.align }"
-                >
-                  <div v-if="!header.slot">
-                    {{ item[header.field] }}
-                  </div>
-                  <slot v-else :name="header.field" v-bind="item"></slot>
-                </div>
-                <div v-else :style="{ width: '60px' }" class="f-table-type">
-                  <TableCheckBox
-                    v-if="header.type == 'checkbox'"
+  <div class="f-table" ref="table">
+    <div class="f-table-header" ref="cols">
+      <table>
+        <thead>
+          <tr>
+            <td v-for="(item, index) in data.headerList" :key="index">
+              <div
+                class="f-table-td"
+                :class="{ 'f-table-td-center': item.center }"
+                :style="{ width: getWidth(item), textAlign: item.align }"
+                v-if="!item.type"
+              >
+                <div class="f-table-header-item">
+                  <span>{{ item.title }}</span>
+                  <TableSort
+                    v-if="item.sort"
                     :status="
-                      data.checkedList.findIndex((a) => a == item[idkey]) > -1
+                      item.field == data.sort.field ? data.sort.value : ''
                     "
-                    @change="itemChecked($event, item[idkey])"
-                  ></TableCheckBox>
-                  <TableRadio
-                    v-if="header.type == 'radio'"
-                    :status="data.radioValue == item[idkey]"
-                    @change="radioChange($event, item[idkey])"
-                  >
-                  </TableRadio>
+                    @change="sortChange($event, item.field)"
+                  ></TableSort>
                 </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- <TableFooter></TableFooter> -->
+              </div>
+              <div v-else :style="{ width: '60px' }" class="f-table-type">
+                <TableCheckBox
+                  v-if="item.type == 'checkbox'"
+                  :status="data.checkedList.length == data.dataList.length"
+                  @change="checkAll($event)"
+                ></TableCheckBox>
+              </div>
+            </td>
+            <td v-if="test()" class="f-table-patch">
+              <div style="width: 17px"></div>
+            </td>
+          </tr>
+        </thead>
+      </table>
     </div>
+    <div
+      class="f-table-content"
+      :style="{ maxHeight: contentHeight > 0 ? contentHeight + 'px' : '' }"
+      @scroll="contentScroll"
+      ref="content"
+    >
+      <table border="0">
+        <tbody>
+          <tr v-for="(item, index) in data.dataList" :key="index">
+            <td v-for="(header, i) in data.headerList" :key="i">
+              <div
+                v-if="!header.type"
+                class="t-table-content-item f-table-td"
+                :style="{ width: getWidth(header), textAlign: header.align }"
+              >
+                <div v-if="!header.slot">
+                  {{ item[header.field] }}
+                </div>
+                <slot v-else :name="header.field" v-bind="item"></slot>
+              </div>
+              <div v-else :style="{ width: '60px' }" class="f-table-type">
+                <TableCheckBox
+                  v-if="header.type == 'checkbox'"
+                  :status="
+                    data.checkedList.findIndex((a) => a == item[idkey]) > -1
+                  "
+                  @change="itemChecked($event, item[idkey])"
+                ></TableCheckBox>
+                <TableRadio
+                  v-if="header.type == 'radio'"
+                  :status="data.radioValue == item[idkey]"
+                  @change="radioChange($event, item[idkey])"
+                >
+                </TableRadio>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <TableFooter></TableFooter> -->
   </div>
 </template>
 
