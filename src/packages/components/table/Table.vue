@@ -1,5 +1,5 @@
 <template>
-  <div class="f-table" ref="table">
+  <div class="f-table" ref="container">
     <div class="f-table-header" ref="cols">
       <table>
         <thead>
@@ -167,6 +167,7 @@ export default {
     const ctx = getCurrentInstance();
 
     const updateColWidth = () => {
+      let el = container.value;
       let setWidthCols = data.headerList.filter((a) => {
         if (a.width > 0 && !a.type) {
           return true;
@@ -189,13 +190,14 @@ export default {
         patchW = 17;
       }
       let containerWdith = 0;
-      if (container.value) {
-        containerWdith = container.value.clientWidth - patchW - choiceW;
+      if (el) {
+        containerWdith = el.clientWidth - patchW - choiceW;
       }
+      console.log("width:" + el?.clientWidth);
       let sumWidth = 0;
       for (let i in setWidthCols) {
         let item = setWidthCols[i];
-        sumWidth += item.width + 1;
+        sumWidth += item.width + 0;
       }
       let w = containerWdith - sumWidth;
       let len = unSetWidthCols.length;
@@ -203,11 +205,11 @@ export default {
       console.log(
         `containerWdith:${containerWdith} sumWidth:${sumWidth} w:${w} len:${len} choiceW:${choiceW} patchW:${patchW}`
       );
-      let unSetColW = (w - 3) / len;
+      let unSetColW = w / len;
       for (let i in unSetWidthCols) {
         let item = unSetWidthCols[i];
-        if (unSetColW <= 300) {
-          item.setWidth = 300;
+        if (unSetColW <= 200) {
+          item.setWidth = 200;
         } else {
           item.setWidth = unSetColW;
         }
