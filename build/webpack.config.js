@@ -11,7 +11,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 module.exports = {
     mode: "production",
-    entry: path.resolve(__dirname,"../src/packages/Index.ts"),
+    entry: path.resolve(__dirname, "../src/packages/Index.ts"),
     output: {
         path: path.resolve(__dirname, '../bin'),
         publicPath: '/',
@@ -87,18 +87,24 @@ module.exports = {
                 },
                 {
                     from: path.resolve(__dirname, "../public/icons"),
-                    to:path.resolve(__dirname,"../bin/icons")
+                    to: path.resolve(__dirname, "../bin/icons")
                 }
                 //打包部分类
                 ,
                 {
                     from: path.resolve(__dirname, "../src/packages/utils/FUtils.d.ts"),
-                    to:path.resolve(__dirname,"../bin/utils/FUtils.d.ts")
+                    to: path.resolve(__dirname, "../bin/utils/FUtils.d.ts")
                 },
                 {
                     from: path.resolve(__dirname, "../src/packages/utils/FUtils.js"),
                     to: path.resolve(__dirname, "../bin/utils/FUtils.js")
                 }
+                //打包d.ts
+                , {
+                    from: path.resolve(__dirname, "../src/packages/types"),
+                    to: path.resolve(__dirname, "../bin/types")
+                }
+
             ]
         }),
         new CssMinimizerPlugin(),
