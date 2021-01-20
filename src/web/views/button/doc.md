@@ -25,6 +25,12 @@
 
 <demo path="./ButtonDemo5.vue"></demo>
 
+### 链接样式的按钮
+
+设置按钮的link属性为true，按钮显示为有个链接的样式 **链接样式按钮不支持type为default**
+
+<demo path="./ButtonDemo6.vue"></demo>
+
 
 ### 按钮组
 

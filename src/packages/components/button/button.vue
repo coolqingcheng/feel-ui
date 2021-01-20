@@ -1,16 +1,5 @@
 <template>
-  <button
-    type="button"
-    :class="[
-      `btn btn-${type}`,
-      readOnly == true ? 'btn-disabled' : '',
-      readOnly == false ? `btn-${type}-hover ` : 'btn-disabled',
-      mini ? 'btn-mini' : '',
-      loading ? 'btn-loading' : '',
-      readOnly ? '' : 'btn-active',
-    ]"
-    :disabled="readOnly"
-  >
+  <button type="button" :class="style" :disabled="readOnly">
     <f-icon icon="loader" class="loading" v-if="loading"></f-icon>
     <slot name="icon" v-if="!loading"> </slot>
     <slot></slot>
@@ -20,11 +9,11 @@
 
 <script>
 import { computed, defineComponent } from "vue";
-import Icon from "../icon/Icon.vue"
-export default defineComponent( {
+import Icon from "../icon/Icon.vue";
+export default defineComponent({
   name: "f-button",
-  components:{
-    "f-icon":Icon
+  components: {
+    "f-icon": Icon,
   },
   props: {
     type: {
@@ -47,6 +36,10 @@ export default defineComponent( {
       type: Boolean,
       default: false,
     },
+    link: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props) {
     const readOnly = computed(() => {
@@ -58,9 +51,24 @@ export default defineComponent( {
       }
       return false;
     });
+
+    const style = computed(() => {
+      console.log(readOnly.value);
+      return [
+        `btn btn-${props.type}`,
+        readOnly.value == true ? "btn-disabled" : "",
+        readOnly.value == false ? `btn-${props.type}-hover` : "btn-disabled",
+        props.mini ? "btn-mini" : "",
+        props.loading ? "btn-loading" : "",
+        readOnly.value ? "" : "btn-active",
+        props.link ? `btn-link-${props.type}` : "",
+        readOnly.value == false ? `btn-link-${props.type}-hover` : "",
+      ];
+    });
     return {
       readOnly,
+      style,
     };
   },
-})
+});
 </script>
