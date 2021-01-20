@@ -90,17 +90,7 @@ import TableSort from "./TableSort.vue";
 
 import cdk from "../../utils/cdk";
 
-interface TableData {
-  headerList: Array<any>;
-  dataList: Array<any>;
-  checkedList: string[];
-  radioValue: string;
-  sort: {
-    field: string;
-    value: string;
-  };
-  w: number;
-}
+import { TableData, HeaderListItem } from "@/packages/types/FeelTable";
 
 export default {
   name: "f-table",
@@ -112,7 +102,7 @@ export default {
   },
   props: {
     header: {
-      type: Array as PropType<any[]>,
+      type: Array as PropType<HeaderListItem[]>,
       default: () => [],
     },
     data: {
@@ -282,7 +272,7 @@ export default {
       }
     };
 
-    const getWidth = (header) => {
+    const getWidth = (header: HeaderListItem) => {
       if (!header.field) {
         return "80px";
       }
