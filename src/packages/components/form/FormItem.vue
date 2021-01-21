@@ -1,5 +1,9 @@
 <template>
-  <div class="f-form-item" :style="{ width: width }">
+  <div
+    class="f-form-item"
+    :style="{ width: width, marginBottom: marginBottom }"
+    :class="{ 'f-form-item-v': data.direction == 'v' }"
+  >
     <div class="f-form-item-label" :style="{ width: labelWidth + 'px' }">
       <span v-if="label">{{ label }}:</span>
     </div>
@@ -28,6 +32,7 @@ import {
   onUnmounted,
   provide,
   reactive,
+  watch,
 } from "vue";
 import mitt from "mitt";
 import { FormEvent } from "*.vue";
@@ -36,7 +41,7 @@ import {
   formItemInjectKey,
   FormItemInject,
   formInjectKey,
-  FormInject
+  FormInject,
 } from "./formOption";
 
 export default {
@@ -44,7 +49,7 @@ export default {
   props: {
     for: {
       type: String,
-      default:'',
+      default: "",
     },
     label: String,
     trigger: {
@@ -55,13 +60,28 @@ export default {
       type: String,
       default: "100%",
     },
+    direction: {
+      type: String,
+      default: "",
+      validator: (v: string) => {
+        return ["h", "v"].indexOf(v) > -1;
+      },
+    },
   },
   setup(props) {
     const data = reactive({
       message: "",
+      direction: "h",
     });
     const event = mitt();
     const form = inject<FormInject>(formInjectKey);
+    if (form) {
+      if (props.direction == "") {
+        data.direction = form?.direction;
+      } else {
+        data.direction = props.direction;
+      }
+    }
     const showMessage = computed(() => {
       let items = form?.fieldValid(props.for);
       if (items && items?.length > 0) {
@@ -74,6 +94,18 @@ export default {
         show: false,
       };
     });
+
+    watch(
+      () => form?.direction,
+      () => {
+        console.log("监听方向");
+
+        if (form?.direction) {
+          data.direction = form?.direction;
+        }
+      }
+    );
+
     const labelWidth = computed(() => {
       return form?.data.labelWidth;
     });
@@ -93,10 +125,18 @@ export default {
     onUnmounted(() => {
       event.all.clear();
     });
+
+    const marginBottom = computed(() => {
+      if (!props.label) {
+        return "3px";
+      }
+    });
+
     return {
       data,
       labelWidth,
       showMessage,
+      marginBottom,
     };
   },
 };

@@ -14,6 +14,7 @@ export interface ValidField {
 interface FormInject {
     data: FormData;
     rules: Object;
+    direction: string;
     fieldValid: (field: string) => { message: string, field: string }[];
     validateItem: (field: string) => Promise<void>;
 }

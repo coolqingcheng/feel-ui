@@ -12,7 +12,7 @@ import { FieldErrorList, ErrorList, ValidateError } from "async-validator";
 
 import { deepClone } from "@/packages/utils/feelutils";
 
-import { FormInject, formInjectKey, FormData,ValidField } from "./formOption";
+import { FormInject, formInjectKey, FormData, ValidField } from "./formOption";
 
 export default {
   name: "f-form",
@@ -20,16 +20,25 @@ export default {
     // 表单模型
     model: {
       type: Object,
+      required: true,
       default: () => {},
     },
     //验证规则
     rules: {
       type: Object,
+      required: true,
       default: () => {},
     },
     labelWidth: {
       type: Number,
       default: 80,
+    },
+    direction: {
+      type: String,
+      default: "h",
+      validator: (v: string) => {
+        return ["h", "v"].indexOf(v) > -1;
+      },
     },
   },
 
@@ -83,6 +92,7 @@ export default {
       rules: props.rules,
       fieldValid: fieldValid,
       validateItem: validateItem,
+      direction:props.direction
     });
     const submit = () => {};
 

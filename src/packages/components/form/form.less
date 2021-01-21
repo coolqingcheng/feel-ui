@@ -1,6 +1,7 @@
 .f-form {
     width: 100%;
     box-sizing: border-box;
+    
     .f-form-item {
         margin-top: .5rem;
         display: flex;
@@ -43,5 +44,15 @@
             }
         }
 
+    }
+    .f-form-item-v {
+        flex-direction: column;
+
+        .f-form-item-label {
+            padding-bottom: 5px;
+            span {
+                text-align: left;
+            }
+        }
     }
 }
