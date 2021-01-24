@@ -54,6 +54,7 @@ import ModalMask from "./ModalMask.vue";
 import ScreenChange from "./ScreenChange";
 import { FDialogIject } from "../../types/FDialog";
 import { dialogInjectKey } from "@/packages/types/KeyOptions";
+import date from '../datepicker/date';
 export default {
   name: "f-dialog",
   components: {
@@ -78,7 +79,6 @@ export default {
     },
   },
   setup(props, context) {
-    let ctx = getCurrentInstance();
     const data = reactive({
       status: false,
       title: props.title,
@@ -165,6 +165,8 @@ export default {
       closed: close,
       setVisible: setVisible,
     });
+    console.log('注入inject');
+    provide("test-inject",new Date().toLocaleString())
     return {
       data,
       close,
