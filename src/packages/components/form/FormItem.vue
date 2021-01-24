@@ -64,7 +64,7 @@ export default {
       type: String,
       default: "",
       validator: (v: string) => {
-        return ["h", "v"].indexOf(v) > -1;
+        return ["h", "v", ""].indexOf(v) > -1;
       },
     },
   },

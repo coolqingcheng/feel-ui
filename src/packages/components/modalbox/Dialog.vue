@@ -43,6 +43,7 @@ import {
   inject,
   onMounted,
   onUpdated,
+  provide,
   reactive,
   ref,
   watch,
@@ -51,6 +52,8 @@ import {
 import cdk from "../../utils/cdk";
 import ModalMask from "./ModalMask.vue";
 import ScreenChange from "./ScreenChange";
+import { FDialogIject } from "../../types/FDialog";
+import { dialogInjectKey } from "@/packages/types/KeyOptions";
 export default {
   name: "f-dialog",
   components: {
@@ -62,16 +65,16 @@ export default {
       type: String,
       default: "",
     },
-    show: {
-      type: Boolean,
-      default: false,
-    },
     width: {
       type: Number,
       default: 0,
     },
     closeBefore: {
       type: Function,
+    },
+    show: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props, context) {
@@ -111,7 +114,7 @@ export default {
       () => props.title,
       () => (data.title = props.title)
     );
-    const close = (status) => {
+    const close = (status: boolean) => {
       data.status = status;
       if (props.closeBefore) {
         props.closeBefore(() => {
@@ -151,12 +154,17 @@ export default {
         }
       });
       getTopZindex();
-      inject("dialog", {
-        close: close,
-      });
+
       data.top = document.body.clientHeight / 5;
     });
 
+    const setVisible = (status: boolean = true) => {
+      close(status);
+    };
+    provide<FDialogIject>(dialogInjectKey, {
+      closed: close,
+      setVisible: setVisible,
+    });
     return {
       data,
       close,
