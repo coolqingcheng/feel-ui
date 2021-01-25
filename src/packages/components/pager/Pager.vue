@@ -1,5 +1,5 @@
 <template>
-  <div class="f-pager">
+  <div class="f-pager m-t-1">
     <ul class="f-pager-list m-b-1">
       <li class="pre f-pager-item" @click="prev()">
         <f-icon icon="chevron-left"></f-icon>
@@ -39,7 +39,12 @@
         @keydown.enter="enter"
       />
       页
-      <button class="f-pager-btn m-l-1" @click="enter">跳转</button>
+      <f-button
+        text="跳转"
+        class="m-l-1"
+        @click="enter"
+        :mini="true"
+      ></f-button>
     </span>
   </div>
 </template>

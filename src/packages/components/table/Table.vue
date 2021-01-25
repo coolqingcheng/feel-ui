@@ -78,6 +78,11 @@
       </table>
     </div>
     <!-- <TableFooter></TableFooter> -->
+    <div class="f-table-pager">
+      <slot name="pager">
+        <!-- <f-pager :count="500"></f-pager> -->
+      </slot>
+    </div>
   </div>
 </template>
 

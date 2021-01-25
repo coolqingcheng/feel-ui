@@ -8,15 +8,15 @@ export default {
     install: (vue: App<Element>) => {
         vue.directive('loading', {
             mounted(el: HTMLElement, bind) {
-                
-                if (el.tagName !== 'DIV') return;
+
+                if (['DIV', 'FORM'].indexOf(el.tagName) < 0) return;
                 el.style.position = "relative"
                 let text = el.getAttribute("loading-text")
                 if (!text) {
                     text = ""
                 }
-                
-                const  loadingComponentInstance  = createLoadingComponent({
+
+                const loadingComponentInstance = createLoadingComponent({
                     text: text,
                     visible: bind.value
                 })

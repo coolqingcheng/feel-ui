@@ -1,9 +1,11 @@
+@table-bg: #f8f9fa;
+
 .f-table {
     display: inline-block;
     box-sizing: border-box;
     border-right: none;
     overflow: hidden;
-    background: #eee;
+    background: @table-bg;
     width: 100%;
     max-width: 100%;
     border-left: 1px solid @bordercolor;
@@ -14,7 +16,7 @@
         display: block;
 
         table {
-            background: #f8f9fa;
+            background: @table-bg;
             width: auto;
             border-collapse: collapse;
             margin: 0 !important;
@@ -74,7 +76,7 @@
         overflow: auto;
         box-sizing: border-box;
         background-color: @white;
-        border-bottom: 1px solid @bordercolor;
+        // border-bottom: 1px solid @bordercolor;
         border-right: 1px solid @bordercolor;
         border-right: none;
 
@@ -170,6 +172,10 @@
             border-color: @font-color-1 transparent transparent transparent;
         }
     }
+}
+
+.f-table-pager:not(:empty) {
+    border-bottom: 1px solid @bordercolor;
 }
 
 .f-table-footer {

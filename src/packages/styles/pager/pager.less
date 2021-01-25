@@ -33,6 +33,10 @@
         .f-pager-item-selected {
             background-color: @theme;
             color: @white;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
 
             &:hover {
                 cursor: pointer;
@@ -42,11 +46,11 @@
 
         .f-pager-item-ellipsis {
 
-            color: @bordercolor;
+            color: @black-50;
 
             &:hover {
                 cursor: not-allowed !important;
-                color: @bordercolor;
+                color: @black-50;
             }
 
         }
@@ -86,6 +90,6 @@
         background-color: @white;
         color: @font-color;
 
-        &:hover {}
+        // &:hover {}
     }
 }
