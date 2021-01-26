@@ -96,6 +96,8 @@ import BreadCrumb from "@/packages/components/breadcrumb/index";
 
 import Empty from "@/packages/components/empty/Index"
 
+import LoadingComponent from "@/packages/components/loading/Index"
+
 
 
 
@@ -150,5 +152,6 @@ export default {
         BreadCrumb.install(app)
 
         Empty.install(app)
+        LoadingComponent.install(app)
     }
 }

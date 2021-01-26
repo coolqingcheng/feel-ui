@@ -1,0 +1,43 @@
+.f-loading {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    @loading-w:3px;
+    .f-loading-bg {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        box-sizing: border-box;
+        border-radius: 50%;
+        border: @loading-w solid fade(@theme,10%);
+    }
+
+    @keyframes loading {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .f-loading-bar {
+        position: absolute;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        box-sizing: border-box;
+        border-radius: 50%;
+
+        border: @loading-w solid fade(@theme,60%);
+        border-left-color: transparent;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+        animation: loading .8s infinite linear;
+    }
+}

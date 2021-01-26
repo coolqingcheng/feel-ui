@@ -1,7 +1,9 @@
 import { createVNode, getCurrentInstance, h, onUnmounted, reactive, Ref, toRefs, VNode } from "vue"
 
-import Icon from "../components/icon/Icon.vue"
+// import Icon from "../components/icon/Icon.vue"
 import FadeAnim from "../components/anim/FadeAnim.vue"
+
+import Loading from "../components/loading/Loading.vue"
 
 
 
@@ -49,9 +51,7 @@ export function createLoadingComponent(option: LoadingOption): loadingComponentI
                 class: 'f-v-loading',
 
             }, [
-                h(Icon, {
-                    icon: 'loader'
-                }),
+                h(Loading),
                 h("span", this.text),
             ])
             return h(FadeAnim, {
