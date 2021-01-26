@@ -1,13 +1,9 @@
 <template>
-  <f-table :header="data.header" :data="data.data" idkey="id" selector="radio">
-      <template v-slot:pager>
-          <f-pager :count="500"></f-pager>
-      </template>
-  </f-table>
+  <f-table :header="data.header"></f-table>
 </template>
 
-<script>
-import { onMounted, reactive } from "vue";
+<script lang="ts">
+import { reactive } from "vue";
 export default {
   setup() {
     const data = reactive({
@@ -37,20 +33,9 @@ export default {
           title: "签名",
         },
       ],
-      data: [],
+      data:[]
     });
 
-    onMounted(() => {
-      for (let i = 0; i < 10; i++) {
-        data.data.push({
-          id: i,
-          userName: "feel:" + i,
-          sex: i % 2 == 0 ? 0 : 1,
-          city: "city:" + i,
-          sign: "feel-ui简单且好用:" + i,
-        });
-      }
-    });
     return {
       data,
     };

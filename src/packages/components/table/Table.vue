@@ -41,9 +41,13 @@
       class="f-table-content"
       :style="{ maxHeight: contentHeight > 0 ? contentHeight + 'px' : '' }"
       @scroll="contentScroll"
+      :class="{
+        'f-table-content-boderbottom':
+          !data.dataList || data.dataList.length == 0,
+      }"
       ref="content"
     >
-      <table border="0">
+      <table v-if="data.dataList && data.dataList.length > 0" border="0">
         <tbody>
           <tr v-for="(item, index) in data.dataList" :key="index">
             <td v-for="(header, i) in data.headerList" :key="i">
@@ -76,6 +80,7 @@
           </tr>
         </tbody>
       </table>
+      <Empty v-if="!data.dataList || data.dataList.length == 0"></Empty>
     </div>
     <!-- <TableFooter></TableFooter> -->
     <div class="f-table-pager">
@@ -95,6 +100,8 @@ import TableSort from "./TableSort.vue";
 
 import cdk from "../../utils/cdk";
 
+import Empty from "@/packages/components/empty/Empty.vue";
+
 import { TableData, HeaderListItem } from "@/packages/types/FeelTable";
 
 export default {
@@ -104,6 +111,7 @@ export default {
     TableCheckBox,
     TableRadio,
     TableSort,
+    Empty,
   },
   props: {
     header: {

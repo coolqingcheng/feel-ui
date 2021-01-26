@@ -47,11 +47,16 @@
 > 因为绝大多数场景是通过服务器排序，组件本身不做排序操作。  
 **f-table会触发sort事件，监听f-table的sort事件**，即可处理排序
 
+### 表格为空
+
+表格为空的时候，需要显示一个友好的提示。此功能自动启用，table的**data**属性为空或者length为0，自动会显示为空提示
+
+<demo path="./TableDemo8.vue"></demo>
 
 
 ### 分页
 
-可使用[f-pager](/#/pager)组件进行分页
+可使用[f-pager](/#/pager)组件进行分页，组件可自定义，也可放在Table组件提供的**pager**插槽中，监听**f-pager**的**page-change**事件，修改表格数据即可完成分页
 
 <demo path="./TableDemo6.vue"></demo>
 
@@ -63,7 +68,7 @@
 
 ### 大数据量虚拟滚动
 
-
+> todo
 
 
 

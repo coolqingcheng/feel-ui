@@ -94,6 +94,8 @@ import Drawer from "../packages/components/drawer/Index"
 
 import BreadCrumb from "@/packages/components/breadcrumb/index";
 
+import Empty from "@/packages/components/empty/Index"
+
 
 
 
@@ -146,5 +148,7 @@ export default {
         Rating.install(app)
         Drawer.install(app)
         BreadCrumb.install(app)
+
+        Empty.install(app)
     }
 }
