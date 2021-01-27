@@ -1,12 +1,19 @@
 <template>
-  <form class="f-form" @submit="submit">
+  <form class="f-form">
     <slot></slot>
   </form>
 </template>
 
 <script lang="ts">
 import mitt from "mitt";
-import { onMounted, onUnmounted, provide, reactive, watch } from "vue";
+import {
+  getCurrentInstance,
+  onMounted,
+  onUnmounted,
+  provide,
+  reactive,
+  watch,
+} from "vue";
 import Schema from "async-validator";
 import { FieldErrorList, ErrorList, ValidateError } from "async-validator";
 
@@ -43,8 +50,7 @@ export default {
   },
 
   setup(props) {
-    console.log(props.model);
-
+    const ctx = getCurrentInstance();
     const data = reactive<FormData>({
       labelWidth: props.labelWidth,
       model: props.model,
@@ -92,9 +98,11 @@ export default {
       rules: props.rules,
       fieldValid: fieldValid,
       validateItem: validateItem,
-      direction:props.direction
+      direction: props.direction,
     });
-    const submit = () => {};
+    const submit = () => {
+      ctx?.emit("submit", { event: "submit" });
+    };
 
     onUnmounted(() => {
       event.all.clear();
