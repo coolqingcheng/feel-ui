@@ -13,6 +13,17 @@ export interface FDialogIject {
      */
     setVisible(status: boolean): void
 
+    /**
+     * 模态框进入loading状态
+     * @param status 
+     */
+    showLoading(text: string): void
+
+    /**
+     * 退出Loading状态
+     */
+    hideLoading();
+
 }
 
 

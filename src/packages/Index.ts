@@ -81,7 +81,7 @@ import Drag from "./directive/DragDirective"
 
 import AlertBox from "./components/alert/Index"
 
-import Loading from "./directive/Loading"
+import { Loadinginstall } from "./directive/Loading"
 
 import Rating from "../packages/components/rating/Index"
 
@@ -104,6 +104,8 @@ import LoadingComponent from "@/packages/components/loading/Index"
 
 export default {
     install: function (app: App<Element>, options: any) {
+
+        Loadinginstall(app)
         button.install(app)
         Layout.install(app)
         Input.install(app)
@@ -146,7 +148,7 @@ export default {
         Position.install(app)
         Card.install(app)
         AlertBox.install(app)
-        Loading.install(app)
+
         Rating.install(app)
         Drawer.install(app)
         BreadCrumb.install(app)

@@ -15,6 +15,8 @@
         class="f-dialog f-shadow"
         ref="dialog"
         v-show="show"
+        v-load="loadingStatus.status"
+        :loading-text="loadingStatus.text"
         :style="{
           left: data.left + 'px',
           width: width > 0 ? width + 'px' : '',
@@ -38,28 +40,20 @@
 </template>
 
 <script lang="ts">
-import {
-  getCurrentInstance,
-  inject,
-  onMounted,
-  onUpdated,
-  provide,
-  reactive,
-  ref,
-  watch,
-} from "vue";
-// import ModalBox from "./ModalBox";
+import { onMounted, provide, reactive, ref, watch } from "vue";
 import cdk from "../../utils/cdk";
 import ModalMask from "./ModalMask.vue";
 import ScreenChange from "./ScreenChange";
 import { FDialogIject } from "../../types/FDialog";
 import { dialogInjectKey } from "@/packages/types/KeyOptions";
-import date from '../datepicker/date';
+import { loading } from "@/packages/directive/Loading";
 export default {
   name: "f-dialog",
   components: {
-    // ModalBox,
     ModalMask,
+  },
+  directives: {
+    load: loading,
   },
   props: {
     title: {
@@ -76,6 +70,14 @@ export default {
     show: {
       type: Boolean,
       default: false,
+    },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+    loadingtext: {
+      type: String,
+      default: "",
     },
   },
   setup(props, context) {
@@ -161,17 +163,29 @@ export default {
     const setVisible = (status: boolean = true) => {
       close(status);
     };
+
+    const loadingStatus = reactive({
+      text: props.loadingtext,
+      status: props.loading,
+    });
+    const setLoading = (text: string) => {
+      loadingStatus.status = true;
+      loadingStatus.text = text;
+    };
     provide<FDialogIject>(dialogInjectKey, {
       closed: close,
       setVisible: setVisible,
+      showLoading: setLoading,
+      hideLoading: () => {
+        loadingStatus.status = false;
+      },
     });
-    console.log('注入inject');
-    provide("test-inject",new Date().toLocaleString())
     return {
       data,
       close,
       dialog,
       modal,
+      loadingStatus,
     };
   },
 };

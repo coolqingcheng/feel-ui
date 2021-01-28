@@ -92,7 +92,14 @@
 </template>
 
 <script lang="ts">
-import { getCurrentInstance, onMounted, PropType, reactive, ref } from "vue";
+import {
+  getCurrentInstance,
+  onMounted,
+  PropType,
+  reactive,
+  ref,
+  watch,
+} from "vue";
 // import TableFooter from "./TableFooter";
 import TableCheckBox from "./TableCheckBox.vue";
 import TableRadio from "./TableRadio.vue";
@@ -162,6 +169,15 @@ export default {
       },
       w: 0,
     });
+
+    watch(
+      () => props.data,
+      () => {
+        console.log("重新修改table的data属性");
+
+        data.dataList = props.data;
+      }
+    );
 
     const container = ref<HTMLElement>();
     const content = ref<HTMLElement>();
