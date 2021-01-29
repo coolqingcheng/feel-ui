@@ -95,6 +95,10 @@ const routes = [
     component: Dialog
   },
   {
+    path: "/rate",
+    component:()=>import("../views/rate/Index.vue")
+  },
+  {
     path: '/spin'
     , component: Spin
   },

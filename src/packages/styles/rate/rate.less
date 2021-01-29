@@ -1,0 +1,32 @@
+.f-rate {
+    display: flex;
+    flex-direction: row;
+
+    .f-rate-item {
+        display: inline-block;
+        position: relative;
+        touch-action: pan-y;
+        cursor: pointer;
+
+        .f-rate-item-first {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            color: @bordercolor;
+            background: initial;
+        }
+        .f-rate-item-second {
+            background: initial;
+            color: @bordercolor;
+        }
+
+        .f-rate-item-hover {
+            color: @rate-default-color;
+        }
+
+        svg {
+            fill: currentColor;
+        }
+    }
+}

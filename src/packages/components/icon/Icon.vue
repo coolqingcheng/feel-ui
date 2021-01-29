@@ -1,20 +1,15 @@
 <template>
-  <span
-    class="f-icon"
-    v-html="svg"
-    :style="{
+  <span class="f-icon" v-html="svg" :style="{
       width: width + 'px',
       height: width + 'px',
       textAlign: 'center',
       lineHeight: width + 'px',
-    }"
-    ref="iconRef"
-  ></span>
+    }" ref="iconRef"></span>
 </template>
 
 <script lang="ts">
 import { HttpClient } from "../../utils/HttpClient";
-import { getCurrentInstance, nextTick, onMounted, ref, watch } from "vue";
+import { nextTick, onMounted, ref, watch } from "vue";
 import IconOption from "./IconOption";
 export default {
   name: "f-icon",
@@ -49,23 +44,7 @@ export default {
       eva: "icon/eva/",
     };
     onMounted(async () => {
-      let url = `${iconUrls[props.type]}${props.icon}.svg`;
-      // console.log('icon-url:'+url);
-
-      // if (process.env.VUE_APP_ICON_BASE) {
-      //   url = `${process.env.VUE_APP_ICON_BASE}${url}`;
-      // }
-      let http = new HttpClient();
-      let res = await http.GetStringAsync(url);
-      // console.log('加载的icon:'+res);
-
-      let el = document.createElement("div");
-      el.innerHTML = res;
-      let svgEl = el.querySelector("svg") as SVGElement;
-      svg.value = svgEl.outerHTML;
-      nextTick(() => {
-        updateIcon();
-      });
+      getSvg();
     });
 
     const iconRef = ref<HTMLElement>();
@@ -80,6 +59,30 @@ export default {
       ele.setAttribute("width", props.width.toString());
       ele.setAttribute("height", props.width.toString());
     };
+
+    const getSvg = () => {
+      let url = `${iconUrls[props.type]}${props.icon}.svg`;
+      let http = new HttpClient();
+      http
+        .GetStringAsync(url)
+        .then((res) => {
+          let el = document.createElement("div");
+          el.innerHTML = res;
+          let svgEl = el.querySelector("svg") as SVGElement;
+          svg.value = svgEl.outerHTML;
+          nextTick(() => {
+            updateIcon();
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    };
+
+    watch(
+      () => props.icon,
+      () => getSvg()
+    );
 
     return {
       svg,

@@ -98,6 +98,8 @@ import Empty from "@/packages/components/empty/Index"
 
 import LoadingComponent from "@/packages/components/loading/Index"
 
+import Rate from "@/packages/components/rate/Index"
+
 
 
 
@@ -155,5 +157,7 @@ export default {
 
         Empty.install(app)
         LoadingComponent.install(app)
+
+        Rate.install(app)
     }
 }
