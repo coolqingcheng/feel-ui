@@ -1,0 +1,57 @@
+.f-timeline {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+
+
+
+    .f-timeline-item {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        padding-left: 1.5rem;
+        box-sizing: border-box;
+        padding-bottom: 1rem;
+
+        &.showline {
+            &::before {
+                content: ' ';
+                position: absolute;
+                top: 0;
+                left: .5rem;
+                bottom: 0;
+                width: 1px;
+                background: @bordercolor;
+            }
+        }
+
+        .f-timeline-item-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-left: -1.5rem;
+            z-index: 99;
+            margin-top: -.5rem;
+
+            .f-timeline-axis {
+                width: 1rem;
+                height: 1rem;
+                border-radius: 100%;
+                box-sizing: border-box;
+                border: 1.5px solid @theme;
+                background: @white;
+            }
+
+            .f-timeline-item-title {
+                font-size: 1.5rem;
+                margin-left: .8rem;
+            }
+        }
+
+        .f-timeline-item-body {
+            font-size: .9rem;
+            margin-top: .6rem;
+        }
+
+    }
+}

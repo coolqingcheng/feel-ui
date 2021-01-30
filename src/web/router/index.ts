@@ -96,7 +96,15 @@ const routes = [
   },
   {
     path: "/rate",
-    component:()=>import("../views/rate/Index.vue")
+    component: () => import("../views/rate/Index.vue")
+  },
+  {
+    path: "/timeline",
+    component: () => import("../views/timeline/Index.vue")
+  },
+  {
+    path: "/slider",
+    component: () => import("../views/slider/Index.vue")
   },
   {
     path: '/spin'

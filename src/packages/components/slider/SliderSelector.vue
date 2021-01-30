@@ -1,68 +1,80 @@
 <template>
-  <div
-    class="f-slider-tag"
-    :style="{ left: left }"
-    @mousedown="down($event)"
-    :class="{ 'f-slider-tag-select': activeClass }"
-  ></div>
+  <div class="f-slider-tag" :style="{ left: data.left }" @mousedown="down($event)" :class="{ 'f-slider-tag-select': data.activeClass }"></div>
 </template>
 
-<script>
+<script lang="ts">
+import { getCurrentInstance, reactive, watch } from "vue";
 export default {
-  name: "f-slider-selector",
   props: {
     value: {
       type: Number,
       default: 0,
     },
   },
-  watch: {
-    value() {
-      this.left = this.value + "px";
-      console.log("修改");
-    },
-  },
-  data() {
-    return {
+  setup(props) {
+    const data = reactive({
       isTouch: false,
       startX: 0,
-      left: this.value + "px",
-      moveLeft: 0,
+      left: "0px",
       activeClass: false,
-    };
-  },
-  methods: {
-    down(e) {
-      this.isTouch = true;
-      console.log(e);
-      this.activeClass = true;
+    });
 
-      this.left = parseInt(e.target.style.left);
-      this.startX = e.clientX - this.left;
+    watch(
+      () => props.value,
+      () => {
+        data.left = props.value + "px";
+      }
+    );
+    const ctx = getCurrentInstance();
+    const down = (e: MouseEvent) => {
+      let target = e.target as HTMLElement;
+      data.isTouch = true;
+      console.log(target.style);
+      if (!target.style.left) {
+        target.style.left = "0px";
+      }
+      data.activeClass = true;
+
+      data.left = target.style.left;
+      data.startX = e.clientX - parseFloat(data.left);
+      let instance = ctx as any;
+      let width: number = instance.parent.ctx.$el.clientWidth;
+      width -= 20;
+      console.log(width);
       document.onmousemove = (move) => {
-        if (this.isTouch) {
-          let i = move.clientX - this.startX;
-          let width = this.$parent.$el.clientWidth;
-          //   console.log(this.isTouch);
-          if (i > 0 && i < width - 20) {
-            this.left = i + "px";
+        if (data.isTouch) {
+          let i = move.clientX - data.startX;
+
+          
+          if (i >= 0 && i < width) {
+            data.left = i + "px";
+          } else {
+            if (i <= 0) {
+              data.left = "0px";
+            }
+            if (i >= width) {
+              data.left = width + "px";
+            }
           }
-          this.moveLeft = e.target.style.left;
-          this.$emit("change", { value: parseFloat(this.moveLeft) });
+
+          ctx?.emit("change", { value: parseFloat(data.left), max: width });
           window.getSelection
-            ? window.getSelection().removeAllRanges()
-            : document.selection.empty();
+            ? window.getSelection()?.removeAllRanges()
+            : window.document["selection"].empty();
         }
       };
       document.onmouseup = (e) => {
-        console.log("end:" + e);
-        this.activeClass = false;
-        this.startX = 0;
-        this.isTouch = false;
+        data.activeClass = false;
+        data.startX = 0;
+        data.isTouch = false;
         document.onmousemove = null;
         document.onmouseup = null;
       };
-    },
+    };
+    return {
+      data,
+      down,
+    };
   },
 };
 </script>

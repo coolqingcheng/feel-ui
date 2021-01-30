@@ -9,6 +9,7 @@
       <router-link to="/uploader">上传文件</router-link>
       <router-link to="/input">输入框</router-link>
       <router-link to="/number">数字输入</router-link>
+      <router-link to="/slider">滑动条</router-link>
       <router-link to="/radio">单选框</router-link>
       <router-link to="/checkbox">复选框</router-link>
       <router-link to="/switch">开关</router-link>
@@ -36,6 +37,7 @@
       <router-link to="/colorpicker">颜色选择器</router-link>
       <router-link to="/button">面包屑</router-link>
       <router-link to="/tag">标签</router-link>
+      <router-link to="/timeline">时间线</router-link>
       <router-link to="/directives">指令</router-link>
       <router-link to="/button">css帮助类</router-link>
       <router-link to="/button">Feel-Admin</router-link>

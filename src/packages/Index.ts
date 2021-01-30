@@ -100,6 +100,8 @@ import LoadingComponent from "@/packages/components/loading/Index"
 
 import Rate from "@/packages/components/rate/Index"
 
+import TimeLine from "@/packages/components/timeline/Index"
+
 
 
 
@@ -159,5 +161,7 @@ export default {
         LoadingComponent.install(app)
 
         Rate.install(app)
+
+        TimeLine.install(app)
     }
 }
