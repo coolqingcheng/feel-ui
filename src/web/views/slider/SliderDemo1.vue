@@ -1,5 +1,5 @@
 <template>
-  <f-slider></f-slider>
+  <f-slider :range="true"></f-slider>
 </template>
 
 <script>
