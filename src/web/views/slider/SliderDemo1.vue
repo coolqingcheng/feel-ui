@@ -1,13 +1,10 @@
 <template>
-  <f-slider :range="true"></f-slider>
+  <f-slider :range="false" :step="5"></f-slider>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
-
 </style>

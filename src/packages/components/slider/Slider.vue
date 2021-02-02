@@ -3,15 +3,22 @@
     <div class="f-slider" @click="sliderClick($event)" ref="container">
       <div class="f-slider-bg"></div>
       <div class="f-slider-bar" :style="{width:data.width,left:data.left}"></div>
-      <SliderSelector v-model="data.v1" :parentWidth="data.parentWidth"></SliderSelector>
+      <SliderSelector v-model="data.v1" :parentWidth="data.parentWidth" :stepdata="stepData"></SliderSelector>
       <SliderSelector v-model="data.v2" v-if="range" :parentWidth="data.parentWidth" color="red"></SliderSelector>
-      <div class="f-slider-step">
-
+      <div class="f-slider-step" v-if="showstep&&step>0">
+        <div class="f-slider-stepcontainer">
+          <div class="f-slider-stepitem" v-for="item in stepData" :key="item" :style="{'left':item+'%'}">
+            <i class="f-slider-steppoint"></i>
+            <div class="f-slider-steplabel">
+              <!-- <span>20G</span> -->
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="f-slider-label">
       <slot>
-        <span v-if="range">range:{{rangeValue}}</span>
+        <span v-if="true">range:{{rangeValue}} <br /> v1:{{data.v1}} <br/> w:{{data.parentWidth}}</span>
       </slot>
     </div>
   </div>
@@ -50,16 +57,21 @@ export default {
     color: {
       type: String,
     },
+    showstep: {
+      type: Boolean,
+      default: true,
+    },
   },
   setup(props) {
     const data = reactive({
-      v1: 0,
+      v1: 20,
       v2: 0,
       width: "0",
       left: "0",
       //1 值 2 范围
       type: 1,
       parentWidth: 0,
+      stepData: [0],
     });
     const container = ref<HTMLElement>();
     onMounted(() => {
@@ -73,16 +85,17 @@ export default {
       });
     });
 
-    const testChange = (e: { value: number; max: number }) => {
-      // console.log(e);
-      // data.v1 = Math.round((e.value / e.max) * 100);
-      // console.log(data.v1);
-      // data.width = `${(e.value / e.max) * 100}%`;
-    };
-    const testChange1 = (e: { value: number; max: number }) => {
-      // console.log(e);
-      // data.v2 = Math.round((e.value / e.max) * 100);
-    };
+    const stepData = computed(() => {
+      if (props.step == 0) return [];
+      let arr: number[] = [];
+      let scale = (props.max - props.min) / props.step;
+      for (let i = 0; i <= scale; i++) {
+        arr.push(props.step * i);
+      }
+      console.log(arr);
+
+      return arr;
+    });
 
     const rangeValue = computed(() => {
       // console.log(`${data.v1} ${data.v2} w:${container.value?.clientWidth}`);
@@ -90,15 +103,15 @@ export default {
         v2 = 0;
       if (container.value) {
         let w = container.value.clientWidth;
-        v1 = Math.round((data.v1 / w) * 100);
-        v2 = Math.round((data.v2 / w) * 100);
+        v1 = Math.round(((data.v1 + 10) / w) * 100);
+        v2 = Math.round(((data.v2 + 10) / w) * 100);
       }
       return [v1, v2];
     });
 
     const sliderClick = (e: MouseEvent) => {
       let browerX = e.clientX;
-      console.log(e.clientX);
+      console.log(`点击:${e.clientX}`);
       let containerX = 0;
       if (container.value) {
         containerX = container.value.getBoundingClientRect().left;
@@ -139,7 +152,7 @@ export default {
     watch(
       () => [data.v1, data.v2],
       () => {
-        let min,
+        let min = 0,
           max = 0;
         if (data.v1 > data.v2) {
           min = data.v2;
@@ -161,12 +174,11 @@ export default {
     );
 
     return {
-      testChange,
-      testChange1,
       data,
       sliderClick,
       container,
       rangeValue,
+      stepData,
     };
   },
 };

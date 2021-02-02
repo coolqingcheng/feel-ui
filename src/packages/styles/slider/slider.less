@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+
     .f-slider-label {
         min-width: 150px;
         padding-left: 10px;
@@ -10,6 +11,8 @@
         flex-direction: row;
         align-items: center;
     }
+
+    border-radius: 50%;
 }
 
 .f-slider-h {
@@ -23,20 +26,22 @@
     display: block;
     position: relative;
     cursor: pointer;
+    @slider-h: 6px;
 
     .f-slider-bg {
-        height: 4px;
+        height: @slider-h;
         display: block;
         background: @bordercolor;
-        border-radius: 5px;
+        border-radius: 10px;
     }
 
     .f-slider-bar {
         position: absolute;
         top: 10px;
         left: 0px;
-        height: 4px;
+        height: @slider-h;
         background: @theme;
+        border-radius: 10px;
     }
 
     .f-slider-tag {
@@ -51,6 +56,7 @@
         border-radius: 20px;
         transform: scale(1);
         transition: transform .3s ease;
+        z-index: 20;
 
         &:hover {
             transform: scale(1.1);
@@ -63,5 +69,56 @@
         // cursor: grabbing;
         border: 2px solid @theme;
         transform: scale(1.1);
+    }
+
+    .f-slider-step {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        top: 10px;
+        height: 8px;
+        display: flex;
+        flex-direction: row;
+
+        .f-slider-stepcontainer {
+            width: 100%;
+            height: 100%;
+            position: relative;
+
+            .f-slider-stepitem {
+                height: 6px;
+                box-sizing: border-box;
+                position: absolute;
+
+                .f-slider-steppoint {
+                    position: absolute;
+                    top: 0;
+                    right: -3px;
+                    width: 6px;
+                    height: 6px;
+                    content: ' ';
+                    border: 1px solid @theme;
+                    box-sizing: border-box;
+                    background: @white;
+                    border-radius: 50%;
+                }
+
+                .f-slider-steplabel {
+                    position: relative;
+                    width: 100%;
+                    padding-top: 8px;
+
+                    span {
+                        position: absolute;
+                        right: 0;
+                        font-size: 14px;
+
+                    }
+                }
+
+
+            }
+        }
     }
 }
