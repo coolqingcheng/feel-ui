@@ -173,6 +173,10 @@ const routes = [
   {
     path: '/tag',
     component: () => import("../views/tag/Index.vue")
+  },
+  {
+    path: '/tooltips',
+    component:()=>import("../views/tooltips/Index.vue")
   }
 ]
 

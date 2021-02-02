@@ -102,6 +102,8 @@ import Rate from "@/packages/components/rate/Index"
 
 import TimeLine from "@/packages/components/timeline/Index"
 
+import ToolTip from "@/packages/components/tooltips/Index"
+
 
 
 
@@ -163,5 +165,7 @@ export default {
         Rate.install(app)
 
         TimeLine.install(app)
+
+        ToolTip.install(app)
     }
 }
