@@ -14,13 +14,24 @@ export default {
     msg: {
       type: String,
     },
+    event: {
+      type: String,
+      default: "hover",
+      validator: (v: string) => {
+        return ["hover", "click"].indexOf(v) > -1;
+      },
+    },
   },
   setup() {
     const trigger = (event: MouseEvent) => {
       console.log("触发事件");
       console.log(event);
     };
-    const triggerEvent = reactive({ mouseover: trigger, click: trigger });
+    const triggerEvent = reactive({
+      mouseenter: trigger,
+      click: trigger,
+      mouseleave: trigger,
+    });
 
     return {
       trigger,
