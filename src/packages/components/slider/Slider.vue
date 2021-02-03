@@ -18,7 +18,7 @@
     </div>
     <div class="f-slider-label">
       <slot>
-        <span v-if="true">range:{{rangeValue}} <br /> v1:{{data.v1}} <br/> w:{{data.parentWidth}}</span>
+        <span v-if="true">range:{{rangeValue}} <br /> v1:{{data.v1}} <br /> w:{{data.parentWidth}}</span>
       </slot>
     </div>
   </div>

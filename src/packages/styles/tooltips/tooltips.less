@@ -1,0 +1,47 @@
+.f-tooltips {
+    display: inline-flex;
+    min-width: 24px;
+    min-height: 24px;
+    z-index: 999;
+    .f-tooltips-label {
+        background: @black;
+        padding: 5px;
+        color: @white;
+        font-size: 14px;
+        border-radius: 4px;
+        position: relative;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, .2);
+        max-width: 100px;
+
+        &::before {
+            content: '';
+            position: absolute;
+
+        }
+    }
+
+    .f-tooltips-arrow {
+        width: 10px;
+        height: 10px;
+        background: @black;
+        transform: rotate(45deg);
+        border-radius: 2px;
+    }
+}
+
+
+.f-tooltips-top {
+    flex-direction: column;
+    align-items: center;
+
+    .f-tooltips-arrow {
+        margin-top: -6px;
+    }
+}
+.f-tooltips-bottom{
+    flex-direction: column-reverse;
+    align-items: center;
+    .f-tooltips-arrow {
+        margin-bottom: -6px;
+    }
+}
