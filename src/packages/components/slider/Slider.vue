@@ -1,7 +1,6 @@
 <template>
   <div class="f-slider-wrapper">
     <div class="f-slider" @click="sliderClick($event)" ref="container">
-      <div class="f-slider-bg"></div>
       <div class="f-slider-bar" :style="{width:`${progreeBarLength}%`,left:progreeBarOffset}"></div>
       <SliderSelector v-model="data.v1" :parentWidth="data.parentWidth" :stepdata="stepData" @press="press"></SliderSelector>
       <SliderSelector v-model="data.v2" v-if="range" :parentWidth="data.parentWidth" color="red" @press="press"></SliderSelector>

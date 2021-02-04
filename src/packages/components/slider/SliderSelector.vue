@@ -1,5 +1,7 @@
 <template>
-  <div @click.prevent class="f-slider-tag" :style="{ left: `${leftValue}`,'border-color':color }" @mousedown="down($event)" :class="{ 'f-slider-tag-select': data.activeClass }"></div>
+  <div @click.prevent class="f-slider-box" :style="{ left: `${leftValue}`,'border-color':color }" @mousedown="down($event)" :class="{ 'f-slider-tag-select': data.activeClass }">
+    <div class="f-slider-circle"></div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -43,8 +45,7 @@ export default {
     });
 
     const emit = () => {
-      let v =
-        (data.left / props.parentWidth) * 100 + (10 / props.parentWidth) * 100;
+      let v = (data.left / props.parentWidth) * 100;
       ctx?.emit("update:modelValue", v);
       ctx?.emit("change", {
         value: v,
@@ -69,14 +70,14 @@ export default {
           let x = 0;
           let i = move.clientX - data.startX;
           if (props.stepdata.length == 0) {
-            if (i >= -10 && i <= props.parentWidth - 10) {
+            if (i >= 0 && i <= props.parentWidth) {
               data.left = i;
             } else {
-              if (i <= -10) {
-                data.left = -10;
+              if (i <= 0) {
+                data.left = 0;
               }
-              if (i >= props.parentWidth - 10) {
-                data.left = props.parentWidth - 10;
+              if (i >= props.parentWidth) {
+                data.left = props.parentWidth;
               }
             }
           } else {
