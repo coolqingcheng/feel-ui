@@ -1,13 +1,21 @@
 <template>
-  <div class="f-tooltips f-tooltips-bottom" :class="data.tooltipscode" ref="tooltips" v-show="data.show">
-    <div class="f-tooltips-label" ref="label">200GB</div>
+  <div class="f-tooltips" :class="[data.tooltipscode,tooltipDirection]" ref="tooltips" v-show="data.show">
+    <div class="f-tooltips-label" ref="label">{{msg}}</div>
     <div class="f-tooltips-arrow"></div>
   </div>
   <slot name="trigger" :on="triggerEvent"></slot>
 </template>
 
 <script lang="ts">
-import { getCurrentInstance, onMounted, onUnmounted, reactive, ref } from "vue";
+import {
+  computed,
+  getCurrentInstance,
+  onMounted,
+  onUnmounted,
+  onUpdated,
+  reactive,
+  ref,
+} from "vue";
 import { genRandCode } from "@/packages/utils/feelutils";
 import cdk from "@/packages/utils/cdk";
 export default {
@@ -15,6 +23,8 @@ export default {
   props: {
     msg: {
       type: String,
+      default: "null",
+      required: true,
     },
     trigger: {
       type: String,
@@ -25,7 +35,7 @@ export default {
     },
     direction: {
       type: String,
-      default: "bottom",
+      default: "top",
       validator: (v: string) => {
         return ["left", "right", "top", "bottom"].indexOf(v) > -1;
       },
@@ -34,14 +44,18 @@ export default {
   setup(props) {
     const trigger = (event: MouseEvent) => {
       updatePos();
-      if (event.type == "mouseenter") {
-        data.show = true;
+      if (props.trigger == "hover") {
+        if (event.type == "mouseenter") {
+          data.show = true;
+        }
       }
       if (event.type == "mouseleave") {
-        // data.show = false;
+        data.show = false;
       }
-      if (event.type == "click") {
-        data.show = true;
+      if (props.trigger == "click") {
+        if (event.type == "click") {
+          data.show = true;
+        }
       }
     };
     cdk.docOnScroll(() => {
@@ -49,6 +63,9 @@ export default {
     });
     cdk.windowOnResize(() => {
       updatePos();
+    });
+    const tooltipDirection = computed(() => {
+      return `f-tooltips-${props.direction}`;
     });
 
     const updatePos = () => {
@@ -61,17 +78,24 @@ export default {
           el.style.top = `${rect.y - rect.height - 1}px`;
           el.style.left = `${rect.x - (el.clientWidth - rect.width) / 2}px`;
           //垂直对齐
+          console.log(props.direction);
+
           if (props.direction == "bottom") {
             if (label.value) {
-              console.log(`${rect.y} ${slotEl.getBoundingClientRect().height}`);
-
-              el.style.top = `${
-                rect.y + slotEl.getBoundingClientRect().height + 3
-              }px`;
+              console.log(`${rect.y} ${rect.height}`);
+              el.style.top = `${rect.y + rect.height + 3}px`;
             }
           }
         }
         if (["left", "right"].indexOf(props.direction) > -1) {
+          if (props.direction == "left") {
+            el.style.top = `${rect.y + (rect.height - el.clientHeight) / 2}px`;
+            el.style.left = `${rect.x - el.clientWidth - 3}px`;
+          }
+          if (props.direction == "right") {
+            el.style.top = `${rect.y + (rect.height - el.clientHeight) / 2}px`;
+            el.style.left = `${rect.x + rect.width + 3}px`;
+          }
         }
       }
     };
@@ -79,7 +103,7 @@ export default {
     const data = reactive({
       code: "f-tooltip-trigger" + randCode,
       tooltipscode: "f-tooltips-" + randCode,
-      show: true,
+      show: false,
     });
     const triggerEvent = reactive({
       mouseenter: trigger,
@@ -107,6 +131,10 @@ export default {
       updatePos();
     });
 
+    onUpdated(() => {
+      updatePos();
+    });
+
     onUnmounted(() => {
       let node = document.querySelector(`.${data.tooltipscode}`);
       if (node) {
@@ -121,6 +149,7 @@ export default {
       triggerEvent,
       data,
       label,
+      tooltipDirection,
     };
   },
 };

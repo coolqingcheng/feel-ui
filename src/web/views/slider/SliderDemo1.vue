@@ -1,5 +1,5 @@
 <template>
-  <f-slider :range="false" :step="5"></f-slider>
+  <f-slider :range="false" :step="0"></f-slider>
 </template>
 
 <script>

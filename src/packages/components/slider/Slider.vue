@@ -2,9 +2,9 @@
   <div class="f-slider-wrapper">
     <div class="f-slider" @click="sliderClick($event)" ref="container">
       <div class="f-slider-bg"></div>
-      <div class="f-slider-bar" :style="{width:data.width,left:data.left}"></div>
-      <SliderSelector v-model="data.v1" :parentWidth="data.parentWidth" :stepdata="stepData"></SliderSelector>
-      <SliderSelector v-model="data.v2" v-if="range" :parentWidth="data.parentWidth" color="red"></SliderSelector>
+      <div class="f-slider-bar" :style="{width:`${progreeBarLength}%`,left:progreeBarOffset}"></div>
+      <SliderSelector v-model="data.v1" :parentWidth="data.parentWidth" :stepdata="stepData" @press="press"></SliderSelector>
+      <SliderSelector v-model="data.v2" v-if="range" :parentWidth="data.parentWidth" color="red" @press="press"></SliderSelector>
       <div class="f-slider-step" v-if="showstep&&step>0">
         <div class="f-slider-stepcontainer">
           <div class="f-slider-stepitem" v-for="item in stepData" :key="item" :style="{'left':item+'%'}">
@@ -64,26 +64,28 @@ export default {
   },
   setup(props) {
     const data = reactive({
-      v1: 20,
+      v1: 0,
       v2: 0,
-      width: "0",
-      left: "0",
+      width: 0,
+      left: 0,
       //1 值 2 范围
       type: 1,
       parentWidth: 0,
       stepData: [0],
+      press: false,
     });
     const container = ref<HTMLElement>();
     onMounted(() => {
+      resizeWindow();
+    });
+    cdk.windowOnResize(() => {
+      resizeWindow();
+    });
+    const resizeWindow = () => {
       if (container.value) {
         data.parentWidth = container.value.clientWidth;
       }
-      cdk.windowOnResize(() => {
-        if (container.value) {
-          data.parentWidth = container.value.clientWidth;
-        }
-      });
-    });
+    };
 
     const stepData = computed(() => {
       if (props.step == 0) return [];
@@ -110,15 +112,14 @@ export default {
     });
 
     const sliderClick = (e: MouseEvent) => {
+      if (data.press) return;
+      if (props.step > 0) return;
       let browerX = e.clientX;
-      console.log(`点击:${e.clientX}`);
+      console.log(`点击:${e.clientX} range:${props.range}`);
       let containerX = 0;
       if (container.value) {
         containerX = container.value.getBoundingClientRect().left;
-        let scale =
-          ((browerX - containerX - 10) /
-            container.value?.getBoundingClientRect().width) *
-          100;
+
         // console.log(`${scale}/100`);
         if (props.range) {
           //判断调整的tag
@@ -151,27 +152,50 @@ export default {
      */
     watch(
       () => [data.v1, data.v2],
-      () => {
-        let min = 0,
-          max = 0;
-        if (data.v1 > data.v2) {
-          min = data.v2;
-          max = data.v1;
-        }
-        if (data.v2 > data.v1) {
-          min = data.v1;
-          max = data.v2;
-        }
-        let w = max - min;
-        if (props.range) {
-          //计算进度条的left和width
-          data.width = `${(w / data.parentWidth) * 100}%`;
-          data.left = `${((min + 10) / data.parentWidth) * 100}%`;
-        } else {
-          data.width = `${(w / data.parentWidth) * 100}%`;
-        }
-      }
+      () => {}
     );
+
+    const progreeBarLength = computed(() => {
+      let { w } = calculationBeginAndAfter();
+      if (props.range) {
+        //计算进度条的left和width
+        return w * data.parentWidth;
+      } else {
+        data.width = data.v1;
+        return data.v1;
+        console.log("更新:" + data.width);
+      }
+    });
+
+    const progreeBarOffset = computed(() => {
+      if (props.range) {
+        let { min } = calculationBeginAndAfter();
+        return (min * data.parentWidth + 10) * 100;
+      }
+    });
+
+    const calculationBeginAndAfter = () => {
+      let min = 0,
+        max = 0;
+      if (data.v1 > data.v2) {
+        min = data.v2;
+        max = data.v1;
+      }
+      if (data.v2 > data.v1) {
+        min = data.v1;
+        max = data.v2;
+      }
+      let w = max - min;
+      return {
+        min,
+        max,
+        w,
+      };
+    };
+
+    const press = (v: { status: boolean }) => {
+      data.press = v.status;
+    };
 
     return {
       data,
@@ -179,6 +203,9 @@ export default {
       container,
       rangeValue,
       stepData,
+      press,
+      progreeBarLength,
+      progreeBarOffset,
     };
   },
 };

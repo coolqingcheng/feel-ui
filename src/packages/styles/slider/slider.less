@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    user-select: none;
 
     .f-slider-label {
         min-width: 150px;
@@ -21,12 +22,12 @@
 
 .f-slider {
     width: 100%;
-    padding: 10px 0;
+    // padding: 10px 0;
     box-sizing: border-box;
     display: block;
     position: relative;
     cursor: pointer;
-    @slider-h: 6px;
+    @slider-h: 4px;
 
     .f-slider-bg {
         height: @slider-h;
@@ -37,7 +38,7 @@
 
     .f-slider-bar {
         position: absolute;
-        top: 10px;
+        top: 0;
         left: 0px;
         height: @slider-h;
         background: @theme;
@@ -46,7 +47,7 @@
 
     .f-slider-tag {
         position: absolute;
-        top: 2px;
+        top: 0;
         bottom: 0;
         width: 20px;
         height: 20px;
@@ -54,13 +55,13 @@
         border: 2px solid @theme;
         box-sizing: border-box;
         border-radius: 20px;
-        transform: scale(1);
+        transform: scale(1) translateY(-50%);
         transition: transform .3s ease;
         z-index: 20;
 
         &:hover {
-            transform: scale(1.1);
-            transition: transform .3s ease;
+            // transform: scale(1.1);
+            // transition: transform .3s ease;
         }
 
     }
@@ -68,7 +69,6 @@
     .f-slider-tag-select {
         // cursor: grabbing;
         border: 2px solid @theme;
-        transform: scale(1.1);
     }
 
     .f-slider-step {

@@ -3,6 +3,7 @@
     min-width: 24px;
     min-height: 24px;
     z-index: 999;
+
     .f-tooltips-label {
         background: @black;
         padding: 5px;
@@ -12,11 +13,12 @@
         position: relative;
         box-shadow: 0 3px 8px rgba(0, 0, 0, .2);
         max-width: 100px;
+        z-index: 1;
+        margin: 0;
 
         &::before {
             content: '';
             position: absolute;
-
         }
     }
 
@@ -26,6 +28,7 @@
         background: @black;
         transform: rotate(45deg);
         border-radius: 2px;
+        z-index: -1;
     }
 }
 
@@ -38,10 +41,30 @@
         margin-top: -6px;
     }
 }
-.f-tooltips-bottom{
+
+.f-tooltips-bottom {
     flex-direction: column-reverse;
     align-items: center;
+
     .f-tooltips-arrow {
         margin-bottom: -6px;
+    }
+}
+
+.f-tooltips-left {
+    flex-direction: row;
+    align-items: center;
+
+    .f-tooltips-arrow {
+        margin-left: -6px;
+    }
+}
+
+.f-tooltips-right {
+    flex-direction: row-reverse;
+    align-items: center;
+
+    .f-tooltips-arrow {
+        margin-right: -6px;
     }
 }

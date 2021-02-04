@@ -1,11 +1,12 @@
 <template>
-  <div @click.prevent class="f-slider-tag" :style="{ left: leftValue,'border-color':color }" @mousedown="down($event)" :class="{ 'f-slider-tag-select': data.activeClass }"></div>
+  <div @click.prevent class="f-slider-tag" :style="{ left: `${leftValue}`,'border-color':color }" @mousedown="down($event)" :class="{ 'f-slider-tag-select': data.activeClass }"></div>
 </template>
 
 <script lang="ts">
 import { computed, getCurrentInstance, PropType, reactive, watch } from "vue";
 export default {
   props: {
+    //位置百分比
     modelValue: {
       type: Number,
       default: 0,
@@ -21,82 +22,64 @@ export default {
       type: Array as PropType<number[]>,
       default: [],
     },
+    direction: {
+      type: String,
+      default: "h",
+    },
   },
   setup(props) {
     const data = reactive({
       isPress: false,
       startX: 0,
-      left: props.modelValue + "px",
+      left: 0,
       activeClass: false,
-      width: props.parentWidth,
     });
 
-    watch(
-      () => props.parentWidth,
-      () => {
-        data.width = props.parentWidth;
-      }
-    );
-
-    watch(
-      () => props.modelValue,
-      () => {
-        data.left = `${props.modelValue}px`;
-        console.log("值修改");
-        emit();
-      }
-    );
-    console.log("stepdata:" + props.stepdata);
-
     const leftValue = computed(() => {
-      // console.log(
-      //   `${parseFloat(data.left)} ${props.parentWidth}  ${
-      //     (parseFloat(data.left) / props.parentWidth) * 100
-      //   }%`
-      // );
-
-      return `${((parseFloat(data.left) - 10) / props.parentWidth) * 100}%`;
+      let v = `${(data.left / props.parentWidth) * 100}%`;
+      console.log("left:" + data.left);
+      emit();
+      return v;
     });
 
     const emit = () => {
-      console.log(parseFloat(data.left));
-
-      ctx?.emit("update:modelValue", parseFloat(data.left));
+      let v =
+        (data.left / props.parentWidth) * 100 + (10 / props.parentWidth) * 100;
+      ctx?.emit("update:modelValue", v);
       ctx?.emit("change", {
-        value: parseFloat(data.left),
-        max: data.width,
+        value: v,
+        max: props.parentWidth,
       });
     };
 
     const ctx = getCurrentInstance();
     const down = (e: MouseEvent) => {
       e.stopPropagation();
+      ctx?.emit("press", { status: true });
       let target = e.target as HTMLElement;
       data.isPress = true;
-      // console.log(target.style);
       if (!target.style.left) {
         target.style.left = "0px";
       }
       data.activeClass = true;
-      // data.left = target.style.left;
-      data.startX = e.clientX - parseFloat(data.left);
+      data.startX = e.clientX - data.left;
 
       document.onmousemove = (move) => {
         if (data.isPress) {
+          let x = 0;
           let i = move.clientX - data.startX;
           if (props.stepdata.length == 0) {
-            if (i >= -10 && i < data.width) {
-              data.left = i + "px";
+            if (i >= -10 && i <= props.parentWidth - 10) {
+              data.left = i;
             } else {
               if (i <= -10) {
-                data.left = "-10px";
+                data.left = -10;
               }
-              if (i >= data.width) {
-                data.left = data.width + "px";
+              if (i >= props.parentWidth - 10) {
+                data.left = props.parentWidth - 10;
               }
             }
           } else {
-            // console.log(`${(i / props.parentWidth) * 100}%`);
             let scale = 0;
             let temp = (i / props.parentWidth) * 100;
             for (let i = 0; i < props.stepdata.length - 1; i++) {
@@ -114,24 +97,28 @@ export default {
             }
             if (i < 0) scale = 0;
             if (i > props.parentWidth) scale = 100;
-            data.left = `${props.parentWidth * (scale / 100) - 10}px`;
+            data.left = props.parentWidth * (scale / 100) - 10;
           }
-          emit();
-          window.getSelection
-            ? window.getSelection()?.removeAllRanges()
-            : window.document["selection"].empty();
         }
+        window.getSelection
+          ? window.getSelection()?.removeAllRanges()
+          : window.document["selection"].empty();
       };
-      document.onmouseup = () => {
+      const cancel = () => {
         data.activeClass = false;
         data.startX = 0;
         data.isPress = false;
         document.onmousemove = null;
         document.onmouseup = null;
+        document.onmouseleave = null;
+        emit();
+        setTimeout(() => ctx?.emit("press", { status: false }), 500);
+        console.log("鼠标抬起");
       };
+      document.onmouseup = cancel;
+      document.onmouseleave = cancel;
     };
 
-    const click = () => {};
     return {
       data,
       down,

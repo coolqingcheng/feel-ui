@@ -24,6 +24,8 @@ function windowOnResize(func: Function) {
 
     const resize = (e: UIEvent) => {
         func(e)
+        console.log('屏幕大小修改');
+        
     }
     onMounted(() => {
         window.addEventListener("resize", resize);
