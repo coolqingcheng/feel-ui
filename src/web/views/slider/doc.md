@@ -20,7 +20,7 @@
 
 ### 自定义起始值
 
-使用*min*和*max*属性自定义起始值。使用*filter*属性可传递一个过滤方法。用于自定义处理滑动条的小数值
+使用*min*和*max*属性自定义起始值。使用*filter*属性可传递一个过滤函数。用于自定义处理滑动条的小数值
 
 <demo path="./SliderDemo4.vue" showtips></demo>
 
@@ -35,7 +35,16 @@
 
 ### 范围选择
 
+设置range属性为true，v-model赋一个长度为2的数组 如:[0,10]
+
+<demo path="./SliderDemo6.vue" showtips></demo>
+
+如需要更精确的控制，需要使用*filter*属性传递一个函数来处理
+
+<demo path="./SliderDemo7.vue" showtips></demo>
 
 ### 步长
+
+### 颜色
 
 ## 禁用

@@ -36,7 +36,6 @@ import {
 } from "vue";
 import SliderSelector from "./SliderSelector.vue";
 import cdk from "@/packages/utils/cdk";
-import { min } from "moment";
 export default {
   name: "f-slider",
   components: {
@@ -128,7 +127,7 @@ export default {
         let v = props.tipchange({ type: "1", value: v1 });
         return v;
       } else {
-        return v1;
+        return String(v1);
       }
     });
     const tips2 = computed(() => {
@@ -137,7 +136,7 @@ export default {
         let v = props.tipchange({ type: "2", value: v2 });
         return v;
       } else {
-        return v2;
+        return String(v2);
       }
     });
 
@@ -191,11 +190,9 @@ export default {
     watch(
       () => [data.v1, data.v2],
       () => {
-        console.log(`v1:${data.v1} v2:${data.v2} `);
-
         if (props.range) {
           let { min, max } = calculationBeginAndAfter();
-          ctx?.emit("update:modelValue", []);
+          ctx?.emit("update:modelValue", [min,max]);
         } else {
           //计算单个值
           let v = calculaModelValue(data.v1);
@@ -205,7 +202,7 @@ export default {
     );
 
     const calculaModelValue = (percent: number) => {
-      console.log(`-- ${props.min} ${percent} ${props.max} ${props.min}`);
+      // console.log(`-- ${props.min} ${percent} ${props.max} ${props.min}`);
 
       let v = props.min + percent * ((props.max - props.min) / 100);
       if (props.filter) {
@@ -251,6 +248,10 @@ export default {
         max = data.v2;
       }
       let w = max - min;
+      if(props.filter){
+        min = props.filter({value:min})
+        max = props.filter({value:max})
+      }
       return {
         min,
         max,

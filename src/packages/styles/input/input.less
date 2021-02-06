@@ -36,6 +36,7 @@
 
 .f-input-focus {
     border-color: @theme;
+    box-shadow: 0 0 0 2px fade(@theme, 20%);
 }
 
 .f-textarea {
@@ -47,7 +48,7 @@
     box-sizing: border-box;
 
     &:focus {
-        border-color: @theme;
+        .f-input-focus
     }
 }
 
