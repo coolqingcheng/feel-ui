@@ -63,5 +63,18 @@
 
 # 属性
 
-
+| 名称      | 说明                                                    | 类型          | 可选值 | 默认值   |
+| --------- | ------------------------------------------------------- | ------------- | ------ | -------- |
+| v-model   | 双向绑定值                                              | number\|array |        | 0\|[0,0] |
+| max       | 最大值                                                  | number        |        | 100      |
+| min       | 最小值                                                  | number        |        | 0        |
+| range     | 是否启用范围选择                                        | bool          |        | false    |
+| step      | 步长，0不启用，大于1启用，step必须要能被 (max-min) 整除 | number        |        | 0        |
+| color     | 自定义颜色                                              | string        |        |          |
+| showstep  | 是否显示步长刻度                                        | bool          |        | false    |
+| tipchange | 提示过滤函数                                            | function      |        |          |
+| showtip   | 是否显示提示                                            | bool          |        | false    |
+| filter    | 绑定值过滤                                              | function      |        |          |
+| disabled  | 是否禁用                                                | bool          |        | false    |
+|           |                                                         |               |        |          |
 
