@@ -1,18 +1,17 @@
 <template>
-  <div class="f-slider-wrapper">
+  <div class="f-slider-wrapper" :class="{'f-slider-disabled':disabled}">
     <div class="f-slider-header">
       <slot name="header"></slot>
     </div>
     <div class="f-slider" @click="sliderClick($event)" ref="container">
-      <div class="f-slider-bar" :style="{width:`${progreeBarLength}%`,left:`${progreeBarOffset}%`,background:color}"></div>
-      <SliderSelector v-model="data.v1" :tips="tips1" :parentWidth="data.parentWidth" :stepdata="stepData" @press="press" :color="color" :showtip="showtip"></SliderSelector>
-      <SliderSelector v-model="data.v2" v-if="range" :tips="tips2" :parentWidth="data.parentWidth" :stepdata="stepData" color="red" @press="press" :showtip="showtip"></SliderSelector>
+      <div class="f-slider-bar" :style="{width:`${progreeBarLength}%`,left:`${progreeBarOffset}%`,background:`${disabled?'#ccc':color}`}"></div>
+      <SliderSelector :disabled="disabled" v-model="data.v1" :tips="tips1" :parentWidth="data.parentWidth" :stepdata="stepData" @press="press" :color="color" :showtip="showtip"></SliderSelector>
+      <SliderSelector :disabled="disabled" v-model="data.v2" v-if="range" :tips="tips2" :parentWidth="data.parentWidth" :stepdata="stepData" :color="color" @press="press" :showtip="showtip"></SliderSelector>
       <div class="f-slider-step" v-if="showstep&&step>0">
         <div class="f-slider-stepcontainer">
           <div class="f-slider-stepitem" v-for="item in stepData" :key="item" :style="{'left':item+'%'}">
             <i class="f-slider-steppoint"></i>
             <div class="f-slider-steplabel">
-
             </div>
           </div>
         </div>
@@ -29,7 +28,6 @@ import {
   computed,
   getCurrentInstance,
   onMounted,
-  PropType,
   reactive,
   ref,
   watch,
@@ -82,17 +80,20 @@ export default {
     filter: {
       type: Function,
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ["update:modelValue"],
   setup(props) {
     const data = reactive({
       //百分比
       v1: 0,
+      //百分比
       v2: 0,
       width: 0,
       left: 0,
-      //1 值 2 范围
-      type: 1,
       parentWidth: 0,
       stepData: [0],
       press: false,
@@ -102,15 +103,16 @@ export default {
       resizeWindow();
       if (props.range) {
         if (props.modelValue) {
-          data.v1 = props.modelValue[0];
-          data.v2 = props.modelValue[1];
+          data.v1 = calculaScale(props.modelValue[0]);
+          data.v2 = calculaScale(props.modelValue[1]);
         }
       } else {
         if (props.modelValue) {
-          console.log("v1变化: " + props.modelValue);
           data.v1 = calculaScale(Number(props.modelValue));
         }
       }
+      //验证v-model
+      modelValueValidate();
     });
     cdk.windowOnResize(() => {
       resizeWindow();
@@ -118,6 +120,35 @@ export default {
     const resizeWindow = () => {
       if (container.value) {
         data.parentWidth = container.value.clientWidth;
+      }
+    };
+
+    watch(
+      () => props.modelValue,
+      () => {
+        modelValueValidate();
+        if (typeof props.modelValue == "number") {
+          data.v1 = calculaScale(props.modelValue);
+        } else {
+          if (props.modelValue) {
+            data.v1 = calculaScale(Number(props.modelValue[0]));
+            data.v2 = calculaScale(Number(props.modelValue[1]));
+          }
+        }
+      }
+    );
+
+    const modelValueValidate = () => {
+      if (props.modelValue) {
+        if (props.range) {
+          if (!(props.modelValue instanceof Array)) {
+            throw "slider的range属性为true的时候，v-model必须是一个长度为2的数组 如:[1,2]";
+          }
+        } else {
+          if (!(typeof props.modelValue == "number")) {
+            throw "slider的range属性为false的时候，v-model必须是一个数字类型";
+          }
+        }
       }
     };
 
@@ -143,30 +174,27 @@ export default {
     const stepData = computed(() => {
       if (props.step == 0) return [];
       let arr: number[] = [];
-      let scale = (props.max - props.min) / props.step;
-      for (let i = 0; i <= scale; i++) {
-        arr.push(props.step * i);
+      let num = props.step / (props.max - props.min);
+      let step = num * 100;
+      let len = 100 / step;
+      for (let i = 0; i <= len; i++) {
+        arr.push(step * i);
       }
       return arr;
-    });
-
-    const rangeValue = computed(() => {
-      let v1 = 0,
-        v2 = 0;
-      return [v1, v2];
     });
 
     const sliderClick = (e: MouseEvent) => {
       if (data.press) return;
       if (props.step > 0) return;
+      if (props.disabled) return;
       let browerX = e.clientX;
-      console.log(`点击:${e.clientX} range:${props.range}`);
+      // console.log(`点击:${e.clientX} range:${props.range}`);
       let containerX = 0;
       if (container.value) {
         containerX = container.value.getBoundingClientRect().left;
         if (props.range) {
           //判断调整的tag
-          console.log(`v1:${data.v1} v2:${data.v2}`);
+          // console.log(`v1:${data.v1} v2:${data.v2}`);
           //获取点的比例
           let point = ((browerX - containerX) / data.parentWidth) * 100;
 
@@ -191,8 +219,10 @@ export default {
       () => [data.v1, data.v2],
       () => {
         if (props.range) {
-          let { min, max } = calculationBeginAndAfter();
-          ctx?.emit("update:modelValue", [min,max]);
+          ctx?.emit("update:modelValue", [
+            calculaModelValue(data.v1),
+            calculaModelValue(data.v2),
+          ]);
         } else {
           //计算单个值
           let v = calculaModelValue(data.v1);
@@ -206,9 +236,11 @@ export default {
 
       let v = props.min + percent * ((props.max - props.min) / 100);
       if (props.filter) {
-        return props.filter({ value: v });
+        let res = props.filter({ value: v });
+        // console.log("res:" + res + " percent:" + v);
+        return res;
       }
-      return v;
+      return defaultFilter(v);
     };
 
     /**
@@ -248,15 +280,25 @@ export default {
         max = data.v2;
       }
       let w = max - min;
-      if(props.filter){
-        min = props.filter({value:min})
-        max = props.filter({value:max})
+      if (props.filter) {
+        min = props.filter({ value: min });
+        max = props.filter({ value: max });
+      } else {
+        min = defaultFilter(min);
+        max = defaultFilter(max);
       }
       return {
         min,
         max,
         w,
       };
+    };
+
+    /**
+     * 默认过滤器
+     */
+    const defaultFilter = (value: number) => {
+      return Math.round(value);
     };
 
     const press = (v: { status: boolean }) => {
@@ -267,7 +309,6 @@ export default {
       data,
       sliderClick,
       container,
-      rangeValue,
       stepData,
       press,
       progreeBarLength,

@@ -1,7 +1,7 @@
 <template>
   <div class="f-slider-tip" :style="{ left: `${data.progreeScale}%` }" v-if="showtip">{{tips}}</div>
   <div @click.prevent class="f-slider-box" :style="{ left: `${data.progreeScale}%` }" @mousedown="down($event)" :class="{ 'f-slider-tag-select': data.activeClass }">
-    <div class="f-slider-circle" :style="{'border-color':color}">
+    <div class="f-slider-circle" :style="{'border-color':`${disabled?'#ccc':color}`}">
     </div>
   </div>
 </template>
@@ -69,6 +69,7 @@ export default {
     const ctx = getCurrentInstance();
     const down = (e: MouseEvent) => {
       e.stopPropagation();
+      if (props.disabled) return;
       ctx?.emit("press", { status: true });
       let target = e.target as HTMLElement;
       data.isPress = true;
@@ -98,7 +99,7 @@ export default {
             }
             data.progreeScale = (left / props.parentWidth) * 100;
           } else {
-            console.log(props.stepdata);
+            // console.log(props.stepdata);
             let scale = 0;
             let temp = (i / props.parentWidth) * 100;
             for (let i = 0; i < props.stepdata.length - 1; i++) {

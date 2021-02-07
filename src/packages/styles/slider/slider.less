@@ -1,3 +1,11 @@
+.f-slider-disabled {
+    cursor: not-allowed !important;
+
+    .f-slider-box {
+        cursor: not-allowed !important;
+    }
+}
+
 .f-slider-wrapper {
     display: flex;
     flex-direction: row;
@@ -19,6 +27,9 @@
             padding: 0 20px;
         }
     }
+
+
+
 
     .f-slider-footer {
         &:not(:empty) {
@@ -111,8 +122,6 @@
     }
 
     .f-slider-tag-select {
-        // cursor: grabbing;
-
         &:hover {
             .f-slider-circle {
                 transform: scale(1.2);

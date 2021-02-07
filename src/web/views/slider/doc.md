@@ -45,6 +45,23 @@
 
 ### 步长
 
+设置*step*属性大于0，启用步长，step必须要能被 (max-min) 整除
+
+<demo path="./SliderDemo8.vue" showtips></demo>
+
 ### 颜色
 
-## 禁用
+*color*属性可设置自定义颜色，支持所有web色
+
+<demo path="./SliderDemo9.vue" showtips></demo>
+
+### 禁用
+
+设置*disabled*属性为true ，禁止组件拖动
+
+<demo path="./SliderDemo10.vue" showtips></demo>
+
+# 属性
+
+
+
