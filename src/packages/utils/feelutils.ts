@@ -31,7 +31,9 @@ function isPlainObject(val: any): val is Object {
     return toString.call(val) === '[object Object]'
 }
 function genRandCode() {
-    return Math.random().toString(36).substr(-8);
+    var array = new Uint32Array(1);
+    var cryptoObj = window.crypto || window['msCrypto']; // for IE 11
+    return cryptoObj.getRandomValues(array)[0];
 }
 
 
