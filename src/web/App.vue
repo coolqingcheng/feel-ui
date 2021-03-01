@@ -1,5 +1,5 @@
 <template>
-  <div id="doc">
+  <div id="doc" :class="[data.open?'nav-open':'nav-close']">
     <div id="nav">
       <router-link to="/">Home</router-link>
       <router-link to="/about">About</router-link>
@@ -45,15 +45,35 @@
       <router-link to="/button">入门教程</router-link>
     </div>
     <div class="doc-right">
+      <div class="menu">
+        <f-icon :icon="data.open?'align-left':'align-right'" width="30" @click="click"></f-icon>
+      </div>
       <router-view />
     </div>
   </div>
 </template>
+<script>
+import { reactive } from "vue";
+export default {
+  setup() {
+    const data = reactive({
+      open: false,
+    });
+    const click = () => {
+      data.open = !data.open;
+    };
+    return {
+      data,
+      click,
+    };
+  },
+};
+</script>
 <style lang="less">
-@left: 250px;
+@left: 200px;
 #doc {
   position: relative;
-  #nav {
+   #nav {
     position: absolute;
     left: 0;
     top: 0;
@@ -66,21 +86,34 @@
     padding-bottom: 30px;
     background: white;
     z-index: 10;
-    transition: margin 0.3s linear;
-  }
-  .doc-right {
-    margin-left: @left;
-    transition: margin 0.3s linear;
-  }
-  @media screen and (max-width: 600px) {
-    #nav {
-      margin-left: -@left;
-      transition: margin 0.3s linear;
-    }
-    .doc-right {
-      margin-left: 0;
-      transition: margin 0.3s linear;
-    }
+    transition: transform 0.3s linear;
   }
 }
+.nav-open {
+    #nav {
+      transform: translateX(0);
+      transition: transform 0.3s linear;
+    }
+
+    .doc-right {
+      transform: translateX(@left);;
+      transition: transform 0.3s linear;
+    }
+  }
+  .nav-close {
+    #nav {
+      transform: translateX(-@left);
+      transition: transform 0.3s linear;
+    }
+
+    .doc-right {
+      transform: translateX(0);;
+      transition: transform 0.3s linear;
+    }
+  }
+
+  .menu{
+    margin-left: 20px;
+    margin-top: 20px;
+  }
 </style>
