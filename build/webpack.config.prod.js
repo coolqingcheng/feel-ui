@@ -18,7 +18,7 @@ module.exports = {
     output: {
         filename: 'index.[hash].js',
         // libraryTarget: 'umd',
-        path: path.resolve(__dirname, "../dist")
+        path: path.resolve(__dirname, "../docs")
     },
     module: {
         rules: [
